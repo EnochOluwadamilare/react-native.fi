@@ -83,7 +83,7 @@ export default async function EventsPage({ params }: Props) {
                 href={conf.url}
                 target='_blank'
                 rel='noopener noreferrer'
-                className='group overflow-hidden rounded-2xl border border-[rgb(var(--mono-200))] bg-white transition-all duration-300 hover:border-[rgb(var(--finnish-blue))/0.3] hover:shadow-xl'
+                className='group overflow-hidden rounded-2xl border border-[rgb(var(--mono-200))] bg-white transition-all duration-300 hover:border-[rgb(var(--finnish-blue)/0.3)] hover:shadow-xl'
               >
                 {/* OG Image */}
                 {conf.ogImage ? (
@@ -106,7 +106,7 @@ export default async function EventsPage({ params }: Props) {
 
                 <div className='p-5'>
                   <div className='mb-3 flex items-center justify-between'>
-                    <span className='rounded-full bg-[rgb(var(--finnish-blue))/0.1] px-3 py-1 font-mono text-xs font-semibold text-[rgb(var(--finnish-blue))]'>
+                    <span className='rounded-full bg-[rgb(var(--finnish-blue)/0.1)] px-3 py-1 font-mono text-xs font-semibold text-[rgb(var(--finnish-blue))]'>
                       {conf.date}
                     </span>
                   </div>
@@ -179,7 +179,7 @@ export default async function EventsPage({ params }: Props) {
                 href={meetup.url}
                 target='_blank'
                 rel='noopener noreferrer'
-                className='group flex items-start gap-4 rounded-xl border border-[rgb(var(--mono-200))] bg-white p-6 transition-all hover:border-[rgb(var(--finnish-blue))/0.3] hover:shadow-lg'
+                className='group flex items-start gap-4 rounded-xl border border-[rgb(var(--mono-200))] bg-white p-6 transition-all hover:border-[rgb(var(--finnish-blue)/0.3)] hover:shadow-lg'
               >
                 <div className='flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-[rgb(var(--mono-100))] transition-colors group-hover:bg-[rgb(var(--finnish-blue))]'>
                   <svg

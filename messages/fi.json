@@ -16,51 +16,51 @@
     "country": "Suomi"
   },
   "hero": {
-    "badge": "Meetupit Helsingissä. Sisältöä suomeksi ja englanniksi.",
+    "badge": "Tutoriaalit, kehittäjähakemisto & konferenssit.",
     "seeEvents": "Katso tulevat tapahtumat",
     "title": "Rakenna React Native -sovelluksia Suomessa",
-    "description": "Yhteisö kehittäjille, jotka toimittavat cross-platform-sovelluksia Helsingistä Ouluun. Osallistu meetuppeihin, lue tutoriaaleja ja verkostoidu pohjoismaisten React Native -kehittäjien kanssa.",
+    "description": "Koottu React Native -resurssi Suomessa — käytännön tutoriaalit, suomalaisten kehittäjien hakemisto ja konferenssikalenteri.",
     "country": "Suomessa",
-    "location": "Helsinki, Suomi",
-    "meetups": "Meetupit & konferenssit",
-    "openSource": "Avoin lähdekoodi",
-    "viewEvents": "Osallistu seuraavaan meetuppiin",
-    "learnMore": "Selaa tutoriaaleja"
+    "viewEvents": "Selaa tutoriaaleja",
+    "learnMore": "Etsi kehittäjä",
+    "maintainedBy": "Ylläpitäjä Perttu",
+    "statTutorials": "Tutoriaalit",
+    "statDevelopers": "Kehittäjää",
+    "statConferences": "Konferenssia"
   },
   "home": {
-    "introTitle": "Miksi React Native Suomessa?",
-    "introDescription": "Suomi on ylittänyt painoluokkansa mobiilissa vuosikymmeniä. Nokian perinnöstä tämän päivän kukoistavaan startup-skeneen — suomalaiset kehittäjät ovat toimittaneet mobiilisovelluksia jo kauan. React Native sopii tähän täydellisesti, ja tämä yhteisö yhdistää tekijät.",
-    "exploreTitle": "Kehittäjät, meetupit, tutoriaalit",
-    "exploreSubtitle": "Kaikki mitä tarvitset React Native -kehitykseen Suomessa",
+    "exploreTitle": "Resurssit",
+    "exploreSubtitle": "Kaikki mitä tarvitset React Nativen rakentamiseen Suomessa",
     "events": {
       "title": "Meetupit",
-      "count": "{count} tapahtumaa tähän mennessä",
-      "description": "Teknisiä puheita suomalaisilta React Native -insinööreiltä. Oikeita keskusteluja, ilmaista pizzaa ja aitoa verkostoitumista.",
+      "count": "{count} mennyttä tapahtumaa",
+      "description": "Suomalaisten React Native -insinöörien puheenvuoroja, tallennettuna ja arkistoituna.",
       "cta": "Selaa tapahtumia"
     },
     "developers": {
       "title": "Kehittäjähakemisto",
-      "count": "{count} listattua kehittäjää",
+      "count": "{count} kehittäjää listattuna",
       "description": "Etsitkö tekijää? Tarvitsetko konsulttia? Selaa Suomessa toimivia React Native -osaajia — tai lisää itsesi löydettäväksi.",
       "cta": "Selaa osaajia"
     },
     "articles": {
       "title": "Tutoriaalit",
-      "count": "{count} opasta & syväsukellusta",
-      "description": "Käytännön tutoriaaleja kehittäjiltä, jotka toimittavat React Native -sovelluksia päivittäin. Suorituskyky, animaatiot, native-moduulit — ei täytettä.",
-      "cta": "Aloita lukeminen"
-    },
-    "learn": {
-      "title": "Tutoriaalit & oppaat",
-      "subtitle": "Opi React Native",
-      "description": "Käytännön tutoriaaleja suomalaiselta React Native -yhteisöltä. Suorituskyky, animaatiot, native-moduulit — oikeita oppaita kehittäjiltä jotka toimittavat sovelluksia.",
+      "count": "{count} tutoriaalia & syväluotausta",
+      "description": "Käytännön React Native -oppaita kehittäjiltä, jotka julkaisevat sovelluksia — suorituskyky, animaatiot, natiivimoduulit. Ei täytettä.",
       "cta": "Selaa tutoriaaleja"
     },
+    "nextConference": {
+      "eyebrow": "Seuraava konferenssi",
+      "daysAway": "{count, plural, =0 {Tänään} =1 {Huomenna} other {# päivän päästä}}",
+      "thisWeek": "Tällä viikolla",
+      "happeningNow": "Käynnissä nyt",
+      "cta": "Katso kaikki konferenssit"
+    },
     "community": {
-      "title": "Rakenna React Native -sovelluksia kanssamme",
-      "description": "Olitpa oppimassa React Nativea, palkkaamassa kehittäjiä tai vain haluat nörtteillä mobiilista — olet oikeassa paikassa.",
-      "ctaPrimary": "Ilmoittaudu Meetupissa",
-      "ctaSecondary": "Selaa sivustoa"
+      "title": "Tutustu React Native Suomeen",
+      "description": "Tutoriaalit, konferenssit, kehittäjähakemisto ja kootut resurssit — kaikki yhdessä paikassa.",
+      "ctaPrimary": "Selaa tutoriaaleja",
+      "ctaSecondary": "Katso konferenssit"
     },
     "faq": {
       "title": "Usein kysytyt kysymykset",
@@ -82,12 +82,25 @@
           "answer": "Kyllä! Etsimme aina sponsoreita auttamaan tilavuokrissa, ruoassa ja juomissa. Sponsorit saavat näkyvyyttä suomalaisessa React Native -yhteisössä. Ota yhteyttä GitHubin tai Meetupin kautta."
         }
       ]
+    },
+    "about": {
+      "eyebrow": "Kuka tämän takana on",
+      "title": "Ylläpitäjänä Perttu Lähteenlahti",
+      "description": "Yhteisön resurssi, jota ylläpitää Perttu Lähteenlahti — React Native -kehittäjä ja Developer Advocate RevenueCatilla, kotipaikkanaan Helsinki. Tehty auttamaan suomalaisia kehittäjiä rakentamaan parempia cross-platform-sovelluksia.",
+      "cta": "Lisää Pertusta"
+    },
+    "contribute": {
+      "title": "Avoin lähdekoodi",
+      "subtitle": "Rakennettu avoimesti — osallistu",
+      "description": "Tämä sivusto on avointa lähdekoodia. Lisää itsesi kehittäjähakemistoon, lähetä tutoriaali tai ehdota tapahtumaa pull requestilla.",
+      "cta": "Osallistu GitHubissa"
     }
   },
   "footer": {
     "siteName": "React Native Suomi",
     "tagline": "React Native -kehittäjien yhteisö Suomessa",
-    "builtBy": "Tekijä:"
+    "builtBy": "Ylläpitäjä:",
+    "maintainerRole": "Developer Advocate @ RevenueCat"
   },
   "articles": {
     "pageTitle": "Opi React Native | Ilmaiset tutoriaalit & oppaat",
@@ -142,7 +155,7 @@
     "description": "Konferensseja, meetup-ryhmiä ja yhteisötapahtumia React Native -kehittäjille.",
     "conferencesTitle": "Konferenssit",
     "conferencesDescription": "React Nativen suurimmat konferenssit ympäri maailmaa.",
-    "conferencesViewAll": "Koko konferenssiopas CFP-deadlineilla",
+    "conferencesViewAll": "Koko konferenssiopas — päivät, sijainnit ja liput",
     "meetupsTitle": "Meetup-ryhmät",
     "meetupsDescription": "Paikallisia React Native -yhteisöjä, jotka kokoontuvat säännöllisesti. Etkö pääse konferenssiin? Aloita tästä.",
     "helsinkiTitle": "React Native Helsinki",
@@ -153,6 +166,81 @@
     "upcomingBadge": "Tulossa",
     "talks": "{count, plural, one {# puhe} other {# puhetta}}",
     "heroAlt": "React Native -tapahtumat"
+  },
+  "conferences": {
+    "metaTitle": "React Native -konferenssit 2026 | Päivät, sijainnit ja opas",
+    "metaDescription": "Päivitetyt vuoden 2026 React Native -konferenssien päivämäärät, sijainnit ja lippulinkit: App.js Conf, React Summit, Chain React, Agent Conf ja muut.",
+    "heroEyebrow": "Päivitetty opas",
+    "heroTitle": "React Native -konferenssit 2026",
+    "heroDescription": "Päivitetyt päivämäärät ja lippulinkit suuriin React Native -konferensseihin. App.js:stä Puolassa Chain Reactiin Yhdysvalloissa.",
+    "viewConferences": "Katso konferenssit",
+    "submitConference": "Ehdota konferenssia",
+    "nextUpEyebrow": "Seuraavaksi",
+    "nextUpDaysAway": "{count, plural, =0 {Tänään} =1 {Huomenna} other {# päivän päästä}}",
+    "nextUpThisWeek": "Tällä viikolla",
+    "nextUpHappeningNow": "Käynnissä nyt",
+    "viewDetails": "Lue lisää",
+    "majorEventsEyebrow": "Suuret tapahtumat",
+    "majorEventsTitle": "Tulevat React Native -konferenssit",
+    "majorEventsDescription": "Tärkeimmät konferenssit React Native -kehittäjille. Järjestetty päivämäärän mukaan — lähimmät ensin.",
+    "pastEventsTitle": "Aiemmin tänä vuonna",
+    "pastEventsDescription": "Jo pidetyt — mutta puheet ilmestyvät yleensä YouTubeen muutamassa viikossa.",
+    "watchTalks": "Katso menneet puheet",
+    "filterAll": "Kaikki alueet",
+    "filterRegionLabel": "Suodata konferensseja alueen mukaan",
+    "filterEurope": "Eurooppa",
+    "filterUS": "USA",
+    "filterUK": "UK",
+    "filterFormatAll": "Kaikki formaatit",
+    "filterFormatLabel": "Suodata konferensseja formaatin mukaan",
+    "filterWorkshops": "Työpajat",
+    "filterSingleTrack": "Yksi raita",
+    "filterOneDay": "Yksi päivä",
+    "noConferencesTitle": "Näillä suodattimilla ei löytynyt konferensseja",
+    "noConferencesDescription": "Kokeile toista aluetta tai formaattia nähdäksesi lisää tulevia tapahtumia.",
+    "officialSite": "Virallinen sivusto",
+    "statusPast": "Mennyt",
+    "statusThisWeek": "Tällä viikolla",
+    "statusUpcoming": "Tulossa",
+    "statusFarFuture": "Merkitse kalenteriin",
+    "whyAttendTitle": "Miksi osallistua React Native -konferensseihin?",
+    "whyAttendDescription": "Konferenssit ovat paras tapa kehittää taitojasi, tavata yhteisöä ja pysyä kärjessä.",
+    "whyAttend": {
+      "learn": {
+        "title": "Opi asiantuntijoilta",
+        "description": "Kuuntele suoraan core-tiimin jäseniä, kirjastojen tekijöitä ja insinöörejä, jotka rakentavat sovelluksia mittakaavassa."
+      },
+      "network": {
+        "title": "Verkostoidu ja rekrytoi",
+        "description": "Tapaa kehittäjiä ympäri maailmaa. Monet yritykset käyttävät konferensseja rekrytointiin."
+      },
+      "workshops": {
+        "title": "Hands-on työpajat",
+        "description": "Monet konferenssit tarjoavat työpajoja, joissa rakennat oikeita projekteja asiantuntijan ohjauksessa."
+      },
+      "earlyAccess": {
+        "title": "Etukäteen kuulolla",
+        "description": "Konferensseissa julkistetaan usein uusia ominaisuuksia ja työkaluja ennen julkista julkaisua."
+      }
+    },
+    "meetupsEyebrow": "Paikalliset yhteisöt",
+    "meetupsTitle": "React Native -meetupit ympäri maailmaa",
+    "meetupsDescription": "Etkö pääse konferenssiin? Liity paikalliseen meetuppiin ja tapaa alueesi kehittäjiä.",
+    "faqTitle": "Usein kysytyt kysymykset",
+    "ctaTitle": "Liity React Native Helsinkiin",
+    "ctaDescription": "Etsitkö paikallisia tapahtumia Suomessa? React Native Helsinki kokoontuu kuukausittain ilmaisten puheiden, käytännön demojen ja pohjoismaisten mobiilinkehittäjien parissa.",
+    "ctaMissingConference": "Puuttuuko konferenssi?",
+    "ctaAddOnGithub": "Lisää se GitHubissa",
+    "joinMeetup": "Liity Meetupissa",
+    "seePastEvents": "Katso menneet tapahtumat",
+    "readGuide": "Lue 2026-opas",
+    "readGuideDescription": "Syväluotaus jokaiseen konferenssiin: kuka järjestää, kenelle se sopii ja miten saat puheesi hyväksytyksi.",
+    "submitSectionEyebrow": "Yhteisö",
+    "submitSectionTitle": "Puuttuuko listalta konferenssi?",
+    "submitSectionDescription": "Tämä lista on yhteisön ylläpitämä. Jos React Native -konferenssi puuttuu, on vanhentunut tai väärin, kerro meille niin lisäämme sen.",
+    "submitViaIssue": "Ehdota GitHub-issuella",
+    "submitViaPr": "Muokkaa dataa suoraan",
+    "submitHint": "Avaa issue tiedoilla, tai muokkaa conferences.json-tiedostoa ja avaa pull request."
   },
   "article": {
     "by": "Kirjoittanut",

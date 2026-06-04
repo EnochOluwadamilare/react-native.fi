@@ -8,6 +8,9 @@ interface ArticleJsonLdProps {
   authorName: string;
   authorUrl?: string;
   authorId?: string;
+  authorImage?: string;
+  authorJobTitle?: string;
+  authorSameAs?: string[];
   url: string;
   imageUrl?: string;
 }
@@ -20,6 +23,9 @@ export function ArticleJsonLd({
   authorName,
   authorUrl,
   authorId,
+  authorImage,
+  authorJobTitle,
+  authorSameAs,
   url,
   imageUrl,
 }: ArticleJsonLdProps) {
@@ -35,6 +41,9 @@ export function ArticleJsonLd({
       name: authorName,
       ...(authorId && { '@id': authorId }),
       ...(authorUrl && { url: authorUrl }),
+      ...(authorImage && { image: authorImage }),
+      ...(authorJobTitle && { jobTitle: authorJobTitle }),
+      ...(authorSameAs && authorSameAs.length > 0 && { sameAs: authorSameAs }),
     },
     publisher: {
       '@type': 'Organization',

@@ -198,6 +198,10 @@ export function Footer() {
               >
                 Perttu Lähteenlahti
               </a>
+              <span className='text-[rgb(var(--mono-400))]'>
+                {' '}
+                · {t('maintainerRole')}
+              </span>
             </p>
             <div className='flex items-center gap-4'>
               <span className='font-mono text-xs text-[rgb(var(--mono-400))]'>

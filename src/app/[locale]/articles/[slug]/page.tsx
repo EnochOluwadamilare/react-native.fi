@@ -16,6 +16,7 @@ import {
 
 import { ArticleJsonLd } from '@/components/ArticleJsonLd';
 import { AuthorBio } from '@/components/AuthorBio';
+import { AuthorByline } from '@/components/AuthorByline';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { Callout } from '@/components/Callout';
 import { Keyboard } from '@/components/Keyboard';
@@ -172,6 +173,20 @@ export default async function ArticlePage({ params }: Props) {
 
   const authorName =
     typeof article.author === 'string' ? article.author : article.author.name;
+  const authorObject =
+    typeof article.author === 'string' ? null : article.author;
+  // E-E-A-T: link the author Person node to its canonical profile + socials.
+  const authorUrl = authorObject
+    ? authorObject.websiteUrl || `${siteConfig.url}${authorObject.href}`
+    : undefined;
+  const authorSameAs = authorObject
+    ? [
+        authorObject.websiteUrl,
+        authorObject.xUrl,
+        authorObject.linkedinUrl,
+        authorObject.githubUrl,
+      ].filter((u): u is string => Boolean(u))
+    : undefined;
   const articleUrl = `${siteConfig.url}/${locale}/articles/${slug}`;
   const ogImageUrl = `${siteConfig.url}/${locale}/articles/${slug}/opengraph-image`;
 
@@ -183,6 +198,12 @@ export default async function ArticlePage({ params }: Props) {
         datePublished={article.date}
         dateModified={article.updatedAt}
         authorName={authorName}
+        authorUrl={authorUrl}
+        authorImage={
+          authorObject ? `${siteConfig.url}${authorObject.imageUrl}` : undefined
+        }
+        authorJobTitle={authorObject?.role}
+        authorSameAs={authorSameAs}
         url={articleUrl}
         imageUrl={ogImageUrl}
       />
@@ -271,6 +292,9 @@ export default async function ArticlePage({ params }: Props) {
                 priority
               />
             </div>
+
+            {/* Author byline (E-E-A-T: surface authorship up front) */}
+            <AuthorByline author={article.author} />
           </header>
 
           {/* Table of Contents */}

@@ -1,0 +1,46 @@
+{
+  "en": [
+    {
+      "question": "What are the biggest React Native conferences?",
+      "answer": "The biggest React Native conferences are App.js Conf in Krakow, Chain React in Portland, and React Native Connection in Paris. React Summit also includes significant React Native content, and Callstack's Agent Conf in Warsaw is the successor to React Universe Conf, now focused on agentic development."
+    },
+    {
+      "question": "How do I speak at a React Native conference?",
+      "answer": "Most React Native conferences use a Call for Papers process. Submit a focused talk proposal through the conference website, usually 3-6 months before the event. Strong proposals explain the problem, show practical examples, and make it clear why the topic matters to React Native developers."
+    },
+    {
+      "question": "When are the next React Native conferences?",
+      "answer": "Major React Native conferences usually run throughout the year: App.js Conf in May, React Summit in June, Chain React in July, and React Native Connection in September. The conference list above shows the current dates and status."
+    },
+    {
+      "question": "Are there free React Native conferences or meetups?",
+      "answer": "Most conferences require tickets, but many local meetups are free. React Native Helsinki, React Native London, React Native NYC, and React Native Berlin all host regular community events. Some conferences also offer scholarships or community tickets."
+    },
+    {
+      "question": "How much do React Native conferences cost?",
+      "answer": "Conference tickets often range from 300 to 900 euros depending on the event, format, timing, and whether workshops are included. Early-bird tickets are usually cheaper, and many employers cover conference costs as professional development."
+    }
+  ],
+  "fi": [
+    {
+      "question": "Mitkä ovat suurimmat React Native -konferenssit?",
+      "answer": "Suurimpiin React Native -konferensseihin kuuluvat App.js Conf Krakovassa, Chain React Portlandissa ja React Native Connection Pariisissa. Myös React Summitissa on merkittävästi React Native -sisältöä, ja Callstackin Agent Conf Varsovassa on React Universe Confin seuraaja, nykyään keskittyen agenttipohjaiseen kehitykseen."
+    },
+    {
+      "question": "Miten pääsen puhujaksi React Native -konferenssiin?",
+      "answer": "Useimmat React Native -konferenssit käyttävät Call for Papers -prosessia. Lähetä rajattu ja käytännönläheinen puhe-ehdotus konferenssin sivuston kautta yleensä 3-6 kuukautta ennen tapahtumaa. Hyvä ehdotus kertoo ongelman, näyttää esimerkit ja perustelee, miksi aihe on tärkeä React Native -kehittäjille."
+    },
+    {
+      "question": "Milloin seuraavat React Native -konferenssit järjestetään?",
+      "answer": "Suuret React Native -konferenssit jakautuvat yleensä koko vuodelle: App.js Conf toukokuussa, React Summit kesäkuussa, Chain React heinäkuussa ja React Native Connection syyskuussa. Yllä oleva lista näyttää nykyiset päivämäärät ja statukset."
+    },
+    {
+      "question": "Onko ilmaisia React Native -konferensseja tai meetupeja?",
+      "answer": "Useimmat konferenssit ovat maksullisia, mutta monet paikalliset meetupit ovat ilmaisia. React Native Helsinki, React Native London, React Native NYC ja React Native Berlin järjestävät säännöllisiä yhteisötapahtumia. Osa konferensseista tarjoaa myös stipendejä tai yhteisölippuja."
+    },
+    {
+      "question": "Paljonko React Native -konferenssit maksavat?",
+      "answer": "Konferenssiliput maksavat usein noin 300-900 euroa tapahtumasta, formaatista, ostoajankohdasta ja työpajoista riippuen. Early bird -liput ovat yleensä edullisempia, ja moni työnantaja korvaa konferenssikuluja ammatillisen kehittymisen osana."
+    }
+  ]
+}

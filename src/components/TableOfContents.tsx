@@ -11,6 +11,7 @@ interface TocItem {
 export function TableOfContents({ locale }: { locale?: string }) {
   const [headings, setHeadings] = useState<TocItem[]>([]);
   const [activeId, setActiveId] = useState<string>('');
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
     const article = document.querySelector('article .prose');
@@ -59,33 +60,80 @@ export function TableOfContents({ locale }: { locale?: string }) {
 
   if (headings.length < 3) return null;
 
+  const title = locale === 'fi' ? 'Sisällysluettelo' : 'Table of Contents';
+
+  const handleClick = (e: React.MouseEvent, id: string) => {
+    e.preventDefault();
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    setMobileOpen(false);
+  };
+
+  const links = (
+    <ol className='space-y-1'>
+      {headings.map((heading) => (
+        <li key={heading.id} className={heading.level === 3 ? 'ml-4' : ''}>
+          <a
+            href={`#${heading.id}`}
+            className={`block border-l-2 py-0.5 pl-3 text-sm transition-colors ${
+              activeId === heading.id
+                ? 'border-indigo-600 font-medium text-indigo-600'
+                : 'border-transparent text-gray-600 hover:border-gray-300 hover:text-gray-900'
+            }`}
+            onClick={(e) => handleClick(e, heading.id)}
+          >
+            {heading.text}
+          </a>
+        </li>
+      ))}
+    </ol>
+  );
+
   return (
-    <nav className='mb-8 rounded-lg border border-gray-200 bg-gray-50 p-4'>
-      <h2 className='text-sm font-semibold text-gray-900 mb-3'>
-        {locale === 'fi' ? 'Sisällysluettelo' : 'Table of Contents'}
-      </h2>
-      <ol className='space-y-1'>
-        {headings.map((heading) => (
-          <li key={heading.id} className={heading.level === 3 ? 'ml-4' : ''}>
-            <a
-              href={`#${heading.id}`}
-              className={`block text-sm py-0.5 transition-colors ${
-                activeId === heading.id
-                  ? 'text-indigo-600 font-medium'
-                  : 'text-gray-600 hover:text-gray-900'
-              }`}
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById(heading.id)?.scrollIntoView({
-                  behavior: 'smooth',
-                });
-              }}
-            >
-              {heading.text}
-            </a>
-          </li>
-        ))}
-      </ol>
-    </nav>
+    <>
+      {/* Desktop: floating sticky ToC in the left margin (xl+ screens) */}
+      <nav
+        aria-label={title}
+        className='pointer-events-none fixed top-28 left-[max(1.5rem,calc((100vw-48rem)/2-17rem))] z-10 hidden w-56 xl:block'
+      >
+        <div className='pointer-events-auto max-h-[calc(100vh-9rem)] overflow-y-auto pr-2'>
+          <p className='mb-3 text-xs font-semibold uppercase tracking-wide text-gray-500'>
+            {title}
+          </p>
+          {links}
+        </div>
+      </nav>
+
+      {/* Mobile / tablet: collapsible card inline above content */}
+      <nav
+        aria-label={title}
+        className='mb-8 rounded-lg border border-gray-200 bg-gray-50 xl:hidden'
+      >
+        <button
+          type='button'
+          onClick={() => setMobileOpen((o) => !o)}
+          aria-expanded={mobileOpen}
+          className='flex w-full items-center justify-between p-4 text-left'
+        >
+          <span className='text-sm font-semibold text-gray-900'>{title}</span>
+          <svg
+            className={`h-4 w-4 text-gray-500 transition-transform ${
+              mobileOpen ? 'rotate-180' : ''
+            }`}
+            fill='none'
+            viewBox='0 0 24 24'
+            strokeWidth={2}
+            stroke='currentColor'
+            aria-hidden='true'
+          >
+            <path
+              strokeLinecap='round'
+              strokeLinejoin='round'
+              d='m19.5 8.25-7.5 7.5-7.5-7.5'
+            />
+          </svg>
+        </button>
+        {mobileOpen && <div className='px-4 pb-4'>{links}</div>}
+      </nav>
+    </>
   );
 }

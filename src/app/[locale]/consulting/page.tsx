@@ -189,7 +189,7 @@ export default async function ConsultingPage({ params }: Props) {
               {services.map((service, index) => (
                 <div
                   key={index}
-                  className='rounded-2xl border border-[rgb(var(--mono-200))] p-8 transition-all hover:border-[rgb(var(--finnish-blue))/0.3] hover:shadow-lg'
+                  className='rounded-2xl border border-[rgb(var(--mono-200))] p-8 transition-all hover:border-[rgb(var(--finnish-blue)/0.3)] hover:shadow-lg'
                 >
                   <div className='flex h-12 w-12 items-center justify-center rounded-xl bg-[rgb(var(--finnish-blue))] text-white'>
                     <svg

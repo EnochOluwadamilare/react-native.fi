@@ -1,14 +1,28 @@
+export type ConferenceRegion = 'Europe' | 'US' | 'UK' | 'Asia';
+export type ConferenceFormat =
+  | 'Single-track'
+  | 'Multi-track'
+  | 'Workshops'
+  | 'One-day'
+  | 'Multi-day';
+
 export interface Conference {
   name: string;
   location: string;
   date: string;
   dateDetail: string;
+  startDate: string;
+  endDate: string;
   description: string;
   url: string;
   tags: string[];
   recurring: string;
-  cfpStatus: string;
-  cfpUrl?: string;
+  region: ConferenceRegion;
+  formats: ConferenceFormat[];
+  ticketsUrl?: string;
+  priceRange?: string;
+  pastTalksUrl?: string;
+  discountCode?: string;
   ogImage?: string;
 }
 
@@ -18,11 +32,6 @@ export interface Meetup {
   description: string;
   url: string;
   frequency: string;
-}
-
-export interface CfpTip {
-  title: string;
-  description: string;
 }
 
 export interface Speaker {

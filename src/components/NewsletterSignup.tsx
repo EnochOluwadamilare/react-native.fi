@@ -93,7 +93,7 @@ export function NewsletterSignup({
   if (variant === 'inline') {
     return (
       <div
-        className={`rounded-2xl border border-[rgb(var(--finnish-blue))/0.2] bg-[rgb(var(--finnish-blue))/0.04] p-6 sm:p-8 ${className}`}
+        className={`rounded-2xl border border-[rgb(var(--finnish-blue)/0.2)] bg-[rgb(var(--finnish-blue)/0.04)] p-6 sm:p-8 ${className}`}
       >
         <div className='flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-6'>
           <div className='flex-1'>

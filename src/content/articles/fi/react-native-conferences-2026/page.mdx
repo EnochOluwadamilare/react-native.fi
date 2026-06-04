@@ -1,0 +1,142 @@
+import { ArticleLayout } from '@/components/ArticleLayout';
+import { ArticleJsonLd } from '@/components/ArticleJsonLd';
+
+export const article = {
+  author: 'Perttu Lähteenlahti',
+  authorTagline: 'Developer Advocate, RevenueCat',
+  authorSlug: 'perttu-lahteenlahti',
+  date: '2026-03-16',
+  updated: '2026-06-04',
+  title: 'Jokainen React Native -konferenssi 2026: päivät ja mitä odottaa',
+  description:
+    'Täydellinen opas React Native -konferensseihin vuonna 2026. App.js Conf, React Summit, Chain React, Agent Conf ja React Native Connection. Päivämäärät, sijainnit ja omakohtaiset vinkit.',
+  tags: ['community'],
+};
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+  openGraph: {
+    publishedTime: article.date,
+    modifiedTime: article.updated || article.date,
+    authors: [article.author],
+    title: article.title,
+    description: article.description,
+    siteName: 'React Native Finland',
+    locale: 'fi_FI',
+    type: 'article',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: article.title,
+    description: article.description,
+  },
+  authors: [{ name: article.author }],
+};
+
+export default (props) => (
+  <>
+    <ArticleJsonLd article={article} />
+    <ArticleLayout article={article} {...props} />
+  </>
+);
+
+Jos teet React Native -sovelluksia, konferenssit ovat paikka, jossa tapaat ihmiset, jotka rakentavat työkalujasi. Metan core-tiimin jäsenet, kirjastojen tekijät Expolta, Callstackilta ja Infinite Rediltä. Olen puhunut muutamassa näistä, ja pelkät käytäväkeskustelut ovat matkan arvoisia.
+
+Vuonna 2026 järjestetään viisi tutustumisen arvoista konferenssia. Tässä ovat päivämäärät, sijainnit ja mitä jokainen tekee parhaiten.
+
+<Callout>
+  **Etsitkö live-statusta?** [Konferenssisivullamme](/fi/conferences) on lajiteltavat kortit sekä suodattimet alueen ja formaatin mukaan. Tämä artikkeli on syväluotaus — sivu on kojetaulu.
+</Callout>
+
+## App.js Conf — Krakova, Puola
+
+**Päivät:** 27.–29. toukokuuta 2026
+**Toistuvuus:** Vuosittain (toukokuu)
+**Verkkosivu:** [appjs.co](https://appjs.co)
+
+App.js on suurin React Native- ja Expo-konferenssi. Software Mansion järjestää sen Krakovassa: kolme päivää puheita ja työpajoja Metan, Microsoftin, Shopifyn ja Amazonin tekijöiden kanssa. Tapahtumapaikka, puhujaillallinen, tuotannon laatu. Software Mansion ei säästele.
+
+Jos voit osallistua tänä vuonna yhteen konferenssiin, tee siitä tämä. Expo- ja React Native -core-tiimit kohtelevat App.js:ää lippulaivatapahtumana, joten kuulet uusista ominaisuuksista täällä ennen muita.
+
+**Kenelle:** Kaikille React Nativea tai Expoa käyttäville. Yleisö painottuu kokeneisiin kehittäjiin, mutta puheet käsittelevät kaikkea aloittelusta syviin sisuksiin asti.
+
+## React Summit — Amsterdam, Alankomaat
+
+**Päivät:** 12.–16. kesäkuuta 2026
+**Toistuvuus:** Vuosittain (kesäkuu)
+**Verkkosivu:** [reactsummit.com](https://reactsummit.com)
+
+React Summit on maailman suurin React-konferenssi, ja sillä on oma React Native -raita huippumobiilikehittäjien kanssa. GitNation järjestää sen, ja se kulkee kahdella rinnakkaisella raidalla useita päiviä Amsterdamissa.
+
+Hyvä vaihtoehto, jos tiimisi työskentelee sekä Reactin että React Nativen kanssa. Saat laajemman React-ekosysteemin (server components, Next.js, tilanhallinta) mobiilispesifisen sisällön rinnalla.
+
+**Kenelle:** Full-stack React -kehittäjille ja tiimeille, jotka jakavat koodia webin ja mobiilin välillä.
+
+## Chain React — Portland, Oregon, USA
+
+**Päivät:** 30.–31. heinäkuuta 2026
+**Toistuvuus:** Vuosittain (heinäkuu)
+**Verkkosivu:** [chainreactconf.com](https://chainreactconf.com)
+
+Chain React on Yhdysvaltain React Native -konferenssi, jonka järjestävät Infinite Red ja Expo. Kaksi päivää, yksi raita, Portland. Infinite Red osaa järjestää konferenssin.
+
+Chain React on pienempi kuin App.js tai React Summit, mikä tarkoittaa, että pääset juttelemaan puhujien ja muiden osallistujien kanssa sessioiden välissä. Yksi raita tarkoittaa, että kaikki kokevat saman.
+
+**Kenelle:** Yhdysvalloissa asuville React Native -kehittäjille, jotka haluavat keskittyneen konferenssin ilman Eurooppaan matkustamista. Ensimmäistä kertaa konferenssiin osallistuvat tuntevat itsensä tervetulleeksi.
+
+## Agent Conf — Varsova, Puola
+
+**Päivät:** 17.–18. syyskuuta 2026
+**Toistuvuus:** Vuosittain (syyskuu)
+**Verkkosivu:** [agent.sh](https://www.agent.sh)
+
+Agent Conf on Callstackin seuraaja React Universe Confille (aiemmin React Native EU). Kymmenen vuotta React Native -tapahtumia järjestettyään Callstack on kääntänyt konferenssin agenttipohjaiseen kehitykseen ja autonomisiin järjestelmiin — vibe-koodaukseen, agenttien orkestrointiin, monen agentin järjestelmiin ja oikean maailman käyttöönottotarinoihin.
+
+Se ei ole enää React Native -konferenssi, mutta sitä pyörittää sama tiimi ja se on suunnattu samalle rakentajayhteisölle, joka nyt painii AI-agenttien parissa. Jos työsi suuntautuu kohti agenttiavusteista insinöörityötä, tänne Callstack osoittaa.
+
+**Kenelle:** Kehittäjille, jotka tutkivat, miten AI-agentit muuttavat ohjelmistojen rakentamista — kokeiletpa sitten koodausagentteja tai toimitat agenttipohjaisia ominaisuuksia.
+
+## React Native Connection — Pariisi, Ranska
+
+**Päivät:** 24. syyskuuta 2026
+**Toistuvuus:** Vuosittain (syyskuu)
+**Verkkosivu:** [reactnativeconnection.io](https://reactnativeconnection.io)
+
+React Native Connection on yhden päivän konferenssi Pariisissa ranskalaisten ja kansainvälisten puhujien kanssa. Hyvin järjestetty, keskittynyt ja hyvä tapa yhdistyä Ranskan ja laajemman Euroopan React Native -yhteisön kanssa.
+
+Yhden päivän formaatti tekee matkan oikeutetuksi, jos olet Euroopassa. Pariisi syyskuussa ei myöskään haittaa.
+
+**Kenelle:** Eurooppalaisille React Native -kehittäjille, erityisesti niille, jotka haluavat keskittyneen yhden päivän tapahtuman ilman monipäiväistä sitoumusta.
+
+## Kuinka valita oikea konferenssi
+
+Jos osallistut vain yhteen: **App.js Conf** tai **Chain React**, riippuen siitä, oletko Euroopassa vai Yhdysvalloissa.
+
+Jos haluat työpajoja: **App.js Conf** ja **Chain React** kummallakin on vahvat työpajaohjelmat.
+
+Jos haluat laajimman ekosysteeminäkymän: **React Summit** kattaa sekä Reactin että React Nativen.
+
+Jos haluat nopean: **React Native Connection** mahduttaa kokonaisen konferenssin yhteen päivään.
+
+## Yrityksen saaminen maksamaan se
+
+Useimmilla yrityksillä on konferenssibudjetti, mutta saatat joutua perustelemaan.
+
+1. **Esitä se ammatillisena kehittymisenä.** Opit uusista työkaluista ja malleista, jotka soveltuvat nykyiseen työhösi. Nimeä konkreettisia esityksessäsi.
+2. **Mainitse verkostoituminen.** Tulet takaisin kontaktien, ideoiden ja ekosysteemin suunnan tuntemuksen kanssa.
+3. **Tarjoa jakaa oppimasi.** Lupaa lounaspresentaation tai kirjallisen yhteenvedon, kun palaat. Se moninkertaistaa arvon tiimille.
+4. **Aloita halvimmasta vaihtoehdosta.** Jos yrityksesi ei ole aiemmin lähettänyt ihmisiä konferensseihin, ehdota ensin yhden päivän tapahtumaa.
+
+## Puhuminen konferensseissa
+
+Jos olet harkinnut puheen lähettämistä, tee se. Olen lähettänyt paljon CFP:itä, jotka eivät johtaneet mihinkään. Muutama hyväksyttiin. Niin se toimii.
+
+- **Ole konkreettinen.** "Suorituskyvyn optimointi React Nativessa" on liian laaja. "Kuinka leikkasimme sovelluksemme käynnistysajan 4 sekunnista 800 millisekuntiin" on puhe, jonka ihmiset haluavat nähdä.
+- **Kerro tarina.** Parhailla puheilla on narratiivi: ongelma, mitä kokeilit, mikä toimi. Yleisöt muistavat tarinat luettelomerkkien yli.
+- **Sisällytä tulokset.** Numerot, benchmarkit, ennen/jälkeen-kuvakaappaukset. Konkreettiset lopputulokset erottavat puheesi.
+- **Lähetä useaan konferenssiin.** Hylkääminen on normaalia. Lähetä sama puhe useaan konferenssiin parantaaksesi mahdollisuuksiasi.
+
+## Pysy ajan tasalla
+
+Konferenssipäivät ja ohjelmat muuttuvat. Pidämme päivitetyn listan [konferenssisivullamme](/fi/conferences) uusimpien tietojen kanssa, tai tilaa [React Native Recap -uutiskirje](/fi/articles) saadaksesi kahden viikon välein päivityksiä ekosysteemistä, mukaan lukien konferenssiuutiset.

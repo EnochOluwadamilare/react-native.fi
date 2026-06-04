@@ -3,12 +3,27 @@ import { glob } from 'glob';
 import path from 'path';
 
 import { ArticleTag } from '@/lib/article-tags';
-import { getDeveloperBySlug } from '@/lib/developers';
+import { getDeveloperByName, getDeveloperBySlug } from '@/lib/developers';
+import { Developer } from '@/lib/developers';
 
 import { defaultLocale, Locale } from '@/i18n/config';
 
 export type { ArticleTag } from '@/lib/article-tags';
 export { articleTagLabels } from '@/lib/article-tags';
+
+export interface ArticleAuthor {
+  name: string;
+  role: string;
+  href: string;
+  imageUrl: string;
+  bio?: string;
+  location?: string;
+  expertise?: string[];
+  websiteUrl?: string;
+  xUrl?: string;
+  linkedinUrl?: string;
+  githubUrl?: string;
+}
 
 export interface Article {
   slug: string;
@@ -18,35 +33,46 @@ export interface Article {
   description: string;
   tags?: ArticleTag[];
   readingTime?: number;
-  author:
-    | string
-    | {
-        name: string;
-        role: string;
-        href: string;
-        imageUrl: string;
-      };
+  author: string | ArticleAuthor;
   imageUrl?: string;
   canonical?: string;
   locale?: Locale;
   hasTranslation?: boolean;
 }
 
-// Build a rich author object if authorSlug matches a developer
+// Map a Developer record to a rich article author (with E-E-A-T fields)
+function developerToAuthor(dev: Developer, tagline?: string): ArticleAuthor {
+  return {
+    name: dev.name,
+    role: tagline || dev.role,
+    href: `/developers/${dev.slug}`,
+    imageUrl: dev.imageUrl,
+    bio: dev.bio,
+    location: dev.location,
+    expertise: dev.expertise,
+    websiteUrl: dev.websiteUrl,
+    xUrl: dev.xUrl,
+    linkedinUrl: dev.linkedinUrl,
+    githubUrl: dev.githubUrl,
+  };
+}
+
+// Build a rich author object by matching a developer via authorSlug, or by
+// falling back to the plain `author` name. Returns the raw string only when no
+// matching developer exists.
 function resolveAuthor(
   metadata: Partial<Article> & { authorSlug?: string; authorTagline?: string },
 ): Article['author'] {
   if (metadata.authorSlug) {
     const dev = getDeveloperBySlug(metadata.authorSlug);
-    if (dev) {
-      return {
-        name: dev.name,
-        role: metadata.authorTagline || dev.role,
-        href: `/developers/${dev.slug}`,
-        imageUrl: dev.imageUrl,
-      };
-    }
+    if (dev) return developerToAuthor(dev, metadata.authorTagline);
   }
+
+  if (typeof metadata.author === 'string' && metadata.author) {
+    const dev = getDeveloperByName(metadata.author);
+    if (dev) return developerToAuthor(dev, metadata.authorTagline);
+  }
+
   return metadata.author || '';
 }
 

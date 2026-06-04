@@ -16,51 +16,51 @@
     "country": "Finland"
   },
   "hero": {
-    "badge": "Meetups in Helsinki. Content in English & Finnish.",
+    "badge": "Tutorials, a developer directory & conferences.",
     "seeEvents": "See upcoming events",
     "title": "Build React Native apps in Finland",
-    "description": "The community for developers shipping cross-platform apps from Helsinki to Oulu. Join meetups, read tutorials, and connect with the devs building React Native in the Nordics.",
+    "description": "A curated resource for React Native in Finland — practical tutorials, a directory of Finnish developers, and the conference calendar.",
     "country": "Finland",
-    "location": "Helsinki, Finland",
-    "meetups": "Meetups & Conferences",
-    "openSource": "Open Source",
-    "viewEvents": "Join the Next Meetup",
-    "learnMore": "Browse tutorials"
+    "viewEvents": "Browse tutorials",
+    "learnMore": "Find a developer",
+    "maintainedBy": "Maintained by Perttu",
+    "statTutorials": "Tutorials",
+    "statDevelopers": "Developers",
+    "statConferences": "Conferences"
   },
   "home": {
-    "introTitle": "Why React Native in Finland?",
-    "introDescription": "Finland punches above its weight in mobile. From Nokia's legacy to today's thriving startup scene, Finnish developers have been shipping mobile apps for decades. React Native fits right in — and this community connects the people making it happen.",
-    "exploreTitle": "Developers, meetups, tutorials",
+    "exploreTitle": "Resources",
     "exploreSubtitle": "Everything you need to build with React Native in Finland",
     "events": {
       "title": "Meetups",
-      "count": "{count} events so far",
-      "description": "Technical talks from Finnish React Native engineers. Real conversations, free pizza, and actual networking (not the awkward kind).",
+      "count": "{count} past events",
+      "description": "Talks from Finnish React Native engineers, recorded and archived.",
       "cta": "See upcoming meetups"
     },
     "developers": {
       "title": "Developer Directory",
-      "count": "{count} listed developers",
+      "count": "{count} developers listed",
       "description": "Looking to hire? Need a consultant? Browse vetted React Native specialists based in Finland — or add yourself to get discovered.",
       "cta": "Find React Native talent"
     },
     "articles": {
       "title": "Tutorials",
-      "count": "{count} guides & deep-dives",
-      "description": "Practical tutorials from devs who ship React Native apps daily. Performance, animations, native modules — no fluff.",
-      "cta": "Start reading"
-    },
-    "learn": {
-      "title": "Tutorials & Guides",
-      "subtitle": "Learn React Native",
-      "description": "Practical tutorials from the Finnish React Native community. Performance, animations, native modules — real-world guides from devs who ship.",
+      "count": "{count} tutorials & deep-dives",
+      "description": "Practical React Native guides from devs who ship — performance, animations, native modules. No fluff.",
       "cta": "Browse tutorials"
     },
+    "nextConference": {
+      "eyebrow": "Next conference",
+      "daysAway": "{count, plural, =0 {Happening today} =1 {1 day away} other {# days away}}",
+      "thisWeek": "This week",
+      "happeningNow": "Happening now",
+      "cta": "See all conferences"
+    },
     "community": {
-      "title": "Become part of React Native Finland",
-      "description": "Whether you're learning React Native, hiring developers, or just want to geek out about mobile — you're in the right place.",
-      "ctaPrimary": "Find next meetup",
-      "ctaSecondary": "Browse the site"
+      "title": "Explore React Native Finland",
+      "description": "Tutorials, conferences, a developer directory, and curated resources — everything in one place.",
+      "ctaPrimary": "Browse tutorials",
+      "ctaSecondary": "See conferences"
     },
     "faq": {
       "title": "Frequently Asked Questions",
@@ -82,12 +82,25 @@
           "answer": "Yes! We're always looking for sponsors to help with venue costs, food, and drinks. Sponsors get visibility with the Finnish React Native community. Reach out via GitHub or Meetup to discuss."
         }
       ]
+    },
+    "about": {
+      "eyebrow": "Who's behind this",
+      "title": "Maintained by Perttu Lähteenlahti",
+      "description": "A community resource maintained by Perttu Lähteenlahti — React Native developer and Developer Advocate at RevenueCat, based in Helsinki. Built to help Finnish developers ship better cross-platform apps.",
+      "cta": "More about Perttu"
+    },
+    "contribute": {
+      "title": "Open source",
+      "subtitle": "Built in the open — contribute",
+      "description": "This site is open source. Add yourself to the developer directory, submit a tutorial, or suggest an event with a pull request.",
+      "cta": "Contribute on GitHub"
     }
   },
   "footer": {
     "siteName": "React Native Finland",
     "tagline": "Community hub for React Native developers in Finland",
-    "builtBy": "Built by"
+    "builtBy": "Maintained by",
+    "maintainerRole": "Developer Advocate @ RevenueCat"
   },
   "articles": {
     "pageTitle": "Learn React Native | Free Tutorials & Guides",
@@ -142,17 +155,92 @@
     "description": "Conferences, meetup groups, and community events for React Native developers.",
     "conferencesTitle": "Conferences",
     "conferencesDescription": "The major React Native conferences around the world.",
-    "conferencesViewAll": "Full conference guide with CFP deadlines",
+    "conferencesViewAll": "Full conference guide — dates, locations, and tickets",
     "meetupsTitle": "Meetup Groups",
     "meetupsDescription": "Local React Native communities that meet regularly. Can't make a conference? Start here.",
     "helsinkiTitle": "React Native Helsinki",
-    "helsinkiDescription": "Our local meetup in Helsinki — technical talks, networking, and free pizza. Run by Perttu and the community.",
+    "helsinkiDescription": "Our local meetup in Helsinki — technical talks, networking, and free pizza.",
     "helsinkiJoin": "Join on Meetup.com",
     "upcoming": "Upcoming",
     "past": "Past Events",
     "upcomingBadge": "Upcoming",
     "talks": "{count, plural, one {# talk} other {# talks}}",
     "heroAlt": "React Native Events"
+  },
+  "conferences": {
+    "metaTitle": "React Native Conferences 2026 | Dates, Locations & Guide",
+    "metaDescription": "Updated 2026 React Native conference dates, locations, and ticket links for App.js Conf, React Summit, Chain React, Agent Conf, and more.",
+    "heroEyebrow": "Updated Guide",
+    "heroTitle": "React Native Conferences 2026",
+    "heroDescription": "Updated dates and ticket links for major React Native conferences. From App.js in Poland to Chain React in the US.",
+    "viewConferences": "View Conferences",
+    "submitConference": "Submit a Conference",
+    "nextUpEyebrow": "Next up",
+    "nextUpDaysAway": "{count, plural, =0 {Happening today} =1 {1 day away} other {# days away}}",
+    "nextUpThisWeek": "This week",
+    "nextUpHappeningNow": "Happening now",
+    "viewDetails": "View details",
+    "majorEventsEyebrow": "Major Events",
+    "majorEventsTitle": "Upcoming React Native Conferences",
+    "majorEventsDescription": "The must-attend conferences for React Native developers. Sorted by date — soonest first.",
+    "pastEventsTitle": "Earlier this year",
+    "pastEventsDescription": "Already happened — but the talks usually go up on YouTube within a few weeks.",
+    "watchTalks": "Watch past talks",
+    "filterAll": "All regions",
+    "filterRegionLabel": "Filter conferences by region",
+    "filterEurope": "Europe",
+    "filterUS": "US",
+    "filterUK": "UK",
+    "filterFormatAll": "All formats",
+    "filterFormatLabel": "Filter conferences by format",
+    "filterWorkshops": "Workshops",
+    "filterSingleTrack": "Single-track",
+    "filterOneDay": "One-day",
+    "noConferencesTitle": "No conferences match those filters",
+    "noConferencesDescription": "Try another region or format to see more upcoming events.",
+    "officialSite": "Official site",
+    "statusPast": "Past",
+    "statusThisWeek": "This week",
+    "statusUpcoming": "Upcoming",
+    "statusFarFuture": "Save the date",
+    "whyAttendTitle": "Why Attend React Native Conferences?",
+    "whyAttendDescription": "Conferences are the best way to level up your skills, meet the community, and stay ahead of the curve.",
+    "whyAttend": {
+      "learn": {
+        "title": "Learn from Experts",
+        "description": "Hear directly from core team members, library authors, and engineers building apps at scale."
+      },
+      "network": {
+        "title": "Network & Hire",
+        "description": "Meet developers from around the world. Many companies use conferences for recruiting."
+      },
+      "workshops": {
+        "title": "Hands-on Workshops",
+        "description": "Many conferences offer workshops where you build real projects with expert guidance."
+      },
+      "earlyAccess": {
+        "title": "Early Access",
+        "description": "Conferences often feature announcements of new features and tools before public release."
+      }
+    },
+    "meetupsEyebrow": "Local Communities",
+    "meetupsTitle": "React Native Meetups Worldwide",
+    "meetupsDescription": "Can't make it to a conference? Join a local meetup to connect with developers in your area.",
+    "faqTitle": "Frequently Asked Questions",
+    "ctaTitle": "Join React Native Helsinki",
+    "ctaDescription": "Looking for local events in Finland? React Native Helsinki meets monthly with free talks, practical demos, and mobile developers from across the Nordics.",
+    "ctaMissingConference": "Missing a conference?",
+    "ctaAddOnGithub": "Add it on GitHub",
+    "joinMeetup": "Join on Meetup",
+    "seePastEvents": "See Past Events",
+    "readGuide": "Read the 2026 guide",
+    "readGuideDescription": "Deep-dive on every conference: who runs it, who should attend, and how to get a talk accepted.",
+    "submitSectionEyebrow": "Community",
+    "submitSectionTitle": "Know a Conference We Missed?",
+    "submitSectionDescription": "This list is community-maintained. If a React Native conference is missing, outdated, or wrong, let us know and we'll add it.",
+    "submitViaIssue": "Suggest via GitHub issue",
+    "submitViaPr": "Edit the data directly",
+    "submitHint": "Open an issue with the details, or edit conferences.json and open a pull request."
   },
   "article": {
     "by": "By",
