@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>React Native Finland — 3310</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --case:#0a0b07; --case-2:#11140c; --lcd:#10160b; --lcd-edge:#1f2a15;
+  --green:#9bbc0f; --green-dim:#5a7a14; --amber:#ffb000;
+  --text:#e9ece2; --mute:#8b9384; --line:#23271b;
+  color-scheme:dark;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Hanken Grotesk",system-ui,sans-serif; background:var(--case); color:var(--text); line-height:1.55; -webkit-font-smoothing:antialiased;
+  background-image:radial-gradient(800px 500px at 50% -10%, rgba(155,188,15,.07), transparent 65%);}
+.pixel{font-family:"Silkscreen",monospace; letter-spacing:.02em}
+.mono{font-family:"JetBrains Mono",monospace}
+.wrap{width:min(1120px,92vw); margin-inline:auto}
+a{color:inherit}
+
+nav{position:sticky; top:0; z-index:30; background:rgba(10,11,7,.86); backdrop-filter:blur(8px); border-bottom:1px solid var(--line)}
+.nav-in{display:flex; align-items:center; gap:1.4rem; height:62px}
+.brand{font-family:"Silkscreen"; font-size:.9rem; color:var(--green); display:flex; gap:.55rem; align-items:center}
+.brand .sig{display:flex; gap:2px; align-items:flex-end}
+.brand .sig i{width:3px; background:var(--green); display:block; border-radius:1px}
+.brand .sig i:nth-child(1){height:5px}.brand .sig i:nth-child(2){height:8px}.brand .sig i:nth-child(3){height:11px}.brand .sig i:nth-child(4){height:14px}
+.nav-links{display:flex; gap:1.3rem; margin-left:auto; font-weight:600}
+.nav-links a{text-decoration:none; color:var(--mute)}
+.nav-links a:hover{color:var(--green)}
+.lang{font-family:"JetBrains Mono"; font-size:.74rem; color:var(--mute); border:1px solid var(--line); border-radius:6px; padding:.25rem .5rem}
+.lang b{color:var(--text)}
+@media(max-width:820px){.nav-links{display:none}}
+
+/* hero */
+.hero{padding:4rem 0 3rem; display:grid; grid-template-columns:1.05fr .95fr; gap:3rem; align-items:center}
+@media(max-width:940px){.hero{grid-template-columns:1fr; gap:2.4rem}}
+.eyebrow{font-family:"Silkscreen"; font-size:.72rem; color:var(--green-dim); letter-spacing:.1em}
+h1.title{font-size:clamp(2.6rem,6vw,4.6rem); line-height:.98; letter-spacing:-.03em; font-weight:800; margin:1.1rem 0}
+h1.title .g{color:var(--green)}
+.lede{color:var(--mute); font-size:1.1rem; max-width:46ch}
+.cta-row{display:flex; gap:.8rem; margin-top:1.8rem; flex-wrap:wrap}
+.btn{font-family:"Silkscreen"; font-size:.78rem; text-decoration:none; border-radius:8px; padding:.85rem 1.2rem; transition:.18s; display:inline-flex; gap:.5rem; align-items:center}
+.btn-fill{background:var(--green); color:#0c1003; box-shadow:0 0 0 0 rgba(155,188,15,.5)}
+.btn-fill:hover{box-shadow:0 0 18px rgba(155,188,15,.45); transform:translateY(-2px)}
+.btn-out{border:1px solid var(--green-dim); color:var(--green)}
+.btn-out:hover{border-color:var(--green)}
+.btn:focus-visible{outline:2px solid var(--amber); outline-offset:3px}
+
+/* the phone */
+.phone{justify-self:center; width:300px; max-width:80vw; background:linear-gradient(180deg,#15180f,#0c0e08); border:1px solid #2a2f1d; border-radius:30px 30px 34px 34px; padding:20px 16px 26px; box-shadow:0 40px 90px -30px rgba(0,0,0,.9), inset 0 1px 0 rgba(255,255,255,.05)}
+.phone .speaker{width:42px;height:5px;border-radius:3px;background:#262b18;margin:0 auto 14px}
+.screen{position:relative; background:var(--lcd); border:2px solid var(--lcd-edge); border-radius:6px; padding:12px; aspect-ratio:5/6; overflow:hidden;
+  box-shadow:inset 0 0 30px rgba(0,0,0,.7), inset 0 0 0 1px rgba(155,188,15,.06)}
+.screen::after{content:""; position:absolute; inset:0; pointer-events:none;
+  background:repeating-linear-gradient(0deg, rgba(0,0,0,.18) 0 2px, transparent 2px 4px);
+  mix-blend-mode:multiply}
+#snake{position:absolute; inset:0; width:100%; height:100%; opacity:.5}
+.lcd-status{position:relative; display:flex; justify-content:space-between; font-family:"Silkscreen"; font-size:.6rem; color:var(--green); z-index:2}
+.lcd-status .bars{display:flex; gap:2px; align-items:flex-end}
+.lcd-status .bars i{width:3px;background:var(--green);display:block}
+.lcd-status .bars i:nth-child(1){height:4px}.lcd-status .bars i:nth-child(2){height:6px}.lcd-status .bars i:nth-child(3){height:8px}.lcd-status .bars i:nth-child(4){height:10px}
+.lcd-main{position:relative; z-index:2; height:calc(100% - 18px); display:flex; flex-direction:column; justify-content:center; text-align:center; gap:.5rem}
+.lcd-main .big{font-family:"Silkscreen"; font-weight:700; color:var(--green); font-size:1.5rem; line-height:1.1; text-shadow:0 0 8px rgba(155,188,15,.6)}
+.lcd-main .sub{font-family:"Silkscreen"; font-size:.62rem; color:var(--green-dim); letter-spacing:.06em}
+.lcd-main .row{font-family:"Silkscreen"; font-size:.6rem; color:var(--green); display:flex; justify-content:space-between; border-top:1px solid rgba(155,188,15,.25); padding-top:.4rem; margin-top:.3rem}
+.type::after{content:"_"; animation:blink 1s steps(1) infinite; color:var(--green)}
+@keyframes blink{50%{opacity:0}}
+.phone .keys{display:grid; grid-template-columns:repeat(3,1fr); gap:6px; margin-top:16px}
+.phone .keys b{height:14px; background:#1c2012; border-radius:4px; display:block}
+.phone .keys b.nav{background:#262c17}
+
+.stats{display:flex; gap:1.8rem; margin-top:2.2rem; flex-wrap:wrap}
+.stat .n{font-family:"Silkscreen"; font-size:1.2rem; color:var(--green)}
+.stat .l{font-size:.78rem; color:var(--mute)}
+
+/* sections */
+.section{padding:4rem 0}
+.sec-head{display:flex; align-items:center; gap:.8rem; margin-bottom:1.8rem}
+.sec-head .pre{font-family:"Silkscreen"; font-size:.7rem; color:var(--green-dim)}
+.sec-head h2{font-size:clamp(1.6rem,3vw,2.3rem); letter-spacing:-.02em; font-weight:800}
+.sec-head .line{flex:1; height:1px; background:var(--line)}
+
+/* menu cards (phone-menu metaphor) */
+.menu{display:grid; grid-template-columns:repeat(4,1fr); gap:.9rem}
+@media(max-width:860px){.menu{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.menu{grid-template-columns:1fr}}
+.item{text-decoration:none; color:inherit; border:1px solid var(--line); border-radius:12px; background:linear-gradient(180deg,var(--case-2),#0c0e08); padding:1.2rem; transition:.22s; position:relative}
+.item:hover{border-color:var(--green-dim); transform:translateY(-4px)}
+.item:focus-visible{outline:2px solid var(--green); outline-offset:3px}
+.item .ico{width:34px;height:34px;border-radius:8px; display:grid; place-items:center; background:rgba(155,188,15,.12); color:var(--green); font-family:"Silkscreen"; font-size:.9rem; margin-bottom:.8rem}
+.item h3{font-size:1.18rem; margin-bottom:.35rem}
+.item p{color:var(--mute); font-size:.9rem}
+.item .go{margin-top:.9rem; font-family:"Silkscreen"; font-size:.66rem; color:var(--green)}
+
+/* guides */
+.guide{display:grid; grid-template-columns:auto 1fr auto; gap:1.1rem; align-items:center; padding:1rem 0; border-bottom:1px solid var(--line); text-decoration:none; color:inherit; transition:.2s}
+.guide:hover{padding-left:.5rem}
+.guide:hover .gt{color:var(--green)}
+.guide .gn{font-family:"Silkscreen"; font-size:.8rem; color:var(--green-dim)}
+.guide .gt{font-weight:700; font-size:1.06rem}
+.guide .gd{color:var(--mute); font-size:.86rem; margin-top:.15rem}
+.guide .tag{font-family:"JetBrains Mono"; font-size:.68rem; color:var(--mute); border:1px solid var(--line); border-radius:999px; padding:.25rem .6rem}
+
+/* devs */
+.devs{display:grid; grid-template-columns:repeat(3,1fr); gap:1rem}
+@media(max-width:760px){.devs{grid-template-columns:1fr}}
+.dev{border:1px solid var(--line); border-radius:12px; padding:1.2rem; background:var(--case-2); display:flex; gap:1rem; align-items:center}
+.dev .av{width:48px;height:48px;border-radius:10px; background:rgba(155,188,15,.12); color:var(--green); display:grid; place-items:center; font-family:"Silkscreen"; font-size:.9rem}
+.dev h3{font-size:1.05rem}
+.dev .role{color:var(--mute); font-size:.82rem}
+.dev .st{font-family:"JetBrains Mono"; font-size:.66rem; color:var(--green); margin-top:.2rem}
+
+/* meetup */
+.meet{border:1px solid var(--green-dim); border-radius:16px; padding:2rem; background:linear-gradient(120deg, rgba(155,188,15,.10), transparent 55%), var(--case-2); display:grid; grid-template-columns:1fr auto; gap:1.4rem; align-items:center}
+@media(max-width:720px){.meet{grid-template-columns:1fr}}
+.meet .when{font-family:"Silkscreen"; font-size:.7rem; color:var(--amber)}
+.meet h3{font-size:1.7rem; margin:.5rem 0; letter-spacing:-.01em}
+.meet p{color:var(--mute)}
+
+/* newsletter */
+.news{display:flex; gap:.6rem; border:1px solid var(--line); border-radius:10px; padding:.4rem; max-width:520px; background:var(--case-2)}
+.news input{flex:1; background:transparent; border:0; color:var(--text); padding:.7rem .8rem; font-family:"JetBrains Mono"; font-size:.9rem}
+.news input::placeholder{color:var(--mute)}
+.news input:focus{outline:none}
+.news button{font-family:"Silkscreen"; font-size:.72rem; background:var(--green); color:#0c1003; border:0; border-radius:7px; padding:.7rem 1rem; cursor:pointer}
+
+footer{border-top:1px solid var(--line); margin-top:2rem; padding:2.4rem 0; color:var(--mute); font-size:.85rem}
+.f-in{display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap}
+.f-in a{color:var(--mute); text-decoration:none}.f-in a:hover{color:var(--green)}
+
+@media (prefers-reduced-motion: reduce){ *{animation:none !important} #snake{display:none} .type::after{display:none} }
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap nav-in">
+    <div class="brand"><span class="sig"><i></i><i></i><i></i><i></i></span> react-native.fi</div>
+    <div class="nav-links"><a href="#menu">Guides</a><a href="#devs">Developers</a><a href="#meet">Meetups</a><a href="#guides">Conferences</a></div>
+    <span class="lang"><b>EN</b> / FI</span>
+  </div>
+</nav>
+
+<header class="hero wrap">
+  <div>
+    <div class="eyebrow">EST. HELSINKI — HOME OF MOBILE</div>
+    <h1 class="title">Where mobile<br>was born, <span class="g">we build</span><br>React Native.</h1>
+    <p class="lede">Finland gave the world the mobile phone. This is where its developers gather now — guides, a directory, Helsinki meetups and global conferences. EN &amp; FI.</p>
+    <div class="cta-row">
+      <a class="btn btn-fill" href="#menu">▸ Menu</a>
+      <a class="btn btn-out" href="#meet">Meetups</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="n">40+</div><div class="l">guides</div></div>
+      <div class="stat"><div class="n">EN·FI</div><div class="l">bilingual</div></div>
+      <div class="stat"><div class="n">RN·HEL</div><div class="l">meetups</div></div>
+    </div>
+  </div>
+
+  <div class="phone" aria-hidden="true">
+    <div class="speaker"></div>
+    <div class="screen">
+      <canvas id="snake" width="120" height="144"></canvas>
+      <div class="lcd-status">
+        <span class="bars"><i></i><i></i><i></i><i></i></span>
+        <span>RN-FI</span>
+        <span>▮▮▮</span>
+      </div>
+      <div class="lcd-main">
+        <div class="big">REACT<br>NATIVE</div>
+        <div class="sub type" id="boot">SUOMI</div>
+        <div class="row"><span>40 GUIDES</span><span>HKI</span></div>
+      </div>
+    </div>
+    <div class="keys">
+      <b></b><b class="nav"></b><b></b>
+      <b></b><b></b><b></b>
+      <b></b><b></b><b></b>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="section wrap" id="menu">
+    <div class="sec-head"><span class="pre">MENU</span><h2>Pick an app</h2><span class="line"></span></div>
+    <div class="menu">
+      <a class="item" href="#guides"><div class="ico">⌘</div><h3>Tutorials</h3><p>First screen to native modules, performance and shipping.</p><div class="go">40+ GUIDES ▸</div></a>
+      <a class="item" href="#devs"><div class="ico">☺</div><h3>Directory</h3><p>Finnish React Native developers, open to work and talks.</p><div class="go">BROWSE ▸</div></a>
+      <a class="item" href="#meet"><div class="ico">▤</div><h3>Meetups</h3><p>React Native Helsinki — talks, demos, hallway track.</p><div class="go">NEXT ▸</div></a>
+      <a class="item" href="#guides"><div class="ico">✈</div><h3>Conferences</h3><p>A living index of RN conferences across the world.</p><div class="go">PLAN ▸</div></a>
+    </div>
+  </section>
+
+  <section class="section wrap" id="guides">
+    <div class="sec-head"><span class="pre">INBOX</span><h2>Latest guides</h2><span class="line"></span></div>
+    <a class="guide" href="#"><span class="gn">01</span><span><div class="gt">Mastering Expo Router navigation</div><div class="gd">Stacks, tabs and deep links that scale.</div></span><span class="tag">EN · 12m</span></a>
+    <a class="guide" href="#"><span class="gn">02</span><span><div class="gt">Suorituskyky: listojen optimointi</div><div class="gd">FlashList, muistinhallinta ja renderöinti.</div></span><span class="tag">FI · 9m</span></a>
+    <a class="guide" href="#"><span class="gn">03</span><span><div class="gt">Native modules without fear</div><div class="gd">A practical bridge between JS and the platform.</div></span><span class="tag">EN · 15m</span></a>
+    <a class="guide" href="#"><span class="gn">04</span><span><div class="gt">Animations that feel native</div><div class="gd">Reanimated worklets, gestures, 60fps budgets.</div></span><span class="tag">EN · 11m</span></a>
+  </section>
+
+  <section class="section wrap" id="devs">
+    <div class="sec-head"><span class="pre">CONTACTS</span><h2>In the directory</h2><span class="line"></span></div>
+    <div class="devs">
+      <div class="dev"><div class="av">PL</div><div><h3>Perttu Lähteenlahti</h3><div class="role">RN & Expo · founder</div><div class="st">● open to work</div></div></div>
+      <div class="dev"><div class="av">TH</div><div><h3>Tobias Helsing</h3><div class="role">Mobile engineer · DX</div><div class="st">● open to talks</div></div></div>
+      <div class="dev"><div class="av">EC</div><div><h3>Eduardo Cebola</h3><div class="role">Cross-platform RN</div><div class="st">● collaborating</div></div></div>
+    </div>
+  </section>
+
+  <section class="section wrap" id="meet">
+    <div class="meet">
+      <div>
+        <div class="when">● UPCOMING · HELSINKI · FREE</div>
+        <h3>React Native Helsinki: Fourth Edition</h3>
+        <p>An evening of talks, live demos and the people who ship Finnish apps. English-friendly, everyone welcome.</p>
+      </div>
+      <a class="btn btn-fill" href="#">RSVP ▸</a>
+    </div>
+  </section>
+
+  <section class="section wrap">
+    <div class="sec-head"><span class="pre">SUBSCRIBE</span><h2>One signal, no noise</h2><span class="line"></span></div>
+    <p class="lede" style="margin-bottom:1.2rem">New guides, meetup dates and Finnish RN news.</p>
+    <form class="news" onsubmit="return false">
+      <input type="email" placeholder="you@example.fi" aria-label="Email address">
+      <button>SEND</button>
+    </form>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap f-in">
+    <div>react-native.fi — the React Native community of Finland · open source</div>
+    <div style="display:flex;gap:1.3rem"><a href="#">GitHub</a><a href="#">Meetup</a><a href="#">EN / FI</a></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // boot type effect
+  var boot = document.getElementById('boot');
+  if(boot && !prefersReduced){
+    var word = 'SUOMI'; boot.textContent='';
+    var i=0; var t=setInterval(function(){ boot.textContent = word.slice(0,++i); if(i>=word.length) clearInterval(t); }, 220);
+  }
+  // ambient snake in the LCD
+  var cv = document.getElementById('snake');
+  if(!cv || prefersReduced || !cv.getContext) return;
+  var ctx = cv.getContext('2d');
+  var G = 8, COLS = cv.width/G, ROWS = cv.height/G;
+  var snake = [{x:3,y:9}], dir={x:1,y:0}, food={x:8,y:4}, len=5;
+  function place(){ food = {x:(Math.floor((Date.now()/97)%COLS)), y:(Math.floor((Date.now()/53)%ROWS))}; }
+  function step(){
+    var head={x:snake[0].x+dir.x, y:snake[0].y+dir.y};
+    // simple AI: steer toward food, avoid walls
+    if(head.x<0||head.x>=COLS||head.y<0||head.y>=ROWS){
+      if(dir.x!==0){ dir={x:0,y: head.y<ROWS/2?1:-1}; } else { dir={x: head.x<COLS/2?1:-1, y:0}; }
+      head={x:snake[0].x+dir.x, y:snake[0].y+dir.y};
+    } else {
+      if(dir.x!==0 && snake[0].y!==food.y && Math.random()<0.35) dir={x:0,y: food.y>snake[0].y?1:-1};
+      else if(dir.y!==0 && snake[0].x!==food.x && Math.random()<0.35) dir={x: food.x>snake[0].x?1:-1, y:0};
+      head={x:snake[0].x+dir.x, y:snake[0].y+dir.y};
+    }
+    head.x=(head.x+COLS)%COLS; head.y=(head.y+ROWS)%ROWS;
+    snake.unshift(head);
+    if(head.x===food.x && head.y===food.y){ len++; place(); }
+    while(snake.length>len) snake.pop();
+    draw();
+  }
+  function draw(){
+    ctx.clearRect(0,0,cv.width,cv.height);
+    ctx.fillStyle='#9bbc0f';
+    ctx.fillRect(food.x*G+1, food.y*G+1, G-2, G-2);
+    for(var i=0;i<snake.length;i++){ ctx.fillRect(snake[i].x*G+1, snake[i].y*G+1, G-2, G-2); }
+  }
+  place(); setInterval(step, 220);
+})();
+</script>
+</body>
+</html>

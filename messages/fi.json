@@ -49,6 +49,11 @@
       "description": "Käytännön React Native -oppaita kehittäjiltä, jotka julkaisevat sovelluksia — suorituskyky, animaatiot, natiivimoduulit. Ei täytettä.",
       "cta": "Selaa tutoriaaleja"
     },
+    "conferences": {
+      "title": "Konferenssit",
+      "description": "Elävä hakemisto React Native -konferensseista Euroopassa ja muualla maailmassa.",
+      "cta": "Suunnittele matka"
+    },
     "nextConference": {
       "eyebrow": "Seuraava konferenssi",
       "daysAway": "{count, plural, =0 {Tänään} =1 {Huomenna} other {# päivän päästä}}",

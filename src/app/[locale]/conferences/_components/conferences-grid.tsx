@@ -55,9 +55,14 @@ export function ConferencesGrid({
     { value: 'One-day', label: t('filterOneDay') },
   ];
 
+  const pillClass = (active: boolean) =>
+    active
+      ? 'rounded-full border-2 border-[rgb(var(--ink))] bg-[rgb(var(--ink))] px-4 py-1.5 font-display text-xs font-bold uppercase tracking-wide text-[rgb(var(--paper))]'
+      : 'rounded-full border-2 border-[rgb(var(--ink))] bg-[rgb(var(--paper))] px-4 py-1.5 font-display text-xs font-bold uppercase tracking-wide text-[rgb(var(--ink))] transition-colors hover:bg-[rgb(var(--sun))]';
+
   return (
     <>
-      <div className='mt-8 flex flex-wrap items-center gap-2'>
+      <div className='mt-8 flex flex-wrap items-center gap-3'>
         <div
           className='flex flex-wrap gap-2'
           role='group'
@@ -69,17 +74,13 @@ export function ConferencesGrid({
               type='button'
               aria-pressed={region === chip.value}
               onClick={() => setRegion(chip.value)}
-              className={
-                region === chip.value
-                  ? 'rounded-full bg-[rgb(var(--navy-950))] px-3 py-1.5 font-mono text-xs font-semibold text-white'
-                  : 'rounded-full border border-[rgb(var(--mono-200))] bg-white px-3 py-1.5 font-mono text-xs font-semibold text-[rgb(var(--mono-700))] hover:border-[rgb(var(--mono-300))]'
-              }
+              className={pillClass(region === chip.value)}
             >
               {chip.label}
             </button>
           ))}
         </div>
-        <span className='mx-2 h-4 w-px bg-[rgb(var(--mono-200))]' />
+        <span className='mx-1 h-5 w-[2px] bg-[rgb(var(--ink))]' />
         <div
           className='flex flex-wrap gap-2'
           role='group'
@@ -91,11 +92,7 @@ export function ConferencesGrid({
               type='button'
               aria-pressed={format === chip.value}
               onClick={() => setFormat(chip.value)}
-              className={
-                format === chip.value
-                  ? 'rounded-full bg-[rgb(var(--navy-950))] px-3 py-1.5 font-mono text-xs font-semibold text-white'
-                  : 'rounded-full border border-[rgb(var(--mono-200))] bg-white px-3 py-1.5 font-mono text-xs font-semibold text-[rgb(var(--mono-700))] hover:border-[rgb(var(--mono-300))]'
-              }
+              className={pillClass(format === chip.value)}
             >
               {chip.label}
             </button>
@@ -110,11 +107,11 @@ export function ConferencesGrid({
       </div>
 
       {filteredUpcoming.length === 0 && (
-        <div className='mt-8 rounded-2xl border border-dashed border-[rgb(var(--mono-300))] bg-[rgb(var(--mono-50))] p-8 text-center'>
-          <h3 className='text-lg font-semibold text-[rgb(var(--mono-900))]'>
+        <div className='mt-8 rounded-2xl border-[3px] border-dashed border-[rgb(var(--ink))] bg-[rgb(var(--paper-2))] p-8 text-center'>
+          <h3 className='font-display text-lg font-bold text-[rgb(var(--ink))]'>
             {t('noConferencesTitle')}
           </h3>
-          <p className='mt-2 text-sm text-[rgb(var(--mono-600))]'>
+          <p className='mt-2 text-sm font-medium opacity-70'>
             {t('noConferencesDescription')}
           </p>
         </div>
@@ -122,10 +119,13 @@ export function ConferencesGrid({
 
       {past.length > 0 && (
         <div className='mt-20'>
-          <h3 className='text-xl font-bold text-[rgb(var(--mono-900))]'>
-            {t('pastEventsTitle')}
-          </h3>
-          <p className='mt-2 text-sm text-[rgb(var(--mono-600))]'>
+          <div className='mb-6 flex items-baseline gap-3'>
+            <span className='u-num'>02</span>
+            <h3 className='font-display text-2xl font-extrabold tracking-tight sm:text-3xl'>
+              {t('pastEventsTitle')}
+            </h3>
+          </div>
+          <p className='-mt-3 max-w-[60ch] text-sm font-medium opacity-70'>
             {t('pastEventsDescription')}
           </p>
           <div className='mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3'>
@@ -147,10 +147,10 @@ function ConferenceCard({ conference }: { conference: DecoratedConference }) {
       href={conference.url}
       target='_blank'
       rel='noopener noreferrer'
-      className='group relative flex flex-col overflow-hidden rounded-2xl border border-[rgb(var(--mono-200))] bg-white transition-all duration-300 hover:border-[rgb(var(--finnish-blue)/0.3)] hover:shadow-xl'
+      className='group relative flex flex-col overflow-hidden rounded-2xl border-[3px] border-[rgb(var(--ink))] bg-[rgb(var(--paper))] transition-transform hover:-translate-y-1'
     >
       {conference.ogImage ? (
-        <div className='relative aspect-[1200/630] w-full overflow-hidden bg-[rgb(var(--mono-100))]'>
+        <div className='relative aspect-[1200/630] w-full overflow-hidden border-b-[3px] border-[rgb(var(--ink))] bg-[rgb(var(--paper-2))]'>
           <Image
             src={conference.ogImage}
             alt={conference.name}
@@ -160,8 +160,8 @@ function ConferenceCard({ conference }: { conference: DecoratedConference }) {
           />
         </div>
       ) : (
-        <div className='flex aspect-[1200/630] w-full items-center justify-center bg-[rgb(var(--mono-100))]'>
-          <span className='text-lg font-bold text-[rgb(var(--mono-300))]'>
+        <div className='flex aspect-[1200/630] w-full items-center justify-center border-b-[3px] border-[rgb(var(--ink))] bg-[rgb(var(--paper-2))]'>
+          <span className='font-display text-lg font-extrabold opacity-40'>
             {conference.name}
           </span>
         </div>
@@ -172,34 +172,15 @@ function ConferenceCard({ conference }: { conference: DecoratedConference }) {
           <ConferenceStatusBadge status={conference.status} />
         </div>
 
-        <h3 className='text-xl font-bold text-[rgb(var(--mono-900))] group-hover:text-[rgb(var(--finnish-blue))]'>
+        <h3 className='font-display text-xl font-extrabold leading-tight tracking-tight transition-colors group-hover:text-[rgb(var(--poppy))]'>
           {conference.name}
         </h3>
 
-        <div className='mt-2 flex items-center gap-2 text-sm text-[rgb(var(--mono-500))]'>
-          <svg
-            className='h-4 w-4'
-            fill='none'
-            viewBox='0 0 24 24'
-            stroke='currentColor'
-          >
-            <path
-              strokeLinecap='round'
-              strokeLinejoin='round'
-              strokeWidth={2}
-              d='M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z'
-            />
-            <path
-              strokeLinecap='round'
-              strokeLinejoin='round'
-              strokeWidth={2}
-              d='M15 11a3 3 0 11-6 0 3 3 0 016 0z'
-            />
-          </svg>
-          {conference.location} · {conference.dateDetail}
+        <div className='mt-2 font-display text-sm font-bold uppercase tracking-wide opacity-70'>
+          ● {conference.location} · {conference.dateDetail}
         </div>
 
-        <p className='mt-3 text-sm leading-6 text-[rgb(var(--mono-600))]'>
+        <p className='mt-3 text-sm font-medium leading-6 opacity-80'>
           {conference.description}
         </p>
 
@@ -207,15 +188,21 @@ function ConferenceCard({ conference }: { conference: DecoratedConference }) {
           {conference.tags.map((tag) => (
             <span
               key={tag}
-              className='rounded-full bg-[rgb(var(--mono-100))] px-2 py-0.5 text-xs font-medium text-[rgb(var(--mono-600))]'
+              className='rounded-full border-2 border-[rgb(var(--ink))] bg-[rgb(var(--paper))] px-2.5 py-0.5 font-display text-xs font-bold'
             >
               {tag}
             </span>
           ))}
         </div>
 
-        <span className='mt-5 inline-flex items-center gap-1 text-sm font-semibold text-[rgb(var(--finnish-blue))]'>
-          {t('officialSite')} <span aria-hidden>&rarr;</span>
+        <span className='mt-auto pt-5 font-display font-bold text-[rgb(var(--sky))]'>
+          {t('officialSite')}{' '}
+          <span
+            aria-hidden
+            className='inline-block transition-transform group-hover:translate-x-1'
+          >
+            →
+          </span>
         </span>
       </div>
     </a>
@@ -229,14 +216,14 @@ function PastConferenceCard({
 }) {
   const t = useTranslations('conferences');
   return (
-    <div className='rounded-xl border border-[rgb(var(--mono-200))] bg-white p-5'>
-      <div className='flex items-center justify-between'>
-        <h4 className='font-semibold text-[rgb(var(--mono-900))]'>
+    <div className='rounded-2xl border-[3px] border-[rgb(var(--ink))] bg-[rgb(var(--paper-2))] p-5'>
+      <div className='flex items-start justify-between gap-2'>
+        <h4 className='font-display text-base font-extrabold leading-tight tracking-tight'>
           {conference.name}
         </h4>
         <ConferenceStatusBadge status='past' />
       </div>
-      <p className='mt-1 text-xs text-[rgb(var(--mono-500))]'>
+      <p className='mt-1 font-display text-xs font-bold uppercase tracking-wide opacity-60'>
         {conference.dateDetail} · {conference.location}
       </p>
       {conference.pastTalksUrl && (
@@ -244,9 +231,9 @@ function PastConferenceCard({
           href={conference.pastTalksUrl}
           target='_blank'
           rel='noopener noreferrer'
-          className='mt-3 inline-flex items-center gap-1 text-xs font-medium text-[rgb(var(--finnish-blue))] hover:underline'
+          className='mt-3 inline-flex items-center gap-1 font-display text-xs font-bold text-[rgb(var(--sky))] hover:text-[rgb(var(--poppy))]'
         >
-          {t('watchTalks')} <span aria-hidden>&rarr;</span>
+          {t('watchTalks')} <span aria-hidden>→</span>
         </a>
       )}
     </div>

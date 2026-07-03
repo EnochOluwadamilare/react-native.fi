@@ -10,6 +10,7 @@ import {
   sortConferencesByDate,
 } from '@/lib/conferences';
 
+import { PoppyField } from '@/app/components/Poppy';
 import { siteConfig } from '@/constant/config';
 import { Locale } from '@/i18n/config';
 import { Link } from '@/i18n/navigation';
@@ -155,58 +156,32 @@ export default async function ConferencesPage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
 
-      <div className='bg-white'>
+      <div className='bg-[rgb(var(--paper))] text-[rgb(var(--ink))]'>
         {/* Hero Section */}
-        <section className='relative overflow-hidden bg-[rgb(var(--navy-950))] py-24 sm:py-28'>
-          <div className='absolute inset-0'>
-            <div
-              className='absolute left-1/4 top-0 h-[600px] w-[600px] -translate-y-1/2 rounded-full opacity-20 blur-[100px]'
-              style={{
-                background:
-                  'radial-gradient(circle, rgb(var(--finnish-blue)) 0%, transparent 70%)',
-              }}
-            />
-            <div
-              className='absolute right-0 bottom-0 h-[400px] w-[400px] translate-y-1/2 rounded-full opacity-15 blur-[80px]'
-              style={{
-                background:
-                  'radial-gradient(circle, rgb(var(--accent-frost)) 0%, transparent 70%)',
-              }}
-            />
-          </div>
+        <section className='relative overflow-hidden border-b-[3px] border-[rgb(var(--ink))] bg-[rgb(var(--sky))] py-24 text-[rgb(var(--paper))] sm:py-28'>
+          <PoppyField className='pointer-events-none absolute inset-0 h-full w-full opacity-30' />
 
-          <div
-            className='absolute inset-0 opacity-[0.02]'
-            style={{
-              backgroundImage: `
-                linear-gradient(rgb(255 255 255) 1px, transparent 1px),
-                linear-gradient(90deg, rgb(255 255 255) 1px, transparent 1px)
-              `,
-              backgroundSize: '48px 48px',
-            }}
-          />
-
-          <div className='relative mx-auto max-w-7xl px-6 lg:px-8'>
-            <div className='mx-auto max-w-3xl text-center'>
-              <span className='mb-4 inline-block rounded-full border border-white/20 bg-white/10 px-4 py-1.5 font-mono text-xs font-semibold uppercase tracking-wider text-[rgb(var(--accent-frost))]'>
-                {t('heroEyebrow')}
+          <div className='relative mx-auto max-w-[1180px] px-6 lg:px-8'>
+            <div className='fade-in-up mx-auto max-w-3xl text-center'>
+              <span className='mb-5 inline-flex -rotate-1 items-center gap-2 rounded-full border-2 border-[rgb(var(--ink))] bg-[rgb(var(--sun))] px-4 py-1.5 font-display text-sm font-bold uppercase tracking-wider text-[rgb(var(--ink))]'>
+                ✿ {t('heroEyebrow')}
               </span>
-              <h1 className='text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl'>
+              <h1 className='font-display text-[clamp(2.75rem,7vw,5rem)] font-extrabold leading-[0.9] tracking-tight'>
                 {t('heroTitle')}
               </h1>
-              <p className='mt-6 text-lg leading-8 text-white/70'>
+              <p className='mt-6 text-lg font-medium leading-8 text-[rgb(var(--paper))]/85'>
                 {t('heroDescription')}
               </p>
-              <div className='mt-8 flex flex-wrap justify-center gap-4'>
+              <div className='mt-8 flex flex-wrap justify-center gap-3'>
                 <a
                   href='#conferences'
-                  className='rounded-full bg-white px-6 py-3 font-mono text-sm font-semibold text-[rgb(var(--navy-950))] transition-all hover:shadow-lg'
+                  className='u-btn border-[rgb(var(--paper))] bg-[rgb(var(--paper))] text-[rgb(var(--ink))] hover:!border-[rgb(var(--sun))] hover:!bg-[rgb(var(--sun))]'
                 >
-                  {t('viewConferences')}
+                  {t('viewConferences')} →
                 </a>
                 <a
                   href='#submit'
-                  className='rounded-full border border-white/20 bg-white/5 px-6 py-3 font-mono text-sm font-semibold text-white backdrop-blur-sm transition-all hover:border-white/40 hover:bg-white/10'
+                  className='u-btn border-[rgb(var(--paper))] text-[rgb(var(--paper))] hover:!bg-[rgb(var(--paper))] hover:!text-[rgb(var(--ink))]'
                 >
                   {t('submitConference')}
                 </a>
@@ -218,41 +193,45 @@ export default async function ConferencesPage({ params }: Props) {
         </section>
 
         {/* Main Conferences */}
-        <section id='conferences' className='py-24 sm:py-32'>
-          <div className='mx-auto max-w-7xl px-6 lg:px-8'>
-            <div className='mx-auto max-w-2xl lg:mx-0'>
-              <span className='eyebrow mb-3 block'>
-                {t('majorEventsEyebrow')}
-              </span>
-              <h2 className='text-3xl font-bold tracking-tight text-[rgb(var(--mono-900))] sm:text-4xl'>
+        <section id='conferences' className='py-20 sm:py-28'>
+          <div className='mx-auto max-w-[1180px] px-6 lg:px-8'>
+            <div className='mb-4 flex items-baseline gap-3'>
+              <span className='u-num'>01</span>
+              <h2 className='font-display text-3xl font-extrabold tracking-tight sm:text-4xl'>
                 {t('majorEventsTitle')}
               </h2>
-              <p className='mt-4 text-lg text-[rgb(var(--mono-600))]'>
-                {t('majorEventsDescription')}
-              </p>
             </div>
+            <p className='max-w-[60ch] text-lg font-medium opacity-80'>
+              {t('majorEventsDescription')}
+            </p>
 
             <ConferencesGrid conferences={decorated} />
           </div>
         </section>
 
         {/* Read the guide callout */}
-        <section className='bg-[rgb(var(--mono-50))] py-16'>
-          <div className='mx-auto max-w-7xl px-6 lg:px-8'>
+        <section className='border-y-[3px] border-[rgb(var(--ink))] bg-[rgb(var(--paper-2))] py-16'>
+          <div className='mx-auto max-w-[1180px] px-6 lg:px-8'>
             <Link
               href='/articles/react-native-conferences-2026'
-              className='group flex flex-col items-start justify-between gap-4 rounded-2xl border border-[rgb(var(--mono-200))] bg-white p-6 transition-all hover:border-[rgb(var(--finnish-blue)/0.3)] hover:shadow-lg sm:flex-row sm:items-center'
+              className='group flex flex-col items-start justify-between gap-4 rounded-2xl border-[3px] border-[rgb(var(--ink))] bg-[rgb(var(--paper))] p-6 transition-transform hover:-translate-y-1 sm:flex-row sm:items-center'
             >
               <div>
-                <h3 className='text-lg font-semibold text-[rgb(var(--mono-900))] group-hover:text-[rgb(var(--finnish-blue))]'>
+                <h3 className='font-display text-lg font-bold transition-colors group-hover:text-[rgb(var(--poppy))]'>
                   {t('readGuide')}
                 </h3>
-                <p className='mt-1 text-sm text-[rgb(var(--mono-600))]'>
+                <p className='mt-1 text-sm font-medium opacity-70'>
                   {t('readGuideDescription')}
                 </p>
               </div>
-              <span className='inline-flex items-center gap-2 font-mono text-sm font-semibold text-[rgb(var(--finnish-blue))]'>
-                {t('readGuide')} <span aria-hidden>&rarr;</span>
+              <span className='inline-flex items-center gap-2 font-display font-bold text-[rgb(var(--sky))]'>
+                {t('readGuide')}{' '}
+                <span
+                  aria-hidden
+                  className='inline-block transition-transform group-hover:translate-x-1'
+                >
+                  →
+                </span>
               </span>
             </Link>
           </div>
@@ -261,60 +240,57 @@ export default async function ConferencesPage({ params }: Props) {
         {/* Submit a conference */}
         <section
           id='submit'
-          className='bg-[rgb(var(--mono-50))] py-24 sm:py-32'
+          className='bg-[rgb(var(--paper-2))] py-20 sm:py-28'
         >
-          <div className='mx-auto max-w-7xl px-6 lg:px-8'>
-            <div className='mx-auto max-w-2xl lg:mx-0'>
-              <span className='eyebrow mb-3 block'>
-                {t('submitSectionEyebrow')}
-              </span>
-              <h2 className='text-3xl font-bold tracking-tight text-[rgb(var(--mono-900))] sm:text-4xl'>
+          <div className='mx-auto max-w-[1180px] px-6 lg:px-8'>
+            <div className='mb-4 flex items-baseline gap-3'>
+              <span className='u-num'>03</span>
+              <h2 className='font-display text-3xl font-extrabold tracking-tight sm:text-4xl'>
                 {t('submitSectionTitle')}
               </h2>
-              <p className='mt-4 text-lg text-[rgb(var(--mono-600))]'>
-                {t('submitSectionDescription')}
-              </p>
             </div>
+            <p className='max-w-[60ch] text-lg font-medium opacity-80'>
+              {t('submitSectionDescription')}
+            </p>
 
-            <div className='mt-10 flex flex-col gap-4 sm:flex-row'>
+            <div className='mt-10 flex flex-col gap-3 sm:flex-row'>
               <a
                 href={GITHUB_NEW_CONFERENCE_URL}
                 target='_blank'
                 rel='noopener noreferrer'
-                className='inline-flex items-center gap-2 rounded-full bg-[rgb(var(--navy-950))] px-6 py-3 font-mono text-sm font-semibold text-white transition-all hover:shadow-lg'
+                className='u-btn u-btn-fill'
               >
-                {t('submitViaIssue')}
-                <span aria-hidden>&rarr;</span>
+                {t('submitViaIssue')} →
               </a>
               <a
                 href={GITHUB_EDIT_URL}
                 target='_blank'
                 rel='noopener noreferrer'
-                className='inline-flex items-center gap-2 rounded-full border border-[rgb(var(--mono-300))] bg-white px-6 py-3 font-mono text-sm font-semibold text-[rgb(var(--mono-700))] transition-all hover:border-[rgb(var(--mono-400))]'
+                className='u-btn u-btn-out'
               >
-                {t('submitViaPr')}
-                <span aria-hidden>&rarr;</span>
+                {t('submitViaPr')} →
               </a>
             </div>
-            <p className='mt-4 text-sm text-[rgb(var(--mono-500))]'>
+            <p className='mt-4 text-sm font-medium opacity-60'>
               {t('submitHint')}
             </p>
           </div>
         </section>
 
         {/* Why Attend Section */}
-        <section className='py-24 sm:py-32'>
-          <div className='mx-auto max-w-7xl px-6 lg:px-8'>
-            <div className='mx-auto max-w-2xl text-center'>
-              <h2 className='text-3xl font-bold tracking-tight text-[rgb(var(--mono-900))] sm:text-4xl'>
+        <section className='border-t-[3px] border-[rgb(var(--ink))] py-20 sm:py-28'>
+          <div className='mx-auto max-w-[1180px] px-6 lg:px-8'>
+            <div className='mb-4 flex items-baseline gap-3'>
+              <span className='u-num'>04</span>
+              <h2 className='font-display text-3xl font-extrabold tracking-tight sm:text-4xl'>
                 {t('whyAttendTitle')}
               </h2>
-              <p className='mt-4 text-lg text-[rgb(var(--mono-600))]'>
-                {t('whyAttendDescription')}
-              </p>
             </div>
+            <p className='max-w-[60ch] text-lg font-medium opacity-80'>
+              {t('whyAttendDescription')}
+            </p>
 
-            <div className='mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-4'>
+            <div className='mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4'>
               {(
                 [
                   {
@@ -362,55 +338,68 @@ export default async function ConferencesPage({ params }: Props) {
                     ),
                   },
                 ] as const
-              ).map((item) => (
-                <div key={item.key} className='text-center'>
-                  <div className='mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-[rgb(var(--finnish-blue))] text-white'>
-                    <svg
-                      className='h-6 w-6'
-                      fill='none'
-                      viewBox='0 0 24 24'
-                      stroke='currentColor'
+              ).map((item, i) => {
+                const tileColors = [
+                  'bg-[rgb(var(--poppy))] text-[rgb(var(--paper))]',
+                  'bg-[rgb(var(--sky))] text-[rgb(var(--paper))]',
+                  'bg-[rgb(var(--mint))] text-[rgb(var(--paper))]',
+                  'bg-[rgb(var(--sun))] text-[rgb(var(--ink))]',
+                ];
+                return (
+                  <div
+                    key={item.key}
+                    className='rounded-2xl border-[3px] border-[rgb(var(--ink))] bg-[rgb(var(--paper))] p-6'
+                  >
+                    <div
+                      className={`flex h-12 w-12 items-center justify-center rounded-xl border-2 border-[rgb(var(--ink))] ${tileColors[i % tileColors.length]}`}
                     >
-                      {item.icon}
-                    </svg>
+                      <svg
+                        className='h-6 w-6'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                        stroke='currentColor'
+                      >
+                        {item.icon}
+                      </svg>
+                    </div>
+                    <h3 className='mt-4 font-display text-lg font-bold'>
+                      {t(`whyAttend.${item.key}.title`)}
+                    </h3>
+                    <p className='mt-2 text-sm font-medium opacity-80'>
+                      {t(`whyAttend.${item.key}.description`)}
+                    </p>
                   </div>
-                  <h3 className='mt-4 text-lg font-semibold text-[rgb(var(--mono-900))]'>
-                    {t(`whyAttend.${item.key}.title`)}
-                  </h3>
-                  <p className='mt-2 text-sm text-[rgb(var(--mono-600))]'>
-                    {t(`whyAttend.${item.key}.description`)}
-                  </p>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>
 
         {/* Community Meetups */}
-        <section className='bg-[rgb(var(--mono-50))] py-24 sm:py-32'>
-          <div className='mx-auto max-w-7xl px-6 lg:px-8'>
-            <div className='mx-auto max-w-2xl lg:mx-0'>
-              <span className='eyebrow mb-3 block'>{t('meetupsEyebrow')}</span>
-              <h2 className='text-3xl font-bold tracking-tight text-[rgb(var(--mono-900))] sm:text-4xl'>
+        <section className='border-t-[3px] border-[rgb(var(--ink))] bg-[rgb(var(--paper-2))] py-20 sm:py-28'>
+          <div className='mx-auto max-w-[1180px] px-6 lg:px-8'>
+            <div className='mb-4 flex items-baseline gap-3'>
+              <span className='u-num'>05</span>
+              <h2 className='font-display text-3xl font-extrabold tracking-tight sm:text-4xl'>
                 {t('meetupsTitle')}
               </h2>
-              <p className='mt-4 text-lg text-[rgb(var(--mono-600))]'>
-                {t('meetupsDescription')}
-              </p>
             </div>
+            <p className='max-w-[60ch] text-lg font-medium opacity-80'>
+              {t('meetupsDescription')}
+            </p>
 
-            <div className='mt-12 grid gap-6 md:grid-cols-2'>
+            <div className='mt-10 grid gap-5 md:grid-cols-2'>
               {meetups.map((meetup) => (
                 <a
                   key={meetup.name}
                   href={meetup.url}
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='group flex items-start gap-4 rounded-xl border border-[rgb(var(--mono-200))] bg-white p-6 transition-all hover:border-[rgb(var(--finnish-blue)/0.3)] hover:shadow-lg'
+                  className='group flex items-start gap-4 rounded-2xl border-[3px] border-[rgb(var(--ink))] bg-[rgb(var(--paper))] p-6 transition-transform hover:-translate-y-1'
                 >
-                  <div className='flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-[rgb(var(--mono-100))] transition-colors group-hover:bg-[rgb(var(--finnish-blue))]'>
+                  <div className='flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl border-2 border-[rgb(var(--ink))] bg-[rgb(var(--sky))] text-[rgb(var(--paper))]'>
                     <svg
-                      className='h-6 w-6 text-[rgb(var(--mono-600))] transition-colors group-hover:text-white'
+                      className='h-6 w-6'
                       fill='none'
                       viewBox='0 0 24 24'
                       stroke='currentColor'
@@ -424,18 +413,18 @@ export default async function ConferencesPage({ params }: Props) {
                     </svg>
                   </div>
                   <div className='flex-1'>
-                    <div className='flex items-center justify-between'>
-                      <h3 className='text-lg font-semibold text-[rgb(var(--mono-900))] group-hover:text-[rgb(var(--finnish-blue))]'>
+                    <div className='flex items-center justify-between gap-2'>
+                      <h3 className='font-display text-lg font-bold transition-colors group-hover:text-[rgb(var(--poppy))]'>
                         {meetup.name}
                       </h3>
-                      <span className='rounded-full bg-[rgb(var(--mono-100))] px-2 py-0.5 text-xs font-medium text-[rgb(var(--mono-600))]'>
+                      <span className='whitespace-nowrap rounded-full border-2 border-[rgb(var(--ink))] bg-[rgb(var(--sun))] px-2.5 py-0.5 font-display text-xs font-bold'>
                         {meetup.frequency}
                       </span>
                     </div>
-                    <p className='mt-1 text-sm text-[rgb(var(--mono-500))]'>
+                    <p className='mt-1 font-display text-sm font-bold uppercase tracking-wide opacity-60'>
                       {meetup.location}
                     </p>
-                    <p className='mt-2 text-sm text-[rgb(var(--mono-600))]'>
+                    <p className='mt-2 text-sm font-medium opacity-80'>
                       {meetup.description}
                     </p>
                   </div>
@@ -446,87 +435,63 @@ export default async function ConferencesPage({ params }: Props) {
         </section>
 
         {/* FAQ */}
-        <section className='py-24 sm:py-32'>
-          <div className='mx-auto max-w-7xl px-6 lg:px-8'>
-            <div className='mx-auto max-w-2xl'>
-              <h2 className='text-3xl font-bold tracking-tight text-[rgb(var(--mono-900))] sm:text-4xl'>
+        <section className='border-t-[3px] border-[rgb(var(--ink))] py-20 sm:py-28'>
+          <div className='mx-auto max-w-[1180px] px-6 lg:px-8'>
+            <div className='mb-8 flex items-baseline gap-3'>
+              <span className='u-num'>06</span>
+              <h2 className='font-display text-3xl font-extrabold tracking-tight sm:text-4xl'>
                 {t('faqTitle')}
               </h2>
-              <dl className='mt-10 space-y-6 divide-y divide-[rgb(var(--mono-200))]'>
-                {faq.map((item) => (
-                  <div key={item.question} className='pt-6'>
-                    <dt className='text-lg font-semibold text-[rgb(var(--mono-900))]'>
-                      {item.question}
-                    </dt>
-                    <dd className='mt-2 text-[rgb(var(--mono-600))]'>
-                      {item.answer}
-                    </dd>
-                  </div>
-                ))}
-              </dl>
             </div>
+            <dl className='border-b-2 border-[rgb(var(--ink))]'>
+              {faq.map((item) => (
+                <div
+                  key={item.question}
+                  className='border-t-2 border-[rgb(var(--ink))] py-5'
+                >
+                  <dt className='font-display text-lg font-bold'>
+                    {item.question}
+                  </dt>
+                  <dd className='mt-2 font-medium opacity-80'>{item.answer}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
         </section>
 
         {/* CTA Section */}
-        <section className='relative overflow-hidden bg-[rgb(var(--navy-950))] py-24 sm:py-32'>
-          <div className='absolute inset-0'>
-            <div
-              className='absolute left-1/2 top-0 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-20 blur-[100px]'
-              style={{
-                background:
-                  'radial-gradient(circle, rgb(var(--finnish-blue)) 0%, transparent 70%)',
-              }}
-            />
-          </div>
-
-          <div className='relative mx-auto max-w-7xl px-6 lg:px-8'>
-            <div className='mx-auto max-w-2xl text-center'>
-              <h2 className='text-3xl font-bold tracking-tight text-white sm:text-4xl'>
-                {t('ctaTitle')}
-              </h2>
-              <p className='mt-6 text-lg leading-8 text-white/70'>
-                {t('ctaDescription')} {t('ctaMissingConference')}{' '}
-                <a
-                  href={GITHUB_EDIT_URL}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  className='underline hover:text-white'
-                >
-                  {t('ctaAddOnGithub')}
-                </a>
-                .
-              </p>
-              <div className='mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row'>
-                <a
-                  href='https://meetup.com/react-native-helsinki'
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  className='inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 font-mono text-sm font-bold text-[rgb(var(--navy-950))] transition-all hover:shadow-lg hover:shadow-white/20'
-                >
-                  {t('joinMeetup')}
-                  <svg
-                    className='h-4 w-4'
-                    fill='none'
-                    viewBox='0 0 24 24'
-                    stroke='currentColor'
-                  >
-                    <path
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      strokeWidth={2}
-                      d='M17 8l4 4m0 0l-4 4m4-4H3'
-                    />
-                  </svg>
-                </a>
-                <Link
-                  href='/events'
-                  className='inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-8 py-4 font-mono text-sm font-semibold text-white backdrop-blur-sm transition-all hover:border-white/40 hover:bg-white/10'
-                >
-                  {t('seePastEvents')}
-                  <span>&rarr;</span>
-                </Link>
-              </div>
+        <section className='border-t-[3px] border-[rgb(var(--ink))] bg-[rgb(var(--ink))] py-20 text-[rgb(var(--paper))] sm:py-28'>
+          <div className='mx-auto max-w-[1180px] px-6 text-center lg:px-8'>
+            <h2 className='mx-auto max-w-3xl text-balance font-display text-4xl font-extrabold tracking-tight sm:text-5xl'>
+              {t('ctaTitle')}
+            </h2>
+            <p className='mx-auto mt-5 max-w-2xl text-lg font-medium leading-8 text-[rgb(var(--paper))]/70'>
+              {t('ctaDescription')} {t('ctaMissingConference')}{' '}
+              <a
+                href={GITHUB_EDIT_URL}
+                target='_blank'
+                rel='noopener noreferrer'
+                className='font-bold text-[rgb(var(--sun))] underline hover:text-[rgb(var(--paper))]'
+              >
+                {t('ctaAddOnGithub')}
+              </a>
+              .
+            </p>
+            <div className='mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row'>
+              <a
+                href='https://meetup.com/react-native-helsinki'
+                target='_blank'
+                rel='noopener noreferrer'
+                className='u-btn border-[rgb(var(--paper))] bg-[rgb(var(--paper))] text-[rgb(var(--ink))] hover:!border-[rgb(var(--poppy))] hover:!bg-[rgb(var(--poppy))] hover:!text-[rgb(var(--paper))]'
+              >
+                {t('joinMeetup')} →
+              </a>
+              <Link
+                href='/events'
+                className='u-btn border-[rgb(var(--paper))] text-[rgb(var(--paper))] hover:!bg-[rgb(var(--paper))] hover:!text-[rgb(var(--ink))]'
+              >
+                {t('seePastEvents')} →
+              </Link>
             </div>
           </div>
         </section>

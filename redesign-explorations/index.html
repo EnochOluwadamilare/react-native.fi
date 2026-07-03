@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>react-native.fi — redesign explorations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=Martian+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Hanken Grotesk", system-ui, sans-serif;
+    background: #0b0d12;
+    color: #e7ecf3;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 6vw;
+    background-image:
+      radial-gradient(900px 500px at 80% -10%, rgba(255,92,73,.10), transparent 60%),
+      radial-gradient(700px 400px at 0% 110%, rgba(27,77,228,.12), transparent 60%);
+  }
+  .wrap { width: min(980px, 100%); }
+  .kicker {
+    font-family: "Martian Mono", monospace;
+    font-size: .72rem; letter-spacing: .28em; text-transform: uppercase;
+    color: #7c8898; margin-bottom: 1.2rem;
+  }
+  h1 { font-size: clamp(2rem, 5vw, 3.4rem); line-height: 1.02; letter-spacing: -.02em; font-weight: 800; }
+  h1 em { font-style: normal; color: #ff5c49; }
+  p.lede { color: #aab3c0; max-width: 56ch; margin-top: 1rem; font-size: 1.05rem; line-height: 1.5; }
+  .grid { display: grid; gap: 1rem; grid-template-columns: repeat(3, 1fr); margin-top: 2.6rem; }
+  @media (max-width: 720px){ .grid { grid-template-columns: 1fr; } }
+  a.card {
+    display: block; text-decoration: none; color: inherit;
+    border: 1px solid #232a35; border-radius: 16px; padding: 1.4rem;
+    background: linear-gradient(180deg, #12161d, #0e1116);
+    transition: transform .25s ease, border-color .25s ease;
+  }
+  a.card:hover { transform: translateY(-4px); border-color: #3a4454; }
+  a.card:focus-visible { outline: 2px solid #ff5c49; outline-offset: 3px; }
+  .tag { font-family:"Martian Mono",monospace; font-size:.66rem; letter-spacing:.18em; text-transform:uppercase; color:#7c8898; }
+  .card h2 { font-size: 1.3rem; margin: .55rem 0 .4rem; letter-spacing: -.01em; }
+  .card p { color: #98a2b0; font-size: .92rem; line-height: 1.5; }
+  .swatches { display:flex; gap:.4rem; margin-top:1rem; }
+  .sw { width: 22px; height: 22px; border-radius: 6px; border: 1px solid rgba(255,255,255,.12); }
+  .go { margin-top:1.1rem; font-family:"Martian Mono",monospace; font-size:.72rem; color:#e7ecf3; }
+  footer { margin-top: 2.4rem; color:#6b7587; font-size:.82rem; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="kicker">react-native.fi · redesign explorations</div>
+    <h1>Three ways to feel like <em>Finnish mobile</em>.</h1>
+    <p class="lede">Each direction commits fully to one aesthetic, grounded in something true about React Native and Finland. Open one, compare, then pick a winner to build for real.</p>
+
+    <div class="grid">
+      <a class="card" href="a-metro.html">
+        <span class="tag">A · dark / technical</span>
+        <h2>Metro</h2>
+        <p>A developer's instrument panel. The page behaves like a simulator — content hot-reloads in like a Metro build.</p>
+        <div class="swatches">
+          <span class="sw" style="background:#0e1116"></span>
+          <span class="sw" style="background:#171b22"></span>
+          <span class="sw" style="background:#ff5c49"></span>
+          <span class="sw" style="background:#4dd0a7"></span>
+        </div>
+        <div class="go">open →</div>
+      </a>
+
+      <a class="card" href="b-unikko.html">
+        <span class="tag">B · light / bold</span>
+        <h2>Unikko</h2>
+        <p>Finnish print heritage at full saturation. Color blocks and a custom RN-as-poppy pattern carry the whole page.</p>
+        <div class="swatches">
+          <span class="sw" style="background:#fbfaf6"></span>
+          <span class="sw" style="background:#e2342b"></span>
+          <span class="sw" style="background:#1b4de4"></span>
+          <span class="sw" style="background:#f5c518"></span>
+        </div>
+        <div class="go">open →</div>
+      </a>
+
+      <a class="card" href="c-3310.html">
+        <span class="tag">C · dark / heritage</span>
+        <h2>3310</h2>
+        <p>Finland is where the mobile phone was born. A dot-matrix LCD hero, rendered crisp and modern. Snake included.</p>
+        <div class="swatches">
+          <span class="sw" style="background:#0a0b07"></span>
+          <span class="sw" style="background:#10160b"></span>
+          <span class="sw" style="background:#9bbc0f"></span>
+          <span class="sw" style="background:#ffb000"></span>
+        </div>
+        <div class="go">open →</div>
+      </a>
+    </div>
+
+    <footer>Static prototypes · real content, no build step · safe to delete this whole folder.</footer>
+  </div>
+</body>
+</html>

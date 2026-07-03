@@ -6,7 +6,21 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        primary: ['Inter', ...defaultTheme.fontFamily.sans],
+        sans: [
+          'var(--font-body)',
+          'Hanken Grotesk',
+          ...defaultTheme.fontFamily.sans,
+        ],
+        primary: [
+          'var(--font-body)',
+          'Hanken Grotesk',
+          ...defaultTheme.fontFamily.sans,
+        ],
+        display: [
+          'var(--font-display)',
+          'Bricolage Grotesque',
+          ...defaultTheme.fontFamily.sans,
+        ],
       },
       colors: {
         primary: {

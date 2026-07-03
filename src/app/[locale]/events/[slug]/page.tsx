@@ -8,6 +8,7 @@ import { getAllEvents, getEventBySlug } from '@/lib/events';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { EventJsonLd } from '@/components/EventJsonLd';
 
+import { PoppyField } from '@/app/components/Poppy';
 import { siteConfig } from '@/constant/config';
 import { Locale, locales } from '@/i18n/config';
 import { Link } from '@/i18n/navigation';
@@ -84,234 +85,234 @@ export default async function EventPage({ params }: Props) {
         imageUrl={ogImageUrl}
         organizer={event.host}
       />
-      <div className='bg-white py-24 sm:py-32'>
-        <div className='mx-auto max-w-5xl px-6 lg:px-8'>
-          {/* Breadcrumbs */}
-          <Breadcrumbs
-            homeLabel={locale === 'fi' ? 'Etusivu' : 'Home'}
-            items={[
-              {
-                name: locale === 'fi' ? 'Tapahtumat' : 'Events',
-                href: '/events',
-              },
-              { name: event.title },
-            ]}
-          />
+      <div className='bg-[rgb(var(--paper))] text-[rgb(var(--ink))]'>
+        {/* Bold color-blocked header */}
+        <section className='fade-in-up grid grid-cols-1 border-b-[3px] border-[rgb(var(--ink))] lg:grid-cols-[1.2fr_0.8fr]'>
+          <div className='px-6 pb-16 pt-10 sm:px-10 lg:pb-24 lg:pl-[max(4vw,calc((100vw-1180px)/2))] lg:pr-12'>
+            <Breadcrumbs
+              homeLabel={locale === 'fi' ? 'Etusivu' : 'Home'}
+              items={[
+                {
+                  name: locale === 'fi' ? 'Tapahtumat' : 'Events',
+                  href: '/events',
+                },
+                { name: event.title },
+              ]}
+            />
 
-          {/* Event header */}
-          <div>
-            {!event.isPast && (
-              <span className='inline-flex items-center rounded-full bg-green-50 px-3 py-1 text-sm font-medium text-green-700 ring-1 ring-inset ring-green-600/20 mb-4'>
-                {t('upcomingBadge')}
-              </span>
-            )}
-            {event.isPast && (
-              <span className='inline-flex items-center rounded-full bg-gray-50 px-3 py-1 text-sm font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 mb-4'>
-                {locale === 'fi' ? 'Mennyt tapahtuma' : 'Past Event'}
-              </span>
-            )}
-            <h1 className='text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl'>
+            <span
+              className={`inline-flex -rotate-1 items-center gap-2 rounded-full border-2 border-[rgb(var(--ink))] px-4 py-1.5 font-display text-sm font-bold ${
+                event.isPast
+                  ? 'bg-[rgb(var(--paper-2))] text-[rgb(var(--ink))]'
+                  : 'bg-[rgb(var(--mint))] text-[rgb(var(--paper))]'
+              }`}
+            >
+              ✿{' '}
+              {event.isPast
+                ? locale === 'fi'
+                  ? 'Mennyt tapahtuma'
+                  : 'Past Event'
+                : t('upcomingBadge')}
+            </span>
+
+            <h1 className='my-6 font-display text-[clamp(2.25rem,6vw,4.5rem)] font-extrabold leading-[0.94] tracking-tight'>
               {event.title}
             </h1>
-            <p className='mt-4 text-lg text-gray-600'>{event.description}</p>
+
+            <p className='max-w-[52ch] text-lg font-medium text-[rgb(var(--ink))]/85'>
+              {event.description}
+            </p>
+
+            {!event.isPast && (
+              <div className='mt-8'>
+                <a
+                  href='https://meetup.com/react-native-helsinki'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='u-btn u-btn-fill'
+                >
+                  {locale === 'fi'
+                    ? 'Ilmoittaudu Meetup.comissa'
+                    : 'RSVP on Meetup.com'}{' '}
+                  →
+                </a>
+              </div>
+            )}
           </div>
 
-          {/* Event details */}
-          <div className='mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2'>
-            <div className='rounded-xl bg-gray-50 p-6'>
-              <h3 className='text-sm font-semibold text-gray-900'>
-                {locale === 'fi' ? 'Päivämäärä ja aika' : 'Date & Time'}
-              </h3>
-              <div className='mt-3 space-y-2'>
-                <div className='flex items-center gap-3 text-sm text-gray-600'>
-                  <svg
-                    className='size-5 text-gray-400'
-                    fill='none'
-                    stroke='currentColor'
-                    viewBox='0 0 24 24'
-                  >
-                    <path
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      strokeWidth={1.5}
-                      d='M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5'
-                    />
-                  </svg>
-                  <span>{formatDate(event.date, locale)}</span>
-                </div>
-                <div className='flex items-center gap-3 text-sm text-gray-600'>
-                  <svg
-                    className='size-5 text-gray-400'
-                    fill='none'
-                    stroke='currentColor'
-                    viewBox='0 0 24 24'
-                  >
-                    <path
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      strokeWidth={1.5}
-                      d='M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z'
-                    />
-                  </svg>
-                  <span>
-                    {event.startTime} - {event.endTime} {event.timezone}
-                  </span>
-                </div>
+          {/* Date / venue meta on a saturated color block */}
+          <div className='relative overflow-hidden border-t-[3px] border-[rgb(var(--ink))] bg-[rgb(var(--sun))] lg:border-l-[3px] lg:border-t-0'>
+            <PoppyField className='pointer-events-none absolute inset-0 h-full w-full opacity-25' />
+            <dl className='relative flex h-full flex-col justify-center gap-6 px-6 py-12 sm:px-10'>
+              <div>
+                <dt className='font-display text-xs font-extrabold uppercase tracking-[0.14em] text-[rgb(var(--poppy))]'>
+                  {locale === 'fi' ? 'Päivämäärä' : 'Date'}
+                </dt>
+                <dd className='mt-1 font-display text-lg font-bold text-[rgb(var(--ink))]'>
+                  {formatDate(event.date, locale)}
+                </dd>
               </div>
-            </div>
-
-            <div className='rounded-xl bg-gray-50 p-6'>
-              <h3 className='text-sm font-semibold text-gray-900'>
-                {locale === 'fi' ? 'Sijainti' : 'Location'}
-              </h3>
-              <div className='mt-3 space-y-2'>
-                <div className='flex items-start gap-3 text-sm text-gray-600'>
-                  <svg
-                    className='size-5 text-gray-400 mt-0.5'
-                    fill='none'
-                    stroke='currentColor'
-                    viewBox='0 0 24 24'
-                  >
-                    <path
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      strokeWidth={1.5}
-                      d='M15 10.5a3 3 0 11-6 0 3 3 0 016 0z'
-                    />
-                    <path
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      strokeWidth={1.5}
-                      d='M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z'
-                    />
-                  </svg>
-                  <div>
-                    <p className='font-medium text-gray-900'>
-                      {event.venue.name}
-                    </p>
-                    <p>{event.venue.address}</p>
-                    <p>{event.venue.city}</p>
-                  </div>
-                </div>
+              <div>
+                <dt className='font-display text-xs font-extrabold uppercase tracking-[0.14em] text-[rgb(var(--poppy))]'>
+                  {locale === 'fi' ? 'Aika' : 'Time'}
+                </dt>
+                <dd className='mt-1 font-display text-lg font-bold text-[rgb(var(--ink))]'>
+                  {event.startTime} – {event.endTime} {event.timezone}
+                </dd>
               </div>
-            </div>
+              <div>
+                <dt className='font-display text-xs font-extrabold uppercase tracking-[0.14em] text-[rgb(var(--poppy))]'>
+                  {locale === 'fi' ? 'Sijainti' : 'Location'}
+                </dt>
+                <dd className='mt-1 font-display text-lg font-bold text-[rgb(var(--ink))]'>
+                  {event.venue.name}
+                </dd>
+                <dd className='font-medium text-[rgb(var(--ink))]/70'>
+                  {event.venue.address}
+                </dd>
+                <dd className='font-medium text-[rgb(var(--ink))]/70'>
+                  {event.venue.city}
+                </dd>
+              </div>
+            </dl>
           </div>
+        </section>
 
-          {/* Talks section */}
-          <div className='mt-12 pt-12 border-t border-gray-200'>
-            <h2 className='text-2xl font-semibold text-gray-900'>
-              {locale === 'fi' ? 'Esitykset' : 'Talks'} ({event.talks.length})
-            </h2>
-            <div className='mt-8 space-y-6'>
+        <div className='mx-auto max-w-[1180px] px-6 py-16 lg:px-8'>
+          {/* --- 01 Talks --- */}
+          <section>
+            <div className='mb-8 flex items-baseline gap-3'>
+              <span className='u-num'>01</span>
+              <h2 className='font-display text-3xl font-extrabold tracking-tight sm:text-4xl'>
+                {locale === 'fi' ? 'Esitykset' : 'Talks'}{' '}
+                <span className='text-[rgb(var(--ink))]/40'>
+                  ({event.talks.length})
+                </span>
+              </h2>
+            </div>
+
+            <div className='grid gap-6'>
               {event.talks.map((talk, index) => {
                 const developer = talk.speaker.slug
                   ? getDeveloperBySlug(talk.speaker.slug)
                   : null;
 
                 return (
-                  <div
+                  <article
                     key={index}
-                    className='rounded-xl border border-gray-200 p-6'
+                    className='rounded-2xl border-[3px] border-[rgb(var(--ink))] bg-[rgb(var(--paper))] p-6 sm:p-8'
                   >
-                    <div className='flex items-start justify-between gap-4'>
+                    <div className='flex flex-wrap items-start gap-3'>
+                      <span className='font-display text-2xl font-extrabold text-[rgb(var(--ink))]/25'>
+                        {String(index + 1).padStart(2, '0')}
+                      </span>
                       <div className='flex-1'>
-                        <h3 className='text-lg font-semibold text-gray-900'>
+                        <h3 className='font-display text-xl font-bold leading-tight tracking-tight text-[rgb(var(--ink))] sm:text-2xl'>
                           {talk.title}
                         </h3>
                         {talk.level && (
-                          <span className='mt-2 inline-flex items-center rounded-full bg-indigo-50 px-2.5 py-0.5 text-xs font-medium text-indigo-700'>
+                          <span className='mt-3 inline-flex rounded-full border-2 border-[rgb(var(--ink))] bg-[rgb(var(--sky))] px-3 py-1 font-display text-xs font-bold text-[rgb(var(--paper))]'>
                             {talk.level}
                           </span>
                         )}
-                        <p className='mt-3 text-sm text-gray-600'>
-                          {talk.description}
+                        {talk.description && (
+                          <p className='mt-4 text-base font-medium leading-7 text-[rgb(var(--ink))]/80'>
+                            {talk.description}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Speaker */}
+                    <div className='mt-6 flex items-center gap-3 border-t-[3px] border-[rgb(var(--ink))] pt-5'>
+                      {developer?.imageUrl ? (
+                        <img
+                          src={developer.imageUrl}
+                          alt={talk.speaker.name}
+                          className='size-11 rounded-full border-2 border-[rgb(var(--ink))] bg-[rgb(var(--paper-2))] object-cover'
+                        />
+                      ) : (
+                        <div className='flex size-11 items-center justify-center rounded-full border-2 border-[rgb(var(--ink))] bg-[rgb(var(--paper-2))] font-display font-bold text-[rgb(var(--ink))]'>
+                          {talk.speaker.name.charAt(0)}
+                        </div>
+                      )}
+                      <div>
+                        {developer ? (
+                          <Link
+                            href={`/developers/${developer.slug}`}
+                            className='font-display font-bold text-[rgb(var(--ink))] transition-colors hover:text-[rgb(var(--poppy))]'
+                          >
+                            {talk.speaker.name}
+                          </Link>
+                        ) : (
+                          <p className='font-display font-bold text-[rgb(var(--ink))]'>
+                            {talk.speaker.name}
+                          </p>
+                        )}
+                        <p className='font-display text-xs font-bold uppercase tracking-wide text-[rgb(var(--ink))]/50'>
+                          {locale === 'fi' ? 'Puhuja' : 'Speaker'}
                         </p>
                       </div>
                     </div>
-                    <div className='mt-4 pt-4 border-t border-gray-100'>
-                      <div className='flex items-center gap-3'>
-                        {developer?.imageUrl ? (
-                          <img
-                            src={developer.imageUrl}
-                            alt={talk.speaker.name}
-                            className='size-10 rounded-full object-cover'
-                          />
-                        ) : (
-                          <div className='size-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 font-semibold'>
-                            {talk.speaker.name.charAt(0)}
-                          </div>
-                        )}
-                        <div>
-                          {developer ? (
-                            <Link
-                              href={`/developers/${developer.slug}`}
-                              className='text-sm font-medium text-gray-900 hover:text-indigo-600'
-                            >
-                              {talk.speaker.name}
-                            </Link>
-                          ) : (
-                            <p className='text-sm font-medium text-gray-900'>
-                              {talk.speaker.name}
-                            </p>
-                          )}
-                          <p className='text-xs text-gray-500'>
-                            {locale === 'fi' ? 'Puhuja' : 'Speaker'}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  </article>
                 );
               })}
             </div>
-          </div>
+          </section>
 
-          {/* Host info */}
-          <div className='mt-12 pt-12 border-t border-gray-200'>
-            <p className='text-sm text-gray-500'>
-              {locale === 'fi' ? 'Järjestäjä' : 'Hosted by'}{' '}
-              <span className='font-medium text-gray-700'>{event.host}</span>
-            </p>
-          </div>
-
-          {/* CTA for upcoming events */}
-          {!event.isPast && (
-            <div className='mt-12 rounded-xl bg-indigo-50 p-6 sm:p-8'>
-              <h3 className='text-lg font-semibold text-indigo-900'>
-                {locale === 'fi'
-                  ? 'Osallistu tähän tapahtumaan'
-                  : 'Join This Event'}
-              </h3>
-              <p className='mt-2 text-sm text-indigo-700'>
-                {locale === 'fi'
-                  ? 'Ilmoittaudu Meetup.comissa varmistaaksesi paikkasi ja saadaksesi tapahtumatiedotteet.'
-                  : 'RSVP on Meetup.com to secure your spot and get event updates.'}
-              </p>
-              <a
-                href='https://meetup.com/react-native-helsinki'
-                target='_blank'
-                rel='noopener noreferrer'
-                className='mt-4 inline-flex items-center rounded-md bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500'
-              >
-                {locale === 'fi'
-                  ? 'Ilmoittaudu Meetup.comissa'
-                  : 'RSVP on Meetup.com'}
-                <svg
-                  className='ml-2 size-4'
-                  fill='none'
-                  stroke='currentColor'
-                  viewBox='0 0 24 24'
-                >
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    strokeWidth={2}
-                    d='M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25'
-                  />
-                </svg>
-              </a>
+          {/* --- 02 Practical info --- */}
+          <section className='mt-16 border-t-[3px] border-[rgb(var(--ink))] pt-16'>
+            <div className='mb-8 flex items-baseline gap-3'>
+              <span className='u-num'>02</span>
+              <h2 className='font-display text-3xl font-extrabold tracking-tight sm:text-4xl'>
+                {locale === 'fi' ? 'Käytännön tiedot' : 'Practical Info'}
+              </h2>
             </div>
-          )}
+
+            <div className='rounded-2xl border-[3px] border-[rgb(var(--ink))] bg-[rgb(var(--paper-2))] p-6 sm:p-8'>
+              <p className='font-display text-xs font-extrabold uppercase tracking-[0.14em] text-[rgb(var(--poppy))]'>
+                {locale === 'fi' ? 'Järjestäjä' : 'Hosted by'}
+              </p>
+              <p className='mt-1 font-display text-2xl font-extrabold tracking-tight text-[rgb(var(--ink))]'>
+                {event.host}
+              </p>
+
+              {!event.isPast && (
+                <div className='mt-6 border-t-[3px] border-[rgb(var(--ink))] pt-6'>
+                  <p className='max-w-[54ch] text-base font-medium leading-7 text-[rgb(var(--ink))]/80'>
+                    {locale === 'fi'
+                      ? 'Ilmoittaudu Meetup.comissa varmistaaksesi paikkasi ja saadaksesi tapahtumatiedotteet.'
+                      : 'RSVP on Meetup.com to secure your spot and get event updates.'}
+                  </p>
+                  <a
+                    href='https://meetup.com/react-native-helsinki'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className='u-btn u-btn-fill mt-5'
+                  >
+                    {locale === 'fi'
+                      ? 'Ilmoittaudu Meetup.comissa'
+                      : 'RSVP on Meetup.com'}{' '}
+                    →
+                  </a>
+                </div>
+              )}
+            </div>
+
+            <div className='mt-10'>
+              <Link
+                href='/events'
+                className='group font-display font-bold text-[rgb(var(--sky))]'
+              >
+                <span className='inline-block transition-transform group-hover:-translate-x-1'>
+                  ←
+                </span>{' '}
+                {locale === 'fi'
+                  ? 'Takaisin tapahtumiin'
+                  : 'Back to all events'}
+              </Link>
+            </div>
+          </section>
         </div>
       </div>
     </>

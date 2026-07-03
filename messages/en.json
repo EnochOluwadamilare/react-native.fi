@@ -49,6 +49,11 @@
       "description": "Practical React Native guides from devs who ship — performance, animations, native modules. No fluff.",
       "cta": "Browse tutorials"
     },
+    "conferences": {
+      "title": "Conferences",
+      "description": "A living index of React Native conferences across Europe and the rest of the world.",
+      "cta": "Plan a trip"
+    },
     "nextConference": {
       "eyebrow": "Next conference",
       "daysAway": "{count, plural, =0 {Happening today} =1 {1 day away} other {# days away}}",

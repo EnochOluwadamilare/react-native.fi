@@ -25,15 +25,18 @@ export function ArticleTagFilter({
     router.push(url.pathname + url.search, { scroll: false });
   };
 
+  const pillBase =
+    'rounded-full border-2 border-[rgb(var(--ink))] px-4 py-1.5 font-display text-sm font-bold transition-colors';
+  const pillActive = 'bg-[rgb(var(--ink))] text-[rgb(var(--paper))]';
+  const pillInactive =
+    'bg-[rgb(var(--paper))] text-[rgb(var(--ink))] hover:bg-[rgb(var(--sun))]';
+
   return (
-    <div className='flex flex-wrap gap-2'>
+    <div className='flex flex-wrap gap-2.5'>
       <button
         onClick={() => handleTagClick(null)}
-        className={`rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${
-          !activeTag
-            ? 'bg-indigo-600 text-white'
-            : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-        }`}
+        aria-pressed={!activeTag}
+        className={`${pillBase} ${!activeTag ? pillActive : pillInactive}`}
       >
         {locale === 'fi' ? 'Kaikki' : 'All'}
       </button>
@@ -41,10 +44,9 @@ export function ArticleTagFilter({
         <button
           key={tag}
           onClick={() => handleTagClick(tag)}
-          className={`rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${
-            activeTag === tag
-              ? 'bg-indigo-600 text-white'
-              : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+          aria-pressed={activeTag === tag}
+          className={`${pillBase} ${
+            activeTag === tag ? pillActive : pillInactive
           }`}
         >
           {articleTagLabels[tag][locale === 'fi' ? 'fi' : 'en']}

@@ -24,7 +24,7 @@ export function AuthorBio({ author, locale }: AuthorBioProps) {
   ].filter(Boolean) as SocialLink[];
 
   return (
-    <div className='mt-12 rounded-xl border border-gray-200 bg-gray-50 p-6'>
+    <div className='mt-12 rounded-2xl border-[3px] border-[rgb(var(--ink))] bg-[rgb(var(--paper-2))] p-6 sm:p-8'>
       <div className='flex flex-col gap-4 sm:flex-row sm:items-start'>
         {author.imageUrl && (
           <Link
@@ -37,39 +37,39 @@ export function AuthorBio({ author, locale }: AuthorBioProps) {
               alt={author.name}
               width={72}
               height={72}
-              className='rounded-full object-cover ring-1 ring-gray-200'
+              className='h-[72px] w-[72px] rounded-2xl border-[3px] border-[rgb(var(--ink))] bg-[rgb(var(--paper))] object-cover'
             />
           </Link>
         )}
         <div className='min-w-0'>
-          <p className='text-xs font-medium uppercase tracking-wide text-gray-500'>
+          <p className='font-display text-xs font-extrabold uppercase tracking-[0.1em] text-[rgb(var(--poppy))]'>
             {locale === 'fi' ? 'Kirjoittaja' : 'Written by'}
           </p>
           <Link
             href={author.href as '/developers'}
             rel='author'
-            className='text-lg font-semibold text-gray-900 hover:text-indigo-600'
+            className='font-display text-xl font-bold text-[rgb(var(--ink))] transition-colors hover:text-[rgb(var(--poppy))]'
           >
             {author.name}
           </Link>
           {(author.role || author.location) && (
-            <p className='mt-0.5 text-sm text-gray-600'>
+            <p className='mt-0.5 text-sm font-semibold text-[rgb(var(--ink))]/60'>
               {[author.role, author.location].filter(Boolean).join(' · ')}
             </p>
           )}
 
           {author.bio && (
-            <p className='mt-3 text-sm leading-relaxed text-gray-700'>
+            <p className='mt-3 text-sm font-medium leading-relaxed text-[rgb(var(--ink))]/80'>
               {author.bio}
             </p>
           )}
 
           {author.expertise && author.expertise.length > 0 && (
-            <div className='mt-3 flex flex-wrap gap-2'>
+            <div className='mt-4 flex flex-wrap gap-2'>
               {author.expertise.map((skill) => (
                 <span
                   key={skill}
-                  className='rounded-full bg-white px-2.5 py-0.5 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-200'
+                  className='rounded-full border-2 border-[rgb(var(--ink))] bg-[rgb(var(--paper))] px-3 py-0.5 font-display text-xs font-bold text-[rgb(var(--ink))]'
                 >
                   {skill}
                 </span>
@@ -85,7 +85,7 @@ export function AuthorBio({ author, locale }: AuthorBioProps) {
                   href={social.href}
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='text-sm font-medium text-indigo-600 hover:text-indigo-500'
+                  className='font-display text-sm font-bold text-[rgb(var(--sky))] transition-colors hover:text-[rgb(var(--poppy))]'
                 >
                   {social.label}
                 </a>

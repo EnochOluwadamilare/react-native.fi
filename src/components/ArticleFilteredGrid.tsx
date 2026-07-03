@@ -17,14 +17,16 @@ export function ArticleFilteredGrid({ articles }: { articles: Article[] }) {
 
   if (filtered.length === 0) {
     return (
-      <p className='mt-12 text-center text-gray-500'>
-        No articles found for this category.
-      </p>
+      <div className='mt-12 rounded-2xl border-[3px] border-[rgb(var(--ink))] bg-[rgb(var(--paper-2))] px-6 py-16 text-center'>
+        <p className='font-display text-xl font-bold text-[rgb(var(--ink))]'>
+          No articles found for this category.
+        </p>
+      </div>
     );
   }
 
   return (
-    <div className='mt-12 grid grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-3'>
+    <div className='mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3'>
       {filtered.map((article) => (
         <ArticleCard key={article.slug} article={article} />
       ))}

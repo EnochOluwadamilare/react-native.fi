@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>React Native Finland — Unikko</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#fbfaf6; --ink:#15130f;
+  --poppy:#e2342b; --sky:#1b4de4; --sun:#f5c518; --mint:#0f8f6b;
+  --line:#15130f;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Hanken Grotesk",system-ui,sans-serif; background:var(--paper); color:var(--ink); line-height:1.5; -webkit-font-smoothing:antialiased}
+.display{font-family:"Bricolage Grotesque",sans-serif}
+.wrap{width:min(1180px,92vw); margin-inline:auto}
+a{color:inherit}
+
+/* poppy motif used as the page signature */
+.poppy-defs{position:absolute;width:0;height:0}
+
+/* nav */
+nav{border-bottom:3px solid var(--ink); position:sticky; top:0; background:var(--paper); z-index:30}
+.nav-in{display:flex; align-items:center; gap:1.5rem; height:68px}
+.brand{font-family:"Bricolage Grotesque"; font-weight:800; font-size:1.15rem; display:flex; gap:.6rem; align-items:center; letter-spacing:-.01em}
+.nav-links{display:flex; gap:1.5rem; margin-left:auto; font-weight:600}
+.nav-links a{text-decoration:none; padding:.2rem 0; border-bottom:3px solid transparent}
+.nav-links a:hover{border-color:var(--poppy)}
+.lang{font-weight:700; border:2px solid var(--ink); border-radius:999px; padding:.3rem .7rem; font-size:.82rem}
+@media(max-width:820px){.nav-links{display:none}}
+
+/* hero */
+.hero{display:grid; grid-template-columns:1.15fr .85fr; border-bottom:3px solid var(--ink)}
+@media(max-width:900px){.hero{grid-template-columns:1fr}}
+.hero-left{padding:4.5rem 3rem 4rem; padding-left:max(4vw, calc((100vw - 1180px)/2))}
+@media(max-width:900px){.hero-left{padding:3.5rem 6vw}}
+.tagline{display:inline-flex; align-items:center; gap:.5rem; background:var(--sun); border:2px solid var(--ink); border-radius:999px; padding:.35rem .9rem; font-weight:700; font-size:.82rem; transform:rotate(-1.4deg)}
+h1.title{font-family:"Bricolage Grotesque"; font-weight:800; font-size:clamp(3rem,8vw,6.2rem); line-height:.9; letter-spacing:-.03em; margin:1.4rem 0}
+h1.title .red{color:var(--poppy)}
+h1.title .blue{color:var(--sky)}
+.lede{font-size:1.2rem; max-width:42ch; font-weight:500}
+.cta-row{display:flex; gap:.9rem; margin-top:2rem; flex-wrap:wrap}
+.btn{font-weight:700; text-decoration:none; border:2px solid var(--ink); border-radius:999px; padding:.85rem 1.4rem; transition:.15s; display:inline-flex; gap:.5rem; align-items:center}
+.btn-fill{background:var(--ink); color:var(--paper)}
+.btn-fill:hover{background:var(--poppy); border-color:var(--poppy)}
+.btn-out:hover{background:var(--sun)}
+.btn:focus-visible{outline:3px solid var(--sky); outline-offset:3px}
+
+.hero-right{border-left:3px solid var(--ink); background:var(--poppy); position:relative; overflow:hidden; min-height:340px; display:grid; place-items:center}
+@media(max-width:900px){.hero-right{border-left:0; border-top:3px solid var(--ink); min-height:300px}}
+.hero-right .field{position:absolute; inset:0; opacity:.9}
+.hero-right .badge{position:relative; background:var(--paper); border:3px solid var(--ink); border-radius:50%; width:190px; height:190px; display:grid; place-items:center; text-align:center; transform:rotate(-6deg); animation:spinIn .9s cubic-bezier(.2,.8,.2,1)}
+.hero-right .badge b{font-family:"Bricolage Grotesque"; font-size:2.4rem; line-height:.9; display:block}
+.hero-right .badge span{font-weight:700; font-size:.78rem; letter-spacing:.1em}
+@keyframes spinIn{from{transform:rotate(-40deg) scale(.6); opacity:0} to{transform:rotate(-6deg) scale(1); opacity:1}}
+
+/* marquee strip */
+.strip{background:var(--ink); color:var(--paper); overflow:hidden; border-bottom:3px solid var(--ink); white-space:nowrap}
+.strip .track{display:inline-block; padding:.7rem 0; font-family:"Bricolage Grotesque"; font-weight:700; font-size:1rem; letter-spacing:.02em; animation:slide 26s linear infinite}
+.strip .track span{margin:0 1.2rem; color:var(--sun)}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* sections */
+.section{padding:4.5rem 0; border-bottom:3px solid var(--ink)}
+.sec-head{display:flex; align-items:baseline; gap:1rem; margin-bottom:2rem}
+.sec-head .num{font-family:"Bricolage Grotesque"; font-weight:800; color:var(--poppy); font-size:1.4rem}
+.sec-head h2{font-family:"Bricolage Grotesque"; font-weight:800; font-size:clamp(1.8rem,4vw,2.8rem); letter-spacing:-.02em}
+
+/* pillars */
+.pillars{display:grid; grid-template-columns:repeat(2,1fr); gap:0; border:3px solid var(--ink)}
+@media(max-width:680px){.pillars{grid-template-columns:1fr}}
+.pillar{padding:2rem; border-right:3px solid var(--ink); border-bottom:3px solid var(--ink); text-decoration:none; transition:.2s; position:relative}
+.pillars .pillar:nth-child(2n){border-right:0}
+.pillars .pillar:nth-last-child(-n+2){border-bottom:0}
+@media(max-width:680px){.pillar{border-right:0!important}}
+.pillar:hover{background:var(--sun)}
+.pillar:nth-child(1):hover{background:var(--poppy); color:var(--paper)}
+.pillar:nth-child(2):hover{background:var(--sky); color:var(--paper)}
+.pillar:nth-child(4):hover{background:var(--mint); color:var(--paper)}
+.pillar .k{font-family:"Bricolage Grotesque"; font-weight:800; font-size:3rem; line-height:1}
+.pillar h3{font-family:"Bricolage Grotesque"; font-weight:700; font-size:1.5rem; margin:.6rem 0 .4rem}
+.pillar p{font-weight:500; max-width:34ch}
+.pillar .arr{margin-top:1rem; font-weight:700}
+
+/* guides list */
+.guide{display:grid; grid-template-columns:auto 1fr auto; gap:1.2rem; align-items:center; padding:1.2rem 0; border-top:2px solid var(--ink); text-decoration:none}
+.guide:last-child{border-bottom:2px solid var(--ink)}
+.guide:hover .gt{color:var(--poppy)}
+.guide .gn{font-family:"Bricolage Grotesque"; font-weight:800; font-size:1.4rem}
+.guide .gt{font-family:"Bricolage Grotesque"; font-weight:700; font-size:1.3rem; transition:.15s}
+.guide .gd{font-weight:500; color:#5b574d; font-size:.95rem}
+.guide .pill{font-weight:700; font-size:.78rem; border:2px solid var(--ink); border-radius:999px; padding:.3rem .7rem; white-space:nowrap}
+.pill.fi{background:var(--sky); color:var(--paper); border-color:var(--sky)}
+.pill.en{background:var(--sun)}
+
+/* devs */
+.devs{display:grid; grid-template-columns:repeat(4,1fr); gap:1.2rem}
+@media(max-width:820px){.devs{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.devs{grid-template-columns:1fr}}
+.dev{border:3px solid var(--ink); border-radius:18px; overflow:hidden; background:var(--paper)}
+.dev .top{height:96px; display:grid; place-items:center; border-bottom:3px solid var(--ink); font-family:"Bricolage Grotesque"; font-weight:800; font-size:2.4rem; color:var(--paper)}
+.dev:nth-child(1) .top{background:var(--poppy)}
+.dev:nth-child(2) .top{background:var(--sky)}
+.dev:nth-child(3) .top{background:var(--mint)}
+.dev:nth-child(4) .top{background:var(--sun); color:var(--ink)}
+.dev .b{padding:1rem}
+.dev h3{font-family:"Bricolage Grotesque"; font-weight:700; font-size:1.15rem}
+.dev .role{font-weight:600; color:#5b574d; font-size:.86rem; margin-top:.2rem}
+.dev .status{margin-top:.7rem; font-weight:700; font-size:.78rem}
+
+/* meetup */
+.meet{background:var(--sky); color:var(--paper); border:3px solid var(--ink); border-radius:22px; padding:2.4rem; display:grid; grid-template-columns:1fr auto; gap:1.4rem; align-items:center}
+@media(max-width:720px){.meet{grid-template-columns:1fr}}
+.meet .when{font-weight:700; letter-spacing:.08em}
+.meet h3{font-family:"Bricolage Grotesque"; font-weight:800; font-size:clamp(1.8rem,4vw,2.6rem); margin:.5rem 0; line-height:1}
+.meet .btn{background:var(--sun); border-color:var(--sun); color:var(--ink)}
+.meet .btn:hover{background:var(--paper); border-color:var(--paper)}
+
+/* newsletter */
+.news{display:grid; grid-template-columns:1fr 1fr; gap:2rem; align-items:center}
+@media(max-width:760px){.news{grid-template-columns:1fr}}
+.news h2{font-family:"Bricolage Grotesque"; font-weight:800; font-size:clamp(2rem,5vw,3rem); line-height:.95; letter-spacing:-.02em}
+.subscribe{display:flex; gap:.6rem; border:3px solid var(--ink); border-radius:999px; padding:.4rem; background:var(--paper)}
+.subscribe input{flex:1; border:0; background:transparent; font-size:1rem; padding:.7rem 1rem; font-weight:600}
+.subscribe input:focus{outline:none}
+.subscribe button{font-weight:700; background:var(--poppy); color:var(--paper); border:0; border-radius:999px; padding:.7rem 1.3rem; cursor:pointer}
+
+footer{padding:3rem 0; background:var(--ink); color:var(--paper)}
+.f-in{display:flex; justify-content:space-between; flex-wrap:wrap; gap:1rem; font-weight:600}
+.f-in a{text-decoration:none}
+.f-in a:hover{color:var(--sun)}
+
+@media (prefers-reduced-motion: reduce){ *{animation:none !important} }
+</style>
+</head>
+<body>
+
+<!-- RN-as-poppy: petals = React orbit ellipses, center = nucleus -->
+<svg class="poppy-defs" aria-hidden="true">
+  <symbol id="poppy" viewBox="0 0 100 100">
+    <g transform="translate(50,50)">
+      <g fill="#15130f">
+        <ellipse rx="44" ry="17"/>
+        <ellipse rx="44" ry="17" transform="rotate(60)"/>
+        <ellipse rx="44" ry="17" transform="rotate(120)"/>
+      </g>
+      <circle r="11" fill="#15130f"/>
+      <circle r="6.5" fill="#fbfaf6"/>
+    </g>
+  </symbol>
+</svg>
+
+<nav>
+  <div class="wrap nav-in">
+    <div class="brand"><svg width="26" height="26"><use href="#poppy"/></svg>react-native.fi</div>
+    <div class="nav-links">
+      <a href="#pillars">Guides</a><a href="#devs">Developers</a><a href="#meet">Meetups</a><a href="#guides">Conferences</a>
+    </div>
+    <span class="lang">EN / FI</span>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-left">
+      <span class="tagline">🇫🇮 Koti · the home of React Native</span>
+      <h1 class="title">React<br><span class="red">Native</span><br>in <span class="blue">Suomi</span>.</h1>
+      <p class="lede">Guides, a developer directory, Helsinki meetups and the world's conferences — for the people building Finnish apps. In English and Finnish.</p>
+      <div class="cta-row">
+        <a class="btn btn-fill" href="#guides">Read the guides →</a>
+        <a class="btn btn-out" href="#meet">Come to a meetup</a>
+      </div>
+  </div>
+  <div class="hero-right">
+    <svg class="field" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <g opacity="0.55">
+        <use href="#poppy" x="-30" y="-30" width="120" height="120"/>
+        <use href="#poppy" x="150" y="20" width="150" height="150"/>
+        <use href="#poppy" x="300" y="-20" width="120" height="120"/>
+        <use href="#poppy" x="40" y="180" width="160" height="160"/>
+        <use href="#poppy" x="250" y="220" width="180" height="180"/>
+        <use href="#poppy" x="-40" y="300" width="130" height="130"/>
+      </g>
+    </svg>
+    <div class="badge"><div><b>40+</b><span>GUIDES · EN/FI</span></div></div>
+  </div>
+</header>
+
+<div class="strip"><div class="track">TUTORIALS <span>✿</span> DEVELOPER DIRECTORY <span>✿</span> REACT NATIVE HELSINKI <span>✿</span> CONFERENCES <span>✿</span> OPEN SOURCE <span>✿</span> TUTORIALS <span>✿</span> DEVELOPER DIRECTORY <span>✿</span> REACT NATIVE HELSINKI <span>✿</span> CONFERENCES <span>✿</span> OPEN SOURCE <span>✿</span> </div></div>
+
+<main>
+  <section class="section wrap" id="pillars">
+    <div class="sec-head"><span class="num">01</span><h2>Everything in one place</h2></div>
+    <div class="pillars">
+      <a class="pillar" href="#guides"><div class="k">A</div><h3>Tutorials</h3><p>First screen to native modules, performance and shipping — written by people who do it here.</p><div class="arr">40+ guides →</div></a>
+      <a class="pillar" href="#devs"><div class="k">B</div><h3>Developers</h3><p>A directory of Finnish React Native developers, open to work, talks and collaboration.</p><div class="arr">Browse →</div></a>
+      <a class="pillar" href="#meet"><div class="k">C</div><h3>Meetups</h3><p>React Native Helsinki — regular evenings of talks, demos and the hallway track.</p><div class="arr">Next edition →</div></a>
+      <a class="pillar" href="#guides"><div class="k">D</div><h3>Conferences</h3><p>A living index of React Native conferences across Europe and the world.</p><div class="arr">Plan a trip →</div></a>
+    </div>
+  </section>
+
+  <section class="section wrap" id="guides">
+    <div class="sec-head"><span class="num">02</span><h2>Latest guides</h2></div>
+    <a class="guide" href="#"><span class="gn">01</span><span><div class="gt">Mastering Expo Router navigation</div><div class="gd">Stacks, tabs and deep links that scale past the demo.</div></span><span class="pill en">EN</span></a>
+    <a class="guide" href="#"><span class="gn">02</span><span><div class="gt">Suorituskyky: listojen optimointi</div><div class="gd">FlashList, muistinhallinta ja renderöinnin pullonkaulat.</div></span><span class="pill fi">FI</span></a>
+    <a class="guide" href="#"><span class="gn">03</span><span><div class="gt">Native modules without fear</div><div class="gd">A practical bridge between JavaScript and the platform.</div></span><span class="pill en">EN</span></a>
+    <a class="guide" href="#"><span class="gn">04</span><span><div class="gt">Animations that feel native</div><div class="gd">Reanimated worklets, gestures and a 60fps budget.</div></span><span class="pill en">EN</span></a>
+  </section>
+
+  <section class="section wrap" id="devs">
+    <div class="sec-head"><span class="num">03</span><h2>In the directory</h2></div>
+    <div class="devs">
+      <div class="dev"><div class="top">PL</div><div class="b"><h3>Perttu Lähteenlahti</h3><div class="role">RN & Expo · founder</div><div class="status" style="color:var(--poppy)">● Open to work</div></div></div>
+      <div class="dev"><div class="top">TH</div><div class="b"><h3>Tobias Helsing</h3><div class="role">Mobile engineer · DX</div><div class="status" style="color:var(--sky)">● Open to talks</div></div></div>
+      <div class="dev"><div class="top">EC</div><div class="b"><h3>Eduardo Cebola</h3><div class="role">Cross-platform RN</div><div class="status" style="color:var(--mint)">● Collaborating</div></div></div>
+      <a class="dev" href="#" style="text-decoration:none"><div class="top">+</div><div class="b"><h3>Add yourself</h3><div class="role">Open a pull request</div><div class="status">→ Join us</div></div></a>
+    </div>
+  </section>
+
+  <section class="section wrap" id="meet">
+    <div class="meet">
+      <div>
+        <div class="when">● UPCOMING · HELSINKI · FREE</div>
+        <h3>React Native Helsinki:<br>Fourth Edition</h3>
+        <p style="font-weight:500; max-width:48ch">An evening of talks, live demos and the people who ship Finnish apps. English-friendly, everyone welcome.</p>
+      </div>
+      <a class="btn" href="#">RSVP on Meetup →</a>
+    </div>
+  </section>
+
+  <section class="section wrap" style="border-bottom:0">
+    <div class="news">
+      <div><span class="num" style="color:var(--poppy);font-family:'Bricolage Grotesque';font-weight:800;font-size:1.4rem">04</span><h2>One email,<br>when it matters.</h2></div>
+      <form class="subscribe" onsubmit="return false">
+        <input type="email" placeholder="you@example.fi" aria-label="Email address">
+        <button>Subscribe</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap f-in">
+    <div style="display:flex;gap:.6rem;align-items:center"><svg width="22" height="22"><use href="#poppy"/></svg> react-native.fi — the React Native community of Finland</div>
+    <div style="display:flex;gap:1.4rem"><a href="#">GitHub</a><a href="#">Meetup</a><a href="#">EN / FI</a></div>
+  </div>
+</footer>
+</body>
+</html>

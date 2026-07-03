@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>React Native Finland — Metro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=Martian+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0e1116; --panel:#141921; --panel-2:#10141b; --line:#232a35; --line-2:#2f3847;
+  --text:#e7ecf3; --mute:#7c8898; --mute-2:#9aa5b3;
+  --build:#ff5c49;        /* the one hero accent: hot reload */
+  --ready:#4dd0a7;        /* "ready / online" signal, used sparingly */
+  --r:14px;
+  color-scheme: dark;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Hanken Grotesk",system-ui,sans-serif;
+  background:var(--ink); color:var(--text); line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size:44px 44px;
+  background-position:center;
+}
+body::before{
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
+  background:
+    radial-gradient(1100px 600px at 78% -8%, rgba(255,92,73,.12), transparent 60%),
+    radial-gradient(900px 600px at -10% 30%, rgba(27,77,228,.10), transparent 60%),
+    linear-gradient(180deg, rgba(11,13,18,.4), rgba(11,13,18,.92));
+}
+.mono{font-family:"Martian Mono",monospace}
+.wrap{position:relative; z-index:1; width:min(1140px,92vw); margin-inline:auto}
+
+/* ---- nav ---- */
+nav{position:sticky; top:0; z-index:20; backdrop-filter:blur(10px);
+  background:linear-gradient(180deg, rgba(14,17,22,.82), rgba(14,17,22,.4));
+  border-bottom:1px solid var(--line);}
+.nav-in{display:flex; align-items:center; gap:1.4rem; height:62px}
+.brand{font-family:"Martian Mono",monospace; font-weight:700; font-size:.86rem; letter-spacing:.02em; display:flex; align-items:center; gap:.55rem}
+.brand .dot{width:9px;height:9px;border-radius:50%;background:var(--ready); box-shadow:0 0 12px var(--ready); animation:pulse 2.6s infinite}
+@keyframes pulse{50%{opacity:.45}}
+.nav-links{display:flex; gap:1.3rem; margin-left:auto}
+.nav-links a{color:var(--mute-2); text-decoration:none; font-size:.9rem; font-weight:500}
+.nav-links a:hover{color:var(--text)}
+.lang{font-family:"Martian Mono",monospace; font-size:.72rem; color:var(--mute); border:1px solid var(--line-2); border-radius:8px; padding:.3rem .5rem}
+.lang b{color:var(--text)}
+@media(max-width:820px){ .nav-links{display:none} }
+
+/* ---- hero ---- */
+.hero{padding:5rem 0 3.5rem}
+.hero-grid{display:grid; grid-template-columns:1.05fr .95fr; gap:2.6rem; align-items:center}
+@media(max-width:920px){ .hero-grid{grid-template-columns:1fr; gap:2rem} }
+.eyebrow{font-family:"Martian Mono",monospace; font-size:.72rem; letter-spacing:.26em; text-transform:uppercase; color:var(--mute); display:flex; gap:.6rem; align-items:center}
+.eyebrow::before{content:""; width:26px; height:1px; background:var(--build)}
+h1.title{font-size:clamp(2.5rem,6vw,4.4rem); line-height:.98; letter-spacing:-.03em; font-weight:800; margin:1.1rem 0}
+h1.title .hl{color:var(--build)}
+.lede{color:var(--mute-2); font-size:1.12rem; max-width:48ch}
+.cta-row{display:flex; gap:.8rem; margin-top:1.8rem; flex-wrap:wrap}
+.btn{font-family:"Martian Mono",monospace; font-size:.82rem; text-decoration:none; border-radius:10px; padding:.8rem 1.1rem; display:inline-flex; gap:.5rem; align-items:center; transition:.2s}
+.btn-primary{background:var(--build); color:#1a0a07; font-weight:700}
+.btn-primary:hover{box-shadow:0 0 0 4px rgba(255,92,73,.22); transform:translateY(-2px)}
+.btn-ghost{border:1px solid var(--line-2); color:var(--text)}
+.btn-ghost:hover{border-color:var(--mute)}
+.stats{display:flex; gap:1.8rem; margin-top:2.4rem; flex-wrap:wrap}
+.stat .n{font-family:"Martian Mono",monospace; font-size:1.5rem; font-weight:700; letter-spacing:-.02em}
+.stat .l{font-size:.78rem; color:var(--mute); letter-spacing:.04em}
+
+/* ---- simulator ---- */
+.sim{border:1px solid var(--line-2); border-radius:22px; background:linear-gradient(180deg,#11151c,#0c0f15);
+  box-shadow:0 30px 80px -30px rgba(0,0,0,.8), inset 0 1px 0 rgba(255,255,255,.04); overflow:hidden}
+.sim-bar{display:flex; align-items:center; gap:.5rem; padding:.7rem .9rem; border-bottom:1px solid var(--line); font-family:"Martian Mono",monospace; font-size:.72rem; color:var(--mute)}
+.sim-bar .lights{display:flex; gap:.4rem; margin-right:.4rem}
+.sim-bar .lights i{width:10px;height:10px;border-radius:50%;display:block}
+.sim-bar .clock{margin-left:auto; color:var(--mute-2)}
+.sim-body{padding:1.2rem; font-family:"Martian Mono",monospace; font-size:.8rem}
+.log{display:grid; gap:.42rem; min-height:118px}
+.log div{opacity:0; transform:translateY(6px); animation:logIn .5s forwards}
+.log .ok{color:var(--ready)} .log .warn{color:var(--build)} .log .dim{color:var(--mute)}
+.log div:nth-child(1){animation-delay:.15s}
+.log div:nth-child(2){animation-delay:.45s}
+.log div:nth-child(3){animation-delay:.8s}
+.log div:nth-child(4){animation-delay:1.15s}
+.log div:nth-child(5){animation-delay:1.5s}
+@keyframes logIn{to{opacity:1; transform:none}}
+.sim-screen{margin-top:1rem; border-top:1px dashed var(--line-2); padding-top:1.1rem; opacity:0; animation:logIn .6s 1.9s forwards}
+.sim-screen .big{font-family:"Hanken Grotesk",sans-serif; font-weight:800; font-size:1.6rem; line-height:1.05; letter-spacing:-.02em}
+.sim-screen .big span{color:var(--build)}
+.cursor{display:inline-block;width:9px;height:1.05em;background:var(--build);vertical-align:-2px;margin-left:3px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* ---- section heads ---- */
+.section{padding:4.2rem 0}
+.sec-head{display:flex; align-items:flex-end; justify-content:space-between; gap:1rem; margin-bottom:1.8rem; border-bottom:1px solid var(--line); padding-bottom:1rem}
+.sec-head h2{font-size:clamp(1.6rem,3vw,2.3rem); letter-spacing:-.02em; font-weight:800}
+.sec-head .idx{font-family:"Martian Mono",monospace; font-size:.74rem; color:var(--mute); letter-spacing:.18em}
+
+/* ---- modules ---- */
+.modules{display:grid; grid-template-columns:repeat(4,1fr); gap:1rem}
+@media(max-width:900px){ .modules{grid-template-columns:repeat(2,1fr)} }
+@media(max-width:560px){ .modules{grid-template-columns:1fr} }
+.mod{position:relative; text-decoration:none; color:inherit; border:1px solid var(--line); border-radius:var(--r); padding:1.3rem; background:linear-gradient(180deg,var(--panel),var(--panel-2)); transition:.25s; overflow:hidden}
+.mod:hover{transform:translateY(-5px); border-color:var(--line-2)}
+.mod:focus-visible{outline:2px solid var(--build); outline-offset:3px}
+.mod .path{font-family:"Martian Mono",monospace; font-size:.66rem; color:var(--mute); letter-spacing:.1em}
+.mod h3{font-size:1.22rem; margin:.7rem 0 .45rem; letter-spacing:-.01em}
+.mod p{color:var(--mute-2); font-size:.9rem}
+.mod .meta{margin-top:1rem; font-family:"Martian Mono",monospace; font-size:.7rem; color:var(--build)}
+.mod::after{content:""; position:absolute; right:-30px; top:-30px; width:90px; height:90px; border-radius:50%; background:radial-gradient(circle, rgba(255,92,73,.18), transparent 70%); opacity:0; transition:.3s}
+.mod:hover::after{opacity:1}
+
+/* ---- featured list ---- */
+.feed{display:grid; gap:0}
+.row{display:grid; grid-template-columns:auto 1fr auto; gap:1.2rem; align-items:center; padding:1.05rem 0; border-bottom:1px solid var(--line); text-decoration:none; color:inherit; transition:.2s}
+.row:hover{background:rgba(255,255,255,.02); padding-left:.5rem}
+.row .no{font-family:"Martian Mono",monospace; color:var(--mute); font-size:.8rem}
+.row .t{font-weight:600; font-size:1.05rem}
+.row .d{color:var(--mute); font-size:.84rem; margin-top:.15rem}
+.row .badge{font-family:"Martian Mono",monospace; font-size:.66rem; color:var(--mute-2); border:1px solid var(--line); border-radius:999px; padding:.25rem .6rem; white-space:nowrap}
+
+/* ---- meetup banner ---- */
+.banner{border:1px solid var(--line-2); border-radius:18px; padding:2rem; background:
+  linear-gradient(120deg, rgba(255,92,73,.10), transparent 50%), var(--panel);
+  display:grid; grid-template-columns:1fr auto; gap:1.4rem; align-items:center}
+@media(max-width:740px){ .banner{grid-template-columns:1fr} }
+.banner .when{font-family:"Martian Mono",monospace; color:var(--ready); font-size:.78rem; letter-spacing:.12em}
+.banner h3{font-size:1.7rem; letter-spacing:-.02em; margin:.5rem 0}
+.banner p{color:var(--mute-2)}
+
+/* ---- newsletter (terminal) ---- */
+.term{border:1px solid var(--line-2); border-radius:14px; overflow:hidden; max-width:560px; background:var(--panel-2)}
+.term .tt{font-family:"Martian Mono",monospace; font-size:.7rem; color:var(--mute); padding:.6rem .9rem; border-bottom:1px solid var(--line); display:flex; gap:.5rem; align-items:center}
+.term .tb{display:flex; padding:.5rem; gap:.5rem; align-items:center}
+.term input{flex:1; background:transparent; border:0; color:var(--text); font-family:"Martian Mono",monospace; font-size:.85rem; padding:.6rem .7rem}
+.term input::placeholder{color:var(--mute)}
+.term input:focus{outline:none}
+.term button{font-family:"Martian Mono",monospace; font-size:.78rem; background:var(--build); color:#1a0a07; border:0; font-weight:700; border-radius:9px; padding:.6rem .9rem; cursor:pointer}
+
+/* ---- footer ---- */
+footer.f{border-top:1px solid var(--line); margin-top:3rem; padding:2.4rem 0}
+.f-in{display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap; color:var(--mute); font-size:.85rem}
+.f-in a{color:var(--mute-2); text-decoration:none}
+.f-in a:hover{color:var(--text)}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation:none !important}
+  .log div, .sim-screen{opacity:1; transform:none}
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap nav-in">
+    <div class="brand"><span class="dot"></span>react-native.fi</div>
+    <div class="nav-links">
+      <a href="#modules">Guides</a>
+      <a href="#devs">Developers</a>
+      <a href="#meet">Meetups</a>
+      <a href="#feed">Conferences</a>
+    </div>
+    <span class="lang"><b>EN</b> / FI</span>
+  </div>
+</nav>
+
+<header class="hero wrap">
+  <div class="hero-grid">
+    <div>
+      <div class="eyebrow">Helsinki · since 2024 · open source</div>
+      <h1 class="title">Build React&nbsp;Native, <span class="hl">in&nbsp;Finland.</span></h1>
+      <p class="lede">Guides in English and Finnish, a directory of local developers, meetups in Helsinki, and every React Native conference worth the flight — one community hub.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#modules">▸ Start reading</a>
+        <a class="btn btn-ghost" href="#meet">Join a meetup</a>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="n">40+</div><div class="l">guides</div></div>
+        <div class="stat"><div class="n">EN·FI</div><div class="l">bilingual</div></div>
+        <div class="stat"><div class="n">RN HEL</div><div class="l">meetup series</div></div>
+        <div class="stat"><div class="n">∞</div><div class="l">conferences</div></div>
+      </div>
+    </div>
+
+    <div class="sim" aria-hidden="true">
+      <div class="sim-bar">
+        <span class="lights"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></span>
+        metro · react-native.fi
+        <span class="clock">9:41</span>
+      </div>
+      <div class="sim-body">
+        <div class="log">
+          <div class="dim">$ npx react-native start --community fi</div>
+          <div class="dim">Metro waiting on exp://helsinki:8081</div>
+          <div class="ok">✓ bundled 1284 modules in 0.9s</div>
+          <div class="warn">⚡ Fast Refresh: rendering community…</div>
+          <div class="ok">✓ ready — 40 guides · directory · meetups</div>
+        </div>
+        <div class="sim-screen">
+          <div class="path mono" style="color:var(--mute);font-size:.68rem">/app/index.tsx</div>
+          <div class="big" style="margin-top:.5rem">The React Native<br>community of <span>Suomi</span><span class="cursor"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="section wrap" id="modules">
+    <div class="sec-head">
+      <h2>What's in the bundle</h2>
+      <span class="idx">[ 01 / modules ]</span>
+    </div>
+    <div class="modules">
+      <a class="mod" href="#">
+        <div class="path">/guides</div>
+        <h3>Tutorials</h3>
+        <p>From "your first screen" to native modules, performance and monetization.</p>
+        <div class="meta">40+ guides ▸</div>
+      </a>
+      <a class="mod" href="#devs">
+        <div class="path">/developers</div>
+        <h3>Directory</h3>
+        <p>Finnish React Native developers open to work, talks and collaboration.</p>
+        <div class="meta">browse devs ▸</div>
+      </a>
+      <a class="mod" href="#meet">
+        <div class="path">/events</div>
+        <h3>Meetups</h3>
+        <p>React Native Helsinki — talks, demos and sauna-grade hallway track.</p>
+        <div class="meta">next edition ▸</div>
+      </a>
+      <a class="mod" href="#feed">
+        <div class="path">/conferences</div>
+        <h3>Conferences</h3>
+        <p>A living index of React Native conferences across Europe and beyond.</p>
+        <div class="meta">plan a trip ▸</div>
+      </a>
+    </div>
+  </section>
+
+  <section class="section wrap" id="feed">
+    <div class="sec-head">
+      <h2>Fresh from the repo</h2>
+      <span class="idx">[ 02 / guides ]</span>
+    </div>
+    <div class="feed">
+      <a class="row" href="#"><span class="no">01</span><span><span class="t">Mastering Expo Router navigation</span><div class="d">Patterns for stacks, tabs and deep links that scale.</div></span><span class="badge">EN · 12 min</span></a>
+      <a class="row" href="#"><span class="no">02</span><span><span class="t">Suorituskyky: listojen optimointi</span><div class="d">FlashList, muistinhallinta ja renderöinnin pullonkaulat.</div></span><span class="badge">FI · 9 min</span></a>
+      <a class="row" href="#"><span class="no">03</span><span><span class="t">Writing native modules without fear</span><div class="d">A practical bridge between JS and the platform.</div></span><span class="badge">EN · 15 min</span></a>
+      <a class="row" href="#"><span class="no">04</span><span><span class="t">Animations that actually feel native</span><div class="d">Reanimated worklets, gestures and 60fps budgets.</div></span><span class="badge">EN · 11 min</span></a>
+    </div>
+  </section>
+
+  <section class="section wrap" id="devs">
+    <div class="sec-head">
+      <h2>Developers in the directory</h2>
+      <span class="idx">[ 03 / people ]</span>
+    </div>
+    <div class="modules">
+      <div class="mod"><div class="path">@perttu</div><h3>Perttu Lähteenlahti</h3><p>React Native & Expo. Founder of react-native.fi.</p><div class="meta">● open to work</div></div>
+      <div class="mod"><div class="path">@tobias</div><h3>Tobias Helsing</h3><p>Mobile engineer focused on DX and performance.</p><div class="meta">● open to talks</div></div>
+      <div class="mod"><div class="path">@eduardo</div><h3>Eduardo Cebola</h3><p>Building cross-platform products with RN.</p><div class="meta">● collaborating</div></div>
+      <a class="mod" href="#" style="display:grid;place-items:center;text-align:center"><div><h3 style="margin:0">+ You</h3><p style="margin-top:.3rem">Add yourself to the directory.</p><div class="meta" style="margin-top:.6rem">open a PR ▸</div></div></a>
+    </div>
+  </section>
+
+  <section class="section wrap" id="meet">
+    <div class="banner">
+      <div>
+        <div class="when">● UPCOMING · HELSINKI</div>
+        <h3>React Native Helsinki: Fourth Edition</h3>
+        <p>An evening of talks, live demos and the people who actually ship Finnish apps. Free, in person, English-friendly.</p>
+      </div>
+      <a class="btn btn-primary" href="#">RSVP on Meetup ▸</a>
+    </div>
+  </section>
+
+  <section class="section wrap">
+    <div class="sec-head"><h2>Get the dispatch</h2><span class="idx">[ 04 / newsletter ]</span></div>
+    <p class="lede" style="margin-bottom:1.4rem">New guides, meetup dates and Finnish RN news. No noise.</p>
+    <form class="term" onsubmit="return false">
+      <div class="tt"><span class="lights" style="display:flex;gap:.4rem"><i style="width:8px;height:8px;border-radius:50%;background:#ff5f57;display:block"></i><i style="width:8px;height:8px;border-radius:50%;background:#febc2e;display:block"></i><i style="width:8px;height:8px;border-radius:50%;background:#28c840;display:block"></i></span> subscribe.sh</div>
+      <div class="tb"><span class="mono" style="color:var(--ready)">$</span><input type="email" placeholder="you@example.fi" aria-label="Email address"><button>Subscribe</button></div>
+    </form>
+  </section>
+</main>
+
+<footer class="f">
+  <div class="wrap f-in">
+    <div>react-native.fi · the React Native community of Finland · open source</div>
+    <div style="display:flex;gap:1.2rem">
+      <a href="#">GitHub</a><a href="#">Meetup</a><a href="#">EN / FI</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

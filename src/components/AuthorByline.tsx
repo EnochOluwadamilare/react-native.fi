@@ -18,7 +18,7 @@ export function AuthorByline({ author }: AuthorBylineProps) {
     .join(' · ');
 
   return (
-    <div className='mt-6 flex items-center gap-3'>
+    <span className='flex items-center gap-2.5'>
       {author.imageUrl && (
         <Link
           href={author.href as '/developers'}
@@ -28,24 +28,26 @@ export function AuthorByline({ author }: AuthorBylineProps) {
           <Image
             src={author.imageUrl}
             alt={author.name}
-            width={48}
-            height={48}
-            className='rounded-full object-cover ring-1 ring-gray-200'
+            width={44}
+            height={44}
+            className='h-11 w-11 rounded-full border-2 border-[rgb(var(--ink))] bg-[rgb(var(--paper-2))] object-cover'
           />
         </Link>
       )}
-      <div className='min-w-0'>
+      <span className='min-w-0 leading-tight'>
         <Link
           href={author.href as '/developers'}
           rel='author'
-          className='text-sm font-semibold text-gray-900 hover:text-indigo-600'
+          className='font-display text-sm font-bold text-[rgb(var(--ink))] transition-colors hover:text-[rgb(var(--poppy))]'
         >
           {author.name}
         </Link>
         {credentials && (
-          <p className='truncate text-xs text-gray-500'>{credentials}</p>
+          <span className='block truncate text-xs font-medium text-[rgb(var(--ink))]/60'>
+            {credentials}
+          </span>
         )}
-      </div>
-    </div>
+      </span>
+    </span>
   );
 }

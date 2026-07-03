@@ -7,6 +7,7 @@ import { compileMDX } from 'next-mdx-remote/rsc';
 import rehypePrism from 'rehype-prism-plus';
 
 import {
+  articleTagLabels,
   getAllArticleSlugs,
   getArticleBySlug,
   getArticleContent,
@@ -207,7 +208,7 @@ export default async function ArticlePage({ params }: Props) {
         url={articleUrl}
         imageUrl={ogImageUrl}
       />
-      <article className='bg-white py-16 sm:py-24'>
+      <article className='fade-in-up bg-[rgb(var(--paper))] py-16 text-[rgb(var(--ink))] sm:py-24'>
         <div className='mx-auto max-w-3xl px-6 lg:px-8'>
           {/* Breadcrumbs */}
           <Breadcrumbs
@@ -223,8 +224,8 @@ export default async function ArticlePage({ params }: Props) {
 
           {/* Fallback notice */}
           {isShowingFallback && (
-            <div className='mb-8 rounded-lg bg-amber-50 border border-amber-200 p-4'>
-              <p className='text-sm text-amber-800'>
+            <div className='mb-8 rounded-2xl border-[3px] border-[rgb(var(--ink))] bg-[rgb(var(--sun))] p-4'>
+              <p className='font-display text-sm font-bold text-[rgb(var(--ink))]'>
                 {locale === 'fi'
                   ? 'Tätä artikkelia ei ole vielä käännetty suomeksi. Näytetään englanninkielinen versio.'
                   : 'This article is not yet translated. Showing the English version.'}
@@ -233,54 +234,64 @@ export default async function ArticlePage({ params }: Props) {
           )}
 
           <header className='mb-12'>
-            <h1 className='mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl'>
-              {article.title}
-            </h1>
-            <div className='mt-3 flex items-center gap-3 flex-wrap'>
-              <p className='text-sm text-gray-700'>
-                {locale === 'fi' ? 'Kirjoittanut' : 'By'}{' '}
-                <span className='font-medium'>{authorName}</span>
-              </p>
-              <span className='text-sm text-gray-400'>·</span>
-              <time dateTime={article.date} className='text-sm text-gray-500'>
-                {formattedDate}
-              </time>
-              {formattedUpdatedDate && (
-                <>
-                  <span className='text-sm text-gray-400'>·</span>
-                  <span className='text-sm text-gray-500'>
-                    {locale === 'fi' ? 'Päivitetty' : 'Updated'}{' '}
-                    {formattedUpdatedDate}
-                  </span>
-                </>
-              )}
-              {article.readingTime && (
-                <>
-                  <span className='text-sm text-gray-400'>·</span>
-                  <span className='text-sm text-gray-500'>
-                    {article.readingTime} min{' '}
-                    {locale === 'fi' ? 'luku' : 'read'}
-                  </span>
-                </>
-              )}
-            </div>
-
-            {/* Tags */}
+            {/* Tag / eyebrow pills */}
             {article.tags && article.tags.length > 0 && (
-              <div className='mt-4 flex flex-wrap gap-2'>
+              <div className='mb-5 flex flex-wrap gap-2'>
                 {article.tags.map((tag) => (
                   <Link
                     key={tag}
                     href={`/${locale}/articles?tag=${tag}`}
-                    className='rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600 hover:bg-gray-200 transition-colors'
+                    className='rounded-full border-2 border-[rgb(var(--ink))] bg-[rgb(var(--paper-2))] px-3 py-1 font-display text-xs font-bold text-[rgb(var(--ink))] transition-colors hover:bg-[rgb(var(--sun))]'
                   >
-                    {tag}
+                    {articleTagLabels[tag]?.[locale === 'fi' ? 'fi' : 'en'] ??
+                      tag}
                   </Link>
                 ))}
               </div>
             )}
 
-            <div className='relative mt-6 mb-8 aspect-[1200/630] overflow-hidden rounded-xl'>
+            <h1 className='font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-[rgb(var(--ink))] sm:text-5xl'>
+              {article.title}
+            </h1>
+
+            {/* Byline + meta (E-E-A-T: surface authorship up front) */}
+            <div className='mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 font-display text-sm font-bold text-[rgb(var(--ink))]/70'>
+              {authorObject ? (
+                <AuthorByline author={article.author} />
+              ) : (
+                <span className='text-[rgb(var(--ink))]'>
+                  {locale === 'fi' ? 'Kirjoittanut' : 'By'} {authorName}
+                </span>
+              )}
+              <span aria-hidden='true' className='text-[rgb(var(--poppy))]'>
+                ●
+              </span>
+              <time dateTime={article.date}>{formattedDate}</time>
+              {article.readingTime && (
+                <>
+                  <span aria-hidden='true' className='text-[rgb(var(--poppy))]'>
+                    ●
+                  </span>
+                  <span>
+                    {article.readingTime} min{' '}
+                    {locale === 'fi' ? 'luku' : 'read'}
+                  </span>
+                </>
+              )}
+              {formattedUpdatedDate && (
+                <>
+                  <span aria-hidden='true' className='text-[rgb(var(--poppy))]'>
+                    ●
+                  </span>
+                  <span>
+                    {locale === 'fi' ? 'Päivitetty' : 'Updated'}{' '}
+                    {formattedUpdatedDate}
+                  </span>
+                </>
+              )}
+            </div>
+
+            <div className='relative mt-8 aspect-[1200/630] overflow-hidden rounded-2xl border-[3px] border-[rgb(var(--ink))]'>
               <Image
                 src={`/${locale}/articles/${slug}/opengraph-image`}
                 alt={article.title}
@@ -292,9 +303,6 @@ export default async function ArticlePage({ params }: Props) {
                 priority
               />
             </div>
-
-            {/* Author byline (E-E-A-T: surface authorship up front) */}
-            <AuthorByline author={article.author} />
           </header>
 
           {/* Table of Contents */}
@@ -314,12 +322,14 @@ export default async function ArticlePage({ params }: Props) {
           <RelatedArticles articles={relatedArticles} locale={locale} />
 
           {/* Back to articles */}
-          <div className='mt-12 pt-8 border-t border-gray-200'>
+          <div className='mt-12 border-t-[3px] border-[rgb(var(--ink))] pt-8'>
             <Link
               href={`/${locale}/articles`}
-              className='text-sm font-medium text-indigo-600 hover:text-indigo-500'
+              className='group inline-flex items-center gap-2 font-display text-sm font-bold text-[rgb(var(--sky))] transition-colors hover:text-[rgb(var(--poppy))]'
             >
-              ←{' '}
+              <span className='inline-block transition-transform group-hover:-translate-x-1'>
+                ←
+              </span>
               {locale === 'fi' ? 'Takaisin artikkeleihin' : 'Back to articles'}
             </Link>
           </div>

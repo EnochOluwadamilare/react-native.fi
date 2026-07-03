@@ -1,10 +1,10 @@
 'use client';
 
-import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
 import { NewsletterSignup } from '@/components/NewsletterSignup';
 
+import { Poppy } from '@/app/components/Poppy';
 import { Link } from '@/i18n/navigation';
 
 export function Footer() {
@@ -14,42 +14,49 @@ export function Footer() {
 
   const currentYear = new Date().getFullYear();
 
+  const linkClass =
+    'text-sm font-semibold text-[rgb(var(--paper))]/70 transition-colors hover:text-[rgb(var(--poppy))]';
+  const headingClass =
+    'font-display text-xs font-extrabold uppercase tracking-[0.14em] text-[rgb(var(--sun))]';
+  const socialClass =
+    'flex h-11 w-11 items-center justify-center rounded-full border-[3px] border-[rgb(var(--paper))] text-[rgb(var(--paper))] transition-colors hover:border-[rgb(var(--poppy))] hover:bg-[rgb(var(--poppy))] hover:text-[rgb(var(--paper))]';
+
   return (
-    <footer className='border-t border-[rgb(var(--mono-200))] bg-white'>
-      <div className='mx-auto max-w-7xl px-6 py-16 lg:px-8 lg:py-20'>
+    <footer className='border-t-[3px] border-[rgb(var(--ink))] bg-[rgb(var(--ink))] text-[rgb(var(--paper))]'>
+      <div className='mx-auto max-w-[1180px] px-6 py-16 lg:px-8 lg:py-20'>
         {/* Top section */}
         <div className='grid grid-cols-1 gap-12 lg:grid-cols-4 lg:gap-8'>
           {/* Brand column */}
           <div className='lg:col-span-2'>
             <Link href='/' className='group inline-flex items-center gap-3'>
-              <Image
-                src='/icon.png'
-                alt=''
-                width={40}
-                height={40}
-                className='h-10 w-10'
-              />
+              <span className='grid h-12 w-12 place-items-center rounded-full border-[3px] border-[rgb(var(--paper))] bg-[rgb(var(--poppy))]'>
+                <Poppy
+                  color='rgb(var(--paper))'
+                  centerColor='rgb(var(--ink))'
+                  className='h-8 w-8'
+                />
+              </span>
               <div>
-                <div className='font-mono text-base font-bold text-[rgb(var(--mono-900))]'>
-                  {t('siteName')}
+                <div className='font-display text-lg font-extrabold leading-none text-[rgb(var(--paper))]'>
+                  react-native.fi
                 </div>
-                <div className='font-mono text-xs text-[rgb(var(--mono-500))]'>
+                <div className='mt-1 text-xs font-semibold text-[rgb(var(--paper))]/55'>
                   {t('tagline')}
                 </div>
               </div>
             </Link>
-            <p className='mt-6 max-w-md text-sm leading-6 text-[rgb(var(--mono-600))]'>
+            <p className='mt-6 max-w-md text-sm font-medium leading-6 text-[rgb(var(--paper))]/70'>
               Building the React Native community in Finland. Join our meetups,
               learn from articles, and connect with fellow developers.
             </p>
 
             {/* Social links */}
-            <div className='mt-6 flex items-center gap-4'>
+            <div className='mt-6 flex items-center gap-3'>
               <a
                 href='https://meetup.com/react-native-helsinki'
                 target='_blank'
                 rel='noopener noreferrer'
-                className='flex h-10 w-10 items-center justify-center rounded-full bg-[rgb(var(--mono-100))] text-[rgb(var(--mono-600))] transition-all hover:bg-[rgb(var(--finnish-blue))] hover:text-white'
+                className={socialClass}
                 aria-label='Meetup'
               >
                 <svg
@@ -64,7 +71,7 @@ export function Footer() {
                 href='https://github.com/React-Native-Finland'
                 target='_blank'
                 rel='noopener noreferrer'
-                className='flex h-10 w-10 items-center justify-center rounded-full bg-[rgb(var(--mono-100))] text-[rgb(var(--mono-600))] transition-all hover:bg-[rgb(var(--mono-900))] hover:text-white'
+                className={socialClass}
                 aria-label='GitHub'
               >
                 <svg
@@ -79,7 +86,7 @@ export function Footer() {
                 href='https://twitter.com/plahteenlahti'
                 target='_blank'
                 rel='noopener noreferrer'
-                className='flex h-10 w-10 items-center justify-center rounded-full bg-[rgb(var(--mono-100))] text-[rgb(var(--mono-600))] transition-all hover:bg-[rgb(var(--mono-900))] hover:text-white'
+                className={socialClass}
                 aria-label='Twitter/X'
               >
                 <svg
@@ -95,31 +102,20 @@ export function Footer() {
 
           {/* Navigation columns */}
           <div>
-            <h3 className='font-mono text-xs font-semibold uppercase tracking-wider text-[rgb(var(--mono-900))]'>
-              Explore
-            </h3>
+            <h3 className={headingClass}>Explore</h3>
             <ul className='mt-4 space-y-3'>
               <li>
-                <Link
-                  href='/events'
-                  className='text-sm text-[rgb(var(--mono-600))] transition-colors hover:text-[rgb(var(--finnish-blue))]'
-                >
+                <Link href='/events' className={linkClass}>
                   {tNav('events')}
                 </Link>
               </li>
               <li>
-                <Link
-                  href='/articles'
-                  className='text-sm text-[rgb(var(--mono-600))] transition-colors hover:text-[rgb(var(--finnish-blue))]'
-                >
+                <Link href='/articles' className={linkClass}>
                   {tNav('articles')}
                 </Link>
               </li>
               <li>
-                <Link
-                  href='/developers'
-                  className='text-sm text-[rgb(var(--mono-600))] transition-colors hover:text-[rgb(var(--finnish-blue))]'
-                >
+                <Link href='/developers' className={linkClass}>
                   {tNav('developers')}
                 </Link>
               </li>
@@ -127,15 +123,10 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className='font-mono text-xs font-semibold uppercase tracking-wider text-[rgb(var(--mono-900))]'>
-              Resources
-            </h3>
+            <h3 className={headingClass}>Resources</h3>
             <ul className='mt-4 space-y-3'>
               <li>
-                <Link
-                  href='/conferences'
-                  className='text-sm text-[rgb(var(--mono-600))] transition-colors hover:text-[rgb(var(--finnish-blue))]'
-                >
+                <Link href='/conferences' className={linkClass}>
                   RN Conferences 2026
                 </Link>
               </li>
@@ -144,7 +135,7 @@ export function Footer() {
                   href='https://fullstackopen.com/en/part10'
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='text-sm text-[rgb(var(--mono-600))] transition-colors hover:text-[rgb(var(--finnish-blue))]'
+                  className={linkClass}
                 >
                   Full Stack Open
                 </a>
@@ -154,7 +145,7 @@ export function Footer() {
                   href='https://reactnative.dev'
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='text-sm text-[rgb(var(--mono-600))] transition-colors hover:text-[rgb(var(--finnish-blue))]'
+                  className={linkClass}
                 >
                   React Native Docs
                 </a>
@@ -164,7 +155,7 @@ export function Footer() {
                   href='https://expo.dev'
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='text-sm text-[rgb(var(--mono-600))] transition-colors hover:text-[rgb(var(--finnish-blue))]'
+                  className={linkClass}
                 >
                   Expo
                 </a>
@@ -174,12 +165,10 @@ export function Footer() {
         </div>
 
         {/* Newsletter */}
-        <div className='mt-12 border-t border-[rgb(var(--mono-200))] pt-8'>
+        <div className='mt-12 border-t-[3px] border-[rgb(var(--paper))]/20 pt-10'>
           <div className='max-w-md'>
-            <p className='font-mono text-xs font-semibold uppercase tracking-wider text-[rgb(var(--mono-900))]'>
-              {tNewsletter('footerTitle')}
-            </p>
-            <p className='mt-2 mb-4 text-sm text-[rgb(var(--mono-600))]'>
+            <p className={headingClass}>{tNewsletter('footerTitle')}</p>
+            <p className='mb-4 mt-2 text-sm font-medium text-[rgb(var(--paper))]/70'>
               {tNewsletter('footerDescription')}
             </p>
             <NewsletterSignup variant='minimal' />
@@ -187,24 +176,24 @@ export function Footer() {
         </div>
 
         {/* Divider */}
-        <div className='mt-12 border-t border-[rgb(var(--mono-200))] pt-8'>
+        <div className='mt-12 border-t-[3px] border-[rgb(var(--paper))]/20 pt-8'>
           <div className='flex flex-col items-center justify-between gap-4 sm:flex-row'>
-            <p className='text-sm text-[rgb(var(--mono-500))]'>
+            <p className='text-sm font-medium text-[rgb(var(--paper))]/55'>
               &copy; {currentYear} {t('siteName')}. {t('builtBy')}{' '}
               <a
                 href='https://perttu.dev'
                 rel='author'
-                className='font-medium text-[rgb(var(--finnish-blue))] transition-colors hover:text-[rgb(var(--finnish-blue-dark))]'
+                className='font-bold text-[rgb(var(--sun))] transition-colors hover:text-[rgb(var(--poppy))]'
               >
                 Perttu Lähteenlahti
               </a>
-              <span className='text-[rgb(var(--mono-400))]'>
+              <span className='text-[rgb(var(--paper))]/40'>
                 {' '}
                 · {t('maintainerRole')}
               </span>
             </p>
             <div className='flex items-center gap-4'>
-              <span className='font-mono text-xs text-[rgb(var(--mono-400))]'>
+              <span className='font-display text-xs font-extrabold uppercase tracking-[0.14em] text-[rgb(var(--paper))]/45'>
                 Made in Helsinki
               </span>
             </div>

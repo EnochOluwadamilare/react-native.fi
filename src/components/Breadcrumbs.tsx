@@ -57,35 +57,35 @@ export function Breadcrumbs({ items, homeLabel = 'Home' }: BreadcrumbsProps) {
         type='application/ld+json'
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <nav aria-label='Breadcrumb' className='mb-4'>
-        <ol className='flex items-center space-x-2 text-sm text-gray-500'>
+      <nav aria-label='Breadcrumb' className='mb-6'>
+        <ol className='flex flex-wrap items-center gap-2 font-display text-sm font-bold'>
           <li>
-            <Link href='/' className='hover:text-gray-700'>
+            <Link
+              href='/'
+              className='text-[rgb(var(--ink))]/55 transition-colors hover:text-[rgb(var(--poppy))]'
+            >
               {homeLabel}
             </Link>
           </li>
           {items.map((item, index) => (
-            <li key={index} className='flex items-center'>
-              <svg
-                className='mx-2 h-4 w-4 flex-shrink-0 text-gray-400'
-                fill='currentColor'
-                viewBox='0 0 20 20'
-              >
-                <path
-                  fillRule='evenodd'
-                  d='M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z'
-                  clipRule='evenodd'
-                />
-              </svg>
+            <li key={index} className='flex items-center gap-2'>
+              <span aria-hidden='true' className='text-[rgb(var(--ink))]/30'>
+                /
+              </span>
               {item.href ? (
                 <Link
                   href={item.href as '/events' | '/articles' | '/developers'}
-                  className='hover:text-gray-700'
+                  className='text-[rgb(var(--ink))]/55 transition-colors hover:text-[rgb(var(--poppy))]'
                 >
                   {item.name}
                 </Link>
               ) : (
-                <span className='text-gray-900 font-medium'>{item.name}</span>
+                <span
+                  aria-current='page'
+                  className='line-clamp-1 text-[rgb(var(--ink))]'
+                >
+                  {item.name}
+                </span>
               )}
             </li>
           ))}

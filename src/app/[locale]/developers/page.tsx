@@ -1,9 +1,9 @@
 import { Metadata } from 'next';
-import Image from 'next/image';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 
 import { getAllDevelopers } from '@/lib/developers';
 
+import { PoppyField } from '@/app/components/Poppy';
 import { siteConfig } from '@/constant/config';
 import { Locale } from '@/i18n/config';
 
@@ -37,70 +37,78 @@ export default async function DevelopersPage({ params }: Props) {
   const developers = getAllDevelopers();
 
   return (
-    <div className='bg-white'>
-      {/* Hero Image */}
-      <div className='relative h-64 w-full sm:h-80 lg:h-96'>
-        <Image
-          src='/images/developers.jpg'
-          alt={t('heroAlt')}
-          fill
-          sizes='100vw'
-          className='object-cover'
-          priority
-        />
-        <div className='absolute inset-0 bg-gradient-to-b from-transparent to-white' />
-      </div>
-
-      <div className='mx-auto max-w-7xl px-6 py-16 lg:px-8'>
-        {/* Title + description */}
-        <div className='mx-auto max-w-2xl lg:mx-0'>
-          <h1 className='text-4xl font-semibold tracking-tight text-[rgb(var(--mono-900))] sm:text-5xl'>
+    <div className='bg-[rgb(var(--paper))] text-[rgb(var(--ink))]'>
+      {/* Bold Unikko page header */}
+      <header className='relative overflow-hidden border-b-[3px] border-[rgb(var(--ink))] bg-[rgb(var(--sky))] text-[rgb(var(--paper))]'>
+        <PoppyField className='absolute inset-0 h-full w-full opacity-25' />
+        <div className='fade-in-up relative mx-auto max-w-[1180px] px-6 py-16 sm:py-20 lg:px-8'>
+          <span className='inline-flex -rotate-1 items-center gap-2 rounded-full border-2 border-[rgb(var(--ink))] bg-[rgb(var(--sun))] px-4 py-1.5 text-sm font-bold text-[rgb(var(--ink))]'>
+            ✿ {developers.length} {t('title')}
+          </span>
+          <h1 className='mt-6 max-w-[16ch] font-display text-[clamp(2.5rem,6vw,4.5rem)] font-extrabold leading-[0.95] tracking-tight'>
             {t('title')}
           </h1>
-          <p className='mt-6 text-lg text-[rgb(var(--mono-600))]'>
+          <p className='mt-5 max-w-[52ch] text-lg font-medium text-[rgb(var(--paper))]/90'>
             {t('description')}
           </p>
+        </div>
+      </header>
+
+      <div className='mx-auto max-w-[1180px] px-6 py-16 sm:py-20 lg:px-8'>
+        {/* Directory */}
+        <div className='mb-8 flex items-baseline gap-3'>
+          <span className='u-num'>01</span>
+          <h2 className='font-display text-3xl font-extrabold tracking-tight sm:text-4xl'>
+            {t('title')}
+          </h2>
         </div>
 
         {/* Developer list */}
         <ul
           role='list'
-          className='mt-16 grid max-w-2xl grid-cols-1 gap-6 sm:grid-cols-2 lg:max-w-none lg:grid-cols-3'
+          className='grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3'
         >
-          {developers.map((developer) => (
-            <DeveloperCard key={developer.slug} developer={developer} />
+          {developers.map((developer, index) => (
+            <DeveloperCard
+              key={developer.slug}
+              developer={developer}
+              index={index}
+            />
           ))}
         </ul>
 
         {/* Add yourself — bottom of page */}
-        <div className='mt-24 border-t border-[rgb(var(--mono-200))] pt-16'>
-          <h2 className='text-2xl font-semibold text-[rgb(var(--mono-900))]'>
-            {t('addYourself')}
-          </h2>
-          <p className='mt-2 max-w-2xl text-sm text-[rgb(var(--mono-600))]'>
+        <div className='mt-20 rounded-3xl border-[3px] border-[rgb(var(--ink))] bg-[rgb(var(--paper-2))] p-8 sm:p-10'>
+          <div className='mb-8 flex items-baseline gap-3'>
+            <span className='u-num'>02</span>
+            <h2 className='font-display text-3xl font-extrabold tracking-tight sm:text-4xl'>
+              {t('addYourself')}
+            </h2>
+          </div>
+          <p className='max-w-2xl font-medium opacity-80'>
             {t('addDescription')}
           </p>
 
-          <div className='mt-8 grid grid-cols-1 gap-8 lg:grid-cols-2'>
+          <div className='mt-8 grid grid-cols-1 gap-10 lg:grid-cols-2'>
             {/* Left: Step-by-step guide */}
             <div>
-              <h3 className='text-sm font-semibold text-[rgb(var(--mono-900))]'>
+              <h3 className='font-display text-lg font-bold'>
                 {t('howToAdd')}
               </h3>
-              <p className='mt-1 text-xs text-[rgb(var(--mono-500))]'>
+              <p className='mt-1 text-sm font-medium opacity-70'>
                 {t('howToAddDescription')}
               </p>
-              <ol className='mt-4 space-y-3'>
+              <ol className='mt-5 space-y-4'>
                 {[0, 1, 2, 3].map((index) => (
                   <li key={index} className='flex gap-3'>
-                    <span className='flex size-6 shrink-0 items-center justify-center rounded-full bg-[rgb(var(--finnish-blue)/0.1)] text-xs font-medium text-[rgb(var(--finnish-blue))]'>
+                    <span className='flex size-7 shrink-0 items-center justify-center rounded-full border-2 border-[rgb(var(--ink))] bg-[rgb(var(--sun))] font-display text-sm font-extrabold'>
                       {index + 1}
                     </span>
                     <div className='text-sm'>
-                      <p className='font-medium text-[rgb(var(--mono-900))]'>
+                      <p className='font-display font-bold'>
                         {t(`steps.${index}.title`)}
                       </p>
-                      <p className='text-[rgb(var(--mono-500))]'>
+                      <p className='mt-0.5 font-medium opacity-70'>
                         {t(`steps.${index}.description`)}
                       </p>
                     </div>
@@ -112,11 +120,11 @@ export default async function DevelopersPage({ params }: Props) {
                 href='https://github.com/React-Native-Finland/react-native.fi'
                 target='_blank'
                 rel='noopener noreferrer'
-                className='mt-6 inline-flex items-center rounded-md bg-[rgb(var(--finnish-blue))] px-4 py-2 text-sm font-medium text-white hover:bg-[rgb(var(--finnish-blue-dark))]'
+                className='u-btn u-btn-fill mt-7'
               >
                 {t('startPR')}
                 <svg
-                  className='ml-2 size-4'
+                  className='size-4'
                   fill='none'
                   stroke='currentColor'
                   viewBox='0 0 24 24'
@@ -133,13 +141,13 @@ export default async function DevelopersPage({ params }: Props) {
 
             {/* Right: Profile template preview */}
             <div>
-              <h3 className='text-sm font-semibold text-[rgb(var(--mono-900))]'>
+              <h3 className='font-display text-lg font-bold'>
                 {t('templateTitle')}
               </h3>
-              <p className='mt-1 text-xs text-[rgb(var(--mono-500))]'>
+              <p className='mt-1 text-sm font-medium opacity-70'>
                 {t('templateDescription')}
               </p>
-              <pre className='mt-3 overflow-x-auto rounded-lg bg-[rgb(var(--mono-900))] p-4 text-xs leading-relaxed text-[rgb(var(--mono-300))]'>
+              <pre className='mt-4 overflow-x-auto rounded-2xl border-[3px] border-[rgb(var(--ink))] bg-[rgb(var(--ink))] p-4 text-xs leading-relaxed text-[rgb(var(--paper))]/90'>
                 {`{
   "slug": "your-name",
   "name": "Your Name",

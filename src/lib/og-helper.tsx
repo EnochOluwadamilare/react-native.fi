@@ -48,6 +48,58 @@ export async function generateBlueprintOgImage(
     'https://cdn.jsdelivr.net/fontsource/fonts/inter@latest/latin-400-normal.ttf',
   ).then((res) => res.arrayBuffer());
 
+  // Unikko palette
+  const PAPER = '#FBFAF6';
+  const INK = '#15130F';
+  const POPPY = '#E2342B';
+  const PALETTE = [POPPY, '#1B4DE4', '#F5C518', '#0F8F6B']; // poppy, sky, sun, mint
+
+  // Deterministic-but-varied flower arrangement per article.
+  // Same slug → same composition; different slugs → different colours/places.
+  const seedStr = _slug || title;
+  let seed = 2166136261;
+  for (let i = 0; i < seedStr.length; i++) {
+    seed ^= seedStr.charCodeAt(i);
+    seed = Math.imul(seed, 16777619);
+  }
+  const rng = (() => {
+    let a = seed >>> 0;
+    return () => {
+      a = (a + 0x6d2b79f5) | 0;
+      let t = Math.imul(a ^ (a >>> 15), 1 | a);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  })();
+  const shuffled = <T,>(arr: T[]): T[] => {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(rng() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  };
+
+  // Candidate slots are placed at the edges so they frame the headline
+  // (which is left-aligned) rather than cover it.
+  // All slots sit clear of the top row (label + wordmark) and the left
+  // headline column, so flowers frame the composition without covering text.
+  const SLOTS = [
+    { size: 460, style: { right: -110, bottom: -150 } },
+    { size: 320, style: { right: -150, top: 250 } },
+    { size: 300, style: { left: -120, bottom: -150 } },
+    { size: 340, style: { left: 560, bottom: -180 } },
+    { size: 260, style: { right: -40, top: 170 } },
+  ];
+  const colorOrder = shuffled(PALETTE);
+  const slotOrder = shuffled(SLOTS);
+  const flowerCount = 1 + (seed % 3); // 1–3 flowers
+  const flowers = slotOrder.slice(0, flowerCount).map((slot, i) => ({
+    ...slot,
+    color: colorOrder[i % colorOrder.length],
+    rotate: Math.floor(rng() * 80) - 40,
+  }));
+
   return new ImageResponse(
     <div
       style={{
@@ -57,19 +109,36 @@ export async function generateBlueprintOgImage(
         flexDirection: 'column',
         fontFamily: 'Inter',
         position: 'relative',
-        background: 'linear-gradient(135deg, #120021 0%, #2b0c46 100%)',
+        background: PAPER,
       }}
     >
-      {/* Grid pattern overlay */}
+      {/* Hard ink frame — Marimekko poster */}
       <div
         style={{
           position: 'absolute',
           inset: 0,
-          backgroundImage:
-            'linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px)',
-          backgroundSize: '40px 40px',
+          border: `14px solid ${INK}`,
         }}
       />
+
+      {/* Signature poppies — colour, count and placement vary per article */}
+      {flowers.map((f, i) => (
+        <svg
+          key={i}
+          width={f.size}
+          height={f.size}
+          viewBox='0 0 100 100'
+          style={{ position: 'absolute', ...f.style }}
+        >
+          <g transform={`translate(50,50) rotate(${f.rotate})`} fill={f.color}>
+            <ellipse rx='44' ry='17' />
+            <ellipse rx='44' ry='17' transform='rotate(60)' />
+            <ellipse rx='44' ry='17' transform='rotate(120)' />
+            <circle r='11' fill={INK} />
+            <circle r='6.5' fill={PAPER} />
+          </g>
+        </svg>
+      ))}
 
       {/* Content container */}
       <div
@@ -78,7 +147,7 @@ export async function generateBlueprintOgImage(
           flexDirection: 'column',
           justifyContent: 'space-between',
           height: '100%',
-          padding: '50px 60px',
+          padding: '60px 70px',
           position: 'relative',
         }}
       >
@@ -91,42 +160,29 @@ export async function generateBlueprintOgImage(
             width: '100%',
           }}
         >
-          {/* Label */}
-          <div
+          {/* Label chip */}
+          <span
             style={{
               display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
+              fontSize: 20,
+              fontWeight: 700,
+              color: PAPER,
+              backgroundColor: POPPY,
+              padding: '8px 18px',
+              borderRadius: 999,
+              letterSpacing: '2px',
+              textTransform: 'uppercase',
             }}
           >
-            <div
-              style={{
-                width: 28,
-                height: 28,
-                backgroundColor: 'rgba(255,255,255,0.3)',
-                borderRadius: 4,
-              }}
-            />
-            <span
-              style={{
-                fontSize: 18,
-                fontWeight: 600,
-                color: '#cccccc',
-                letterSpacing: '2px',
-                textTransform: 'uppercase',
-              }}
-            >
-              {label}
-            </span>
-          </div>
+            {label}
+          </span>
 
           {/* Branding */}
           <span
             style={{
-              fontSize: 24,
-              fontWeight: 400,
-              color: 'white',
-              fontFamily: 'monospace',
+              fontSize: 26,
+              fontWeight: 700,
+              color: INK,
             }}
           >
             react-native.fi
@@ -139,7 +195,7 @@ export async function generateBlueprintOgImage(
             display: 'flex',
             flexDirection: 'column',
             gap: '24px',
-            maxWidth: '95%',
+            maxWidth: '82%',
           }}
         >
           {/* Headline */}
@@ -154,10 +210,10 @@ export async function generateBlueprintOgImage(
               <span
                 key={i}
                 style={{
-                  fontSize: 72,
+                  fontSize: 76,
                   fontWeight: 700,
-                  color: 'white',
-                  lineHeight: 1.1,
+                  color: INK,
+                  lineHeight: 1.04,
                   letterSpacing: '-2px',
                 }}
               >
@@ -176,13 +232,13 @@ export async function generateBlueprintOgImage(
                 marginTop: '12px',
               }}
             >
-              {/* Author image placeholder */}
               <div
                 style={{
                   width: 72,
                   height: 72,
-                  backgroundColor: 'white',
-                  borderRadius: 10,
+                  backgroundColor: PAPER,
+                  border: `3px solid ${INK}`,
+                  borderRadius: 12,
                   overflow: 'hidden',
                   display: 'flex',
                   alignItems: 'center',
@@ -198,7 +254,6 @@ export async function generateBlueprintOgImage(
                   />
                 )}
               </div>
-              {/* Author info */}
               <div
                 style={{
                   display: 'flex',
@@ -206,20 +261,14 @@ export async function generateBlueprintOgImage(
                   gap: '4px',
                 }}
               >
-                <span
-                  style={{
-                    fontSize: 24,
-                    fontWeight: 600,
-                    color: 'white',
-                  }}
-                >
+                <span style={{ fontSize: 24, fontWeight: 700, color: INK }}>
                   {author.name}
                 </span>
                 <span
                   style={{
                     fontSize: 20,
                     fontWeight: 400,
-                    color: 'rgba(255, 255, 255, 0.5)',
+                    color: 'rgba(21,19,15,0.6)',
                   }}
                 >
                   {author.title}
@@ -234,80 +283,28 @@ export async function generateBlueprintOgImage(
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '24px',
+                gap: '28px',
                 marginTop: '12px',
               }}
             >
-              {/* Calendar icon */}
-              <div
+              <span style={{ fontSize: 24, fontWeight: 700, color: INK }}>
+                {event.date}
+              </span>
+              <span
                 style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '10px',
+                  fontSize: 22,
+                  fontWeight: 400,
+                  color: 'rgba(21,19,15,0.7)',
                 }}
               >
-                <svg
-                  width='28'
-                  height='28'
-                  viewBox='0 0 24 24'
-                  fill='none'
-                  stroke='rgba(255,255,255,0.7)'
-                  strokeWidth='2'
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                >
-                  <rect x='3' y='4' width='18' height='18' rx='2' ry='2'></rect>
-                  <line x1='16' y1='2' x2='16' y2='6'></line>
-                  <line x1='8' y1='2' x2='8' y2='6'></line>
-                  <line x1='3' y1='10' x2='21' y2='10'></line>
-                </svg>
-                <span
-                  style={{
-                    fontSize: 22,
-                    fontWeight: 600,
-                    color: 'white',
-                  }}
-                >
-                  {event.date}
-                </span>
-              </div>
-              {/* Location */}
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '10px',
-                }}
-              >
-                <svg
-                  width='28'
-                  height='28'
-                  viewBox='0 0 24 24'
-                  fill='none'
-                  stroke='rgba(255,255,255,0.7)'
-                  strokeWidth='2'
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                >
-                  <path d='M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z'></path>
-                  <circle cx='12' cy='10' r='3'></circle>
-                </svg>
-                <span
-                  style={{
-                    fontSize: 22,
-                    fontWeight: 400,
-                    color: 'rgba(255, 255, 255, 0.7)',
-                  }}
-                >
-                  {event.venue}, {event.city}
-                </span>
-              </div>
+                {event.venue}, {event.city}
+              </span>
             </div>
           )}
         </div>
 
         {/* Bottom spacer */}
-        <div style={{ display: 'flex', height: 20 }} />
+        <div style={{ display: 'flex', height: 10 }} />
       </div>
     </div>,
     {

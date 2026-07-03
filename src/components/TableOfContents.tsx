@@ -74,10 +74,10 @@ export function TableOfContents({ locale }: { locale?: string }) {
         <li key={heading.id} className={heading.level === 3 ? 'ml-4' : ''}>
           <a
             href={`#${heading.id}`}
-            className={`block border-l-2 py-0.5 pl-3 text-sm transition-colors ${
+            className={`block border-l-2 py-1 pl-3 text-sm transition-colors ${
               activeId === heading.id
-                ? 'border-indigo-600 font-medium text-indigo-600'
-                : 'border-transparent text-gray-600 hover:border-gray-300 hover:text-gray-900'
+                ? 'border-[rgb(var(--poppy))] font-bold text-[rgb(var(--poppy))]'
+                : 'border-[rgb(var(--ink))]/15 font-medium text-[rgb(var(--ink))]/60 hover:border-[rgb(var(--ink))]/40 hover:text-[rgb(var(--ink))]'
             }`}
             onClick={(e) => handleClick(e, heading.id)}
           >
@@ -96,7 +96,7 @@ export function TableOfContents({ locale }: { locale?: string }) {
         className='pointer-events-none fixed top-28 left-[max(1.5rem,calc((100vw-48rem)/2-17rem))] z-10 hidden w-56 xl:block'
       >
         <div className='pointer-events-auto max-h-[calc(100vh-9rem)] overflow-y-auto pr-2'>
-          <p className='mb-3 text-xs font-semibold uppercase tracking-wide text-gray-500'>
+          <p className='mb-3 font-display text-xs font-extrabold uppercase tracking-[0.1em] text-[rgb(var(--poppy))]'>
             {title}
           </p>
           {links}
@@ -106,7 +106,7 @@ export function TableOfContents({ locale }: { locale?: string }) {
       {/* Mobile / tablet: collapsible card inline above content */}
       <nav
         aria-label={title}
-        className='mb-8 rounded-lg border border-gray-200 bg-gray-50 xl:hidden'
+        className='mb-8 rounded-2xl border-[3px] border-[rgb(var(--ink))] bg-[rgb(var(--paper-2))] xl:hidden'
       >
         <button
           type='button'
@@ -114,14 +114,16 @@ export function TableOfContents({ locale }: { locale?: string }) {
           aria-expanded={mobileOpen}
           className='flex w-full items-center justify-between p-4 text-left'
         >
-          <span className='text-sm font-semibold text-gray-900'>{title}</span>
+          <span className='font-display text-sm font-extrabold uppercase tracking-wide text-[rgb(var(--ink))]'>
+            {title}
+          </span>
           <svg
-            className={`h-4 w-4 text-gray-500 transition-transform ${
+            className={`h-4 w-4 text-[rgb(var(--poppy))] transition-transform ${
               mobileOpen ? 'rotate-180' : ''
             }`}
             fill='none'
             viewBox='0 0 24 24'
-            strokeWidth={2}
+            strokeWidth={2.5}
             stroke='currentColor'
             aria-hidden='true'
           >

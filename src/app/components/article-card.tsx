@@ -48,83 +48,92 @@ export const ArticleCard = ({ article }: ArticleCardProps) => {
   // Use OG image if available, otherwise fall back to provided imageUrl
   const displayImage = ogImageUrl || article.imageUrl;
 
+  const articleLocale = (article.locale ?? 'en').toUpperCase();
+  const isFi = (article.locale ?? 'en') === 'fi';
+
   return (
-    <article className='flex flex-col items-start'>
+    <article className='group relative flex flex-col overflow-hidden rounded-2xl border-[3px] border-[rgb(var(--ink))] bg-[rgb(var(--paper))] transition-transform duration-200 hover:-translate-y-1'>
       {displayImage && (
-        <Link href={href} className='relative w-full block aspect-[1200/630]'>
+        <div className='relative block aspect-[1200/630] w-full border-b-[3px] border-[rgb(var(--ink))]'>
           <Image
             src={displayImage}
             alt={article.title}
             fill
             sizes='(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'
-            className='rounded-2xl bg-gray-100 object-cover'
+            className='bg-[rgb(var(--paper-2))] object-cover'
             placeholder='blur'
-            blurDataURL='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI2MzAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iIzFhMDAyYiIvPjwvc3ZnPg=='
+            blurDataURL='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwMCIgaGVpZ2h0PSI2MzAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iI0Y0RjFFOCIvPjwvc3ZnPg=='
           />
-          <div className='absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10' />
-        </Link>
+          {/* EN/FI pill */}
+          <span
+            className={`absolute right-3 top-3 z-10 rounded-full border-2 px-3 py-1 font-display text-xs font-bold ${
+              isFi
+                ? 'border-[rgb(var(--ink))] bg-[rgb(var(--sky))] text-[rgb(var(--paper))]'
+                : 'border-[rgb(var(--ink))] bg-[rgb(var(--sun))] text-[rgb(var(--ink))]'
+            }`}
+          >
+            {articleLocale}
+          </span>
+        </div>
       )}
-      <div className='mt-4 max-w-xl'>
-        <div className='flex gap-x-4 text-xs'>
-          {article.category && (
-            <a
-              href={article.category.href}
-              className='relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100'
-            >
-              {article.category.title}
+      <div className='flex flex-1 flex-col p-5'>
+        {article.category && (
+          <a
+            href={article.category.href}
+            className='relative z-10 mb-3 inline-flex w-fit rounded-full border-2 border-[rgb(var(--ink))] bg-[rgb(var(--paper-2))] px-3 py-1 font-display text-xs font-bold text-[rgb(var(--ink))] transition-colors hover:bg-[rgb(var(--sun))]'
+          >
+            {article.category.title}
+          </a>
+        )}
+        <h3 className='font-display text-xl font-bold leading-tight tracking-tight text-[rgb(var(--ink))] transition-colors group-hover:text-[rgb(var(--poppy))]'>
+          {article.href ? (
+            <a href={article.href}>
+              <span className='absolute inset-0' />
+              {article.title}
             </a>
+          ) : (
+            <Link href={href}>
+              <span className='absolute inset-0' />
+              {article.title}
+            </Link>
+          )}
+        </h3>
+
+        <div className='mt-2 flex items-center gap-2 font-display text-xs font-bold tracking-wide text-[rgb(var(--ink))]/60'>
+          <time dateTime={article.date}>
+            {new Date(article.date).toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            })}
+          </time>
+          {article.readingTime && (
+            <>
+              <span className='text-[rgb(var(--poppy))]'>●</span>
+              <span>{article.readingTime} min read</span>
+            </>
           )}
         </div>
-        <div className='group relative'>
-          <h3 className='text-lg/6 font-semibold text-gray-900 group-hover:text-gray-600'>
-            {article.href ? (
-              <a href={article.href}>
-                <span className='absolute inset-0' />
-                {article.title}
-              </a>
-            ) : (
-              <Link href={href}>
-                <span className='absolute inset-0' />
-                {article.title}
-              </Link>
-            )}
-          </h3>
-          <div className='flex items-center gap-2 mt-2'>
-            <time dateTime={article.date} className='text-sm text-gray-500'>
-              {new Date(article.date).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              })}
-            </time>
-            {article.readingTime && (
-              <>
-                <span className='text-sm text-gray-400'>·</span>
-                <span className='text-sm text-gray-500'>
-                  {article.readingTime} min read
-                </span>
-              </>
-            )}
-          </div>
-          <p className='mt-5 line-clamp-3 text-sm/6 text-gray-600'>
-            {article.description}
-          </p>
-        </div>
+
+        <p className='mt-3 line-clamp-3 text-sm font-medium leading-6 text-[rgb(var(--ink))]/80'>
+          {article.description}
+        </p>
+
         {author && (
-          <div className='relative mt-8 flex items-center gap-x-4'>
+          <div className='relative mt-auto flex items-center gap-x-3 pt-5'>
             {author.imageUrl ? (
               <img
                 src={author.imageUrl}
                 alt=''
-                className='size-10 rounded-full bg-gray-100 object-cover'
+                className='size-9 rounded-full border-2 border-[rgb(var(--ink))] bg-[rgb(var(--paper-2))] object-cover'
               />
             ) : (
-              <div className='size-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 font-bold'>
+              <div className='flex size-9 items-center justify-center rounded-full border-2 border-[rgb(var(--ink))] bg-[rgb(var(--paper-2))] font-display font-bold text-[rgb(var(--ink))]'>
                 {author.name.charAt(0)}
               </div>
             )}
-            <div className='text-sm/6'>
-              <p className='font-semibold text-gray-900'>
+            <div className='text-sm leading-5'>
+              <p className='font-display font-bold text-[rgb(var(--ink))]'>
                 {author.href && author.href !== '#' ? (
                   <a href={author.href}>
                     <span className='absolute inset-0' />
@@ -134,9 +143,15 @@ export const ArticleCard = ({ article }: ArticleCardProps) => {
                   <span>{author.name}</span>
                 )}
               </p>
-              {author.role && <p className='text-gray-600'>{author.role}</p>}
+              {author.role && (
+                <p className='font-medium text-[rgb(var(--ink))]/60'>
+                  {author.role}
+                </p>
+              )}
               {author.tagline && (
-                <p className='text-gray-500 text-xs'>{author.tagline}</p>
+                <p className='text-xs font-medium text-[rgb(var(--ink))]/50'>
+                  {author.tagline}
+                </p>
               )}
             </div>
           </div>

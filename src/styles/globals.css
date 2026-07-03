@@ -16,44 +16,55 @@
   --nordic-900: 12 74 110;
   --nordic-950: 8 47 73;
 
-  /* Finnish Blue - Primary accent (#002F6C) */
-  --finnish-blue: 0 47 108;
-  --finnish-blue-light: 26 95 170;
-  --finnish-blue-dark: 0 30 71;
+  /* Finnish Blue - Primary accent — REMAPPED to Unikko "sky" so every legacy
+     page that references --finnish-blue picks up the redesign automatically. */
+  --finnish-blue: 27 77 228; /* sky */
+  --finnish-blue-light: 90 130 250;
+  --finnish-blue-dark: 16 52 170;
 
-  /* Deep navy - for sophisticated dark sections */
-  --navy-900: 15 23 42;
-  --navy-950: 2 6 23;
+  /* Deep navy → remapped to ink so dark sections become the Unikko near-black */
+  --navy-900: 21 19 15;
+  --navy-950: 21 19 15;
 
-  /* Snow white - crisp backgrounds */
-  --snow: 250 251 252;
-  --snow-warm: 255 251 245;
+  /* Snow white → remapped to warm Unikko paper */
+  --snow: 251 250 246;
+  --snow-warm: 244 241 232;
 
-  /* Mono palette */
-  --mono-50: 248 250 252;
-  --mono-100: 241 245 249;
-  --mono-200: 226 232 240;
-  --mono-300: 203 213 225;
-  --mono-400: 148 163 184;
-  --mono-500: 100 116 139;
-  --mono-600: 71 85 105;
-  --mono-700: 51 65 85;
-  --mono-800: 30 41 59;
-  --mono-900: 15 23 42;
-  --mono-950: 2 6 23;
+  /* Mono palette — warmed slightly; darkest steps pinned to ink */
+  --mono-50: 247 245 239;
+  --mono-100: 242 239 231;
+  --mono-200: 226 222 211;
+  --mono-300: 201 196 184;
+  --mono-400: 150 144 132;
+  --mono-500: 110 104 94;
+  --mono-600: 78 73 65;
+  --mono-700: 54 50 44;
+  --mono-800: 35 32 27;
+  --mono-900: 21 19 15; /* ink */
+  --mono-950: 21 19 15; /* ink */
 
-  /* Accent colors */
-  --accent-aurora: 139 92 246;
-  --accent-midnight: 99 102 241;
-  --accent-frost: 34 211 238;
+  /* Accent colors → remapped to Unikko accents (poppy / sky / sun) */
+  --accent-aurora: 226 52 43; /* poppy */
+  --accent-midnight: 27 77 228; /* sky */
+  --accent-frost: 245 197 24; /* sun */
 
-  /* Wide-gamut Display P3 accent colors (used via @supports) */
-  --p3-finnish-blue: color(display-p3 0 0.17 0.44);
-  --p3-finnish-blue-light: color(display-p3 0.1 0.37 0.67);
-  --p3-finnish-blue-dark: color(display-p3 0 0.11 0.28);
-  --p3-accent-aurora: color(display-p3 0.52 0.3 1);
-  --p3-accent-midnight: color(display-p3 0.36 0.36 0.98);
-  --p3-accent-frost: color(display-p3 0.05 0.84 0.96);
+  /* ── Unikko palette — Finnish print heritage at full saturation ──
+     Used by the redesigned homepage. Bold blocks, hard rules, no timid grays. */
+  --paper: 251 250 246; /* #FBFAF6 warm off-white base */
+  --paper-2: 244 241 232; /* #F4F1E8 deeper paper for panels */
+  --ink: 21 19 15; /* #15130F near-black — the rule + text colour */
+  --poppy: 226 52 43; /* #E2342B the signature red */
+  --sky: 27 77 228; /* #1B4DE4 */
+  --sun: 245 197 24; /* #F5C518 */
+  --mint: 15 143 107; /* #0F8F6B */
+
+  /* Wide-gamut Display P3 accent colors (used via @supports) — Unikko */
+  --p3-finnish-blue: color(display-p3 0.16 0.3 0.86); /* sky */
+  --p3-finnish-blue-light: color(display-p3 0.4 0.52 0.97);
+  --p3-finnish-blue-dark: color(display-p3 0.1 0.2 0.64);
+  --p3-accent-aurora: color(display-p3 0.84 0.22 0.18); /* poppy */
+  --p3-accent-midnight: color(display-p3 0.16 0.3 0.86); /* sky */
+  --p3-accent-frost: color(display-p3 0.94 0.77 0.12); /* sun */
 
   /* Semantic tokens */
   --background: var(--snow);
@@ -87,17 +98,8 @@
 }
 
 @layer base {
-  /* Satoshi - Modern geometric sans for body */
-  @font-face {
-    font-family: 'Satoshi';
-    font-style: normal;
-    font-weight: 400 900;
-    font-display: swap;
-    src: url('https://cdn.jsdelivr.net/gh/nickshanks/Fonts@master/Satoshi-Variable.woff2')
-      format('woff2');
-  }
-
-  /* Space Mono - Technical character for headlines */
+  /* Display (Bricolage Grotesque) and body (Hanken Grotesk) are loaded via
+     next/font in the root layout. Space Mono remains only for code blocks. */
   @font-face {
     font-family: 'Space Mono';
     font-style: normal;
@@ -107,25 +109,15 @@
       format('woff2');
   }
 
-  /* Instrument Serif - Elegant display for special headlines */
-  @font-face {
-    font-family: 'Instrument Serif';
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url('https://fonts.gstatic.com/s/instrumentserif/v4/jizBRFtNs2ka5fXjeivQ4LroWlx-2zIZj1bIkNo.woff2')
-      format('woff2');
-  }
-
   html {
     scroll-behavior: smooth;
   }
 
   body {
     @apply antialiased;
-    font-family: 'Satoshi', system-ui, sans-serif;
-    background-color: rgb(var(--snow));
-    color: rgb(var(--mono-900));
+    font-family: var(--font-body), 'Hanken Grotesk', system-ui, sans-serif;
+    background-color: rgb(var(--paper));
+    color: rgb(var(--ink));
     font-feature-settings:
       'ss01' on,
       'ss02' on;
@@ -139,13 +131,9 @@
   h5,
   h6,
   .font-display {
-    font-family: 'Space Mono', monospace;
+    font-family: var(--font-display), 'Bricolage Grotesque', sans-serif;
     @apply tracking-tight font-bold;
     letter-spacing: -0.02em;
-  }
-
-  .font-serif {
-    font-family: 'Instrument Serif', serif;
   }
 
   h1,
@@ -175,18 +163,62 @@
   /* Inline code styling for prose */
   .prose
     :where(code):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
-    @apply rounded px-1.5 py-0.5 text-sm font-medium before:content-none after:content-none;
-    background-color: rgb(var(--mono-100));
-    border: 1px solid rgb(var(--mono-200));
-    color: rgb(var(--mono-800));
+    @apply rounded-md px-1.5 py-0.5 text-sm font-semibold before:content-none after:content-none;
+    background-color: rgb(var(--paper-2));
+    border: 2px solid rgb(var(--ink));
+    color: rgb(var(--ink));
     font-family: 'Space Mono', monospace;
   }
 
   .prose pre {
-    border: 1px solid rgb(var(--mono-200));
-    background-color: rgb(var(--navy-950));
+    border: 3px solid rgb(var(--ink));
+    background-color: rgb(var(--ink));
     font-family: 'Space Mono', monospace;
-    @apply rounded-xl;
+    @apply rounded-2xl;
+  }
+
+  .prose pre code {
+    border: 0 !important;
+    background: transparent !important;
+    color: rgb(var(--paper)) !important;
+    padding: 0 !important;
+    font-weight: 400 !important;
+  }
+
+  /* Unikko prose — headings, links, quotes, media */
+  .prose :where(h1, h2, h3, h4):not(:where([class~='not-prose'] *)) {
+    font-family: var(--font-display), 'Bricolage Grotesque', sans-serif;
+    color: rgb(var(--ink));
+    letter-spacing: -0.02em;
+  }
+  .prose :where(a):not(:where([class~='not-prose'] *)) {
+    color: rgb(var(--sky));
+    text-decoration-thickness: 2px;
+    text-underline-offset: 2px;
+    font-weight: 600;
+    transition: color 0.15s ease;
+  }
+  .prose :where(a):not(:where([class~='not-prose'] *)):hover {
+    color: rgb(var(--poppy));
+  }
+  .prose :where(strong):not(:where([class~='not-prose'] *)) {
+    color: rgb(var(--ink));
+    font-weight: 700;
+  }
+  .prose :where(blockquote):not(:where([class~='not-prose'] *)) {
+    border-left: 4px solid rgb(var(--poppy));
+    background-color: rgb(var(--paper-2));
+    border-radius: 0 0.75rem 0.75rem 0;
+    font-style: normal;
+    color: rgb(var(--ink));
+  }
+  .prose :where(img):not(:where([class~='not-prose'] *)) {
+    border: 3px solid rgb(var(--ink));
+    border-radius: 1rem;
+  }
+  .prose :where(hr):not(:where([class~='not-prose'] *)) {
+    border-color: rgb(var(--ink));
+    border-top-width: 2px;
   }
 
   /* Layout container */
@@ -324,79 +356,67 @@
     box-shadow: 0 0 30px rgb(var(--finnish-blue) / 0.15);
   }
 
-  /* Button variants */
+  /* Button variants — Unikko: flat fills, hard 2px ink outline, display face */
   .btn {
-    @apply inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-semibold rounded-full transition-all duration-200;
-    font-family: 'Space Mono', monospace;
+    @apply inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-bold rounded-full transition-all duration-150;
+    font-family: var(--font-display), 'Bricolage Grotesque', sans-serif;
+    border: 2px solid rgb(var(--ink));
     letter-spacing: -0.01em;
   }
 
   .btn-primary {
-    @apply btn text-white;
-    background: linear-gradient(
-      135deg,
-      rgb(var(--finnish-blue)) 0%,
-      rgb(var(--finnish-blue-dark)) 100%
-    );
-    box-shadow:
-      0 2px 8px rgb(var(--finnish-blue) / 0.3),
-      inset 0 1px 0 rgb(255 255 255 / 0.1);
+    @apply btn;
+    background: rgb(var(--ink));
+    color: rgb(var(--paper));
   }
 
   .btn-primary:hover {
-    transform: translateY(-1px);
-    box-shadow:
-      0 4px 16px rgb(var(--finnish-blue) / 0.4),
-      inset 0 1px 0 rgb(255 255 255 / 0.1);
+    background: rgb(var(--poppy));
+    border-color: rgb(var(--poppy));
   }
 
   .btn-primary:active {
-    transform: translateY(0);
-    box-shadow:
-      0 1px 4px rgb(var(--finnish-blue) / 0.3),
-      inset 0 1px 0 rgb(255 255 255 / 0.1);
+    transform: translateY(1px);
   }
 
   .btn-secondary {
     @apply btn;
-    background-color: white;
-    color: rgb(var(--mono-900));
-    border: 1.5px solid rgb(var(--mono-200));
-    box-shadow: 0 1px 2px rgb(0 0 0 / 0.05);
+    background-color: rgb(var(--paper));
+    color: rgb(var(--ink));
   }
 
   .btn-secondary:hover {
-    background-color: rgb(var(--mono-50));
-    border-color: rgb(var(--mono-300));
-    transform: translateY(-1px);
+    background-color: rgb(var(--sun));
   }
 
   .btn-ghost {
     @apply btn;
-    color: rgb(var(--mono-600));
+    color: rgb(var(--ink));
     background: transparent;
+    border-color: transparent;
   }
 
   .btn-ghost:hover {
-    color: rgb(var(--mono-900));
-    background-color: rgb(var(--mono-100));
+    color: rgb(var(--ink));
+    background-color: rgb(var(--paper-2));
   }
 
   .btn-dark {
-    @apply btn text-white;
-    background: rgb(var(--navy-950));
-    border: 1.5px solid rgb(var(--mono-800));
+    @apply btn;
+    background: rgb(var(--ink));
+    color: rgb(var(--paper));
+    border-color: rgb(var(--ink));
   }
 
   .btn-dark:hover {
-    border-color: rgb(var(--finnish-blue));
-    box-shadow: 0 0 20px rgb(var(--finnish-blue) / 0.2);
+    background: rgb(var(--poppy));
+    border-color: rgb(var(--poppy));
   }
 
   /* Tag/Badge */
   .tag {
-    @apply inline-flex items-center px-3 py-1.5 text-xs font-semibold rounded-full;
-    font-family: 'Space Mono', monospace;
+    @apply inline-flex items-center px-3 py-1.5 text-xs font-bold rounded-full;
+    font-family: var(--font-display), 'Bricolage Grotesque', sans-serif;
     letter-spacing: 0.02em;
   }
 
@@ -447,14 +467,14 @@
 
   /* Eyebrow text */
   .eyebrow {
-    @apply text-xs font-bold uppercase tracking-widest;
-    font-family: 'Space Mono', monospace;
-    color: rgb(var(--finnish-blue));
+    @apply text-xs font-extrabold uppercase tracking-widest;
+    font-family: var(--font-display), 'Bricolage Grotesque', sans-serif;
+    color: rgb(var(--poppy));
   }
 
   /* Large display number */
   .display-number {
-    font-family: 'Space Mono', monospace;
+    font-family: var(--font-display), 'Bricolage Grotesque', sans-serif;
     @apply text-6xl md:text-8xl lg:text-9xl font-bold;
     line-height: 0.85;
     letter-spacing: -0.04em;
@@ -888,5 +908,72 @@
       var(--p3-accent-frost),
       var(--p3-accent-aurora)
     ) !important;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Unikko — redesigned homepage primitives (Marimekko direction)
+   ────────────────────────────────────────────────────────────── */
+@layer components {
+  /* Bold pill buttons with a hard 2.5px ink outline */
+  .u-btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 font-bold transition-all duration-150;
+    font-family: var(--font-display), 'Bricolage Grotesque', sans-serif;
+    border: 2.5px solid rgb(var(--ink));
+    color: rgb(var(--ink));
+  }
+  .u-btn-fill {
+    background: rgb(var(--ink));
+    color: rgb(var(--paper));
+  }
+  .u-btn-fill:hover {
+    background: rgb(var(--poppy));
+    border-color: rgb(var(--poppy));
+  }
+  .u-btn-out:hover {
+    background: rgb(var(--sun));
+  }
+
+  /* Section number eyebrow */
+  .u-num {
+    font-family: var(--font-display), 'Bricolage Grotesque', sans-serif;
+    @apply text-2xl font-extrabold;
+    color: rgb(var(--poppy));
+  }
+}
+
+@layer utilities {
+  /* Scrolling print marquee */
+  @keyframes u-marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  .u-marquee-track {
+    display: inline-block;
+    white-space: nowrap;
+    animation: u-marquee 26s linear infinite;
+  }
+
+  /* Hero badge spin-in */
+  @keyframes u-spin-in {
+    from {
+      transform: rotate(-40deg) scale(0.6);
+      opacity: 0;
+    }
+    to {
+      transform: rotate(-6deg) scale(1);
+      opacity: 1;
+    }
+  }
+  .u-spin-in {
+    animation: u-spin-in 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .u-marquee-track,
+    .u-spin-in {
+      animation: none;
+    }
   }
 }
