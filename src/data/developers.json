@@ -40,5 +40,18 @@
     "githubUrl": "https://github.com/Eduard-02",
     "expertise": ["React Native", "Mobile Development"],
     "availability": "Available for hire"
+  },
+  {
+    "slug": "axel-nieminen",
+    "name": "Axel Nieminen",
+    "role": "Mobile Developer",
+    "location": "Helsinki, Finland",
+    "imageUrl": "/images/axel.jpg",
+    "bio": "Helsinki-based mobile developer building cross-platform apps with React Native, and native iOS apps with Swift & SwiftUI. I ship products end to end - from idea to App Store.",
+    "linkedinUrl": "https://www.linkedin.com/in/axel-nieminen-06a580196/",
+    "githubUrl": "https://github.com/niemax",
+    "websiteUrl": "https://niemax.me",
+    "expertise": ["React Native", "Swift", "SwiftUI", "iOS", "TypeScript"],
+    "availability": "Available for hire"
   }
 ]
