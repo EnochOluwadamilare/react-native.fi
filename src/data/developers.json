@@ -53,5 +53,17 @@
     "websiteUrl": "https://niemax.me",
     "expertise": ["React Native", "Swift", "SwiftUI", "iOS", "TypeScript"],
     "availability": "Available for hire"
+  },
+  {
+    "slug": "enoch-oyerinde",
+    "name": "Enoch Oyerinde",
+    "role": "Mobile Developer",
+    "location": "Joensuu, Finland",
+    "imageUrl": "/images/enoch-oyerinde.jpg",
+    "bio": "Software engineer, academic, and AI researcher with 6+ years of industry experience building web, mobile, and AI-powered solutions.",
+    "linkedinUrl": "https://www.linkedin.com/in/enoch-oyerinde-29b542b0/",
+    "githubUrl": "https://github.com/EnochOluwadamilare/",
+    "expertise": ["React Native", "DevOps", "Expo", "AI Research", "Swift", "Mobile Development", "Web Development", "Backend Development"],
+    "availability": "Available for hire"
   }
 ]
